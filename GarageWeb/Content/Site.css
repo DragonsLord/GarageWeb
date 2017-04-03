@@ -12,6 +12,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     width: 100%;
     min-width:1000px;
     height:100vh;
@@ -21,6 +22,11 @@ header{
     margin:auto;
     text-align:center;
     position:relative;
+}
+footer {
+    background: none;
+    margin-top: 5px;
+    text-align:center;
 }
 .social{
     position:absolute;
