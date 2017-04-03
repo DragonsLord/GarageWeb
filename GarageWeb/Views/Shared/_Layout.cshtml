@@ -8,26 +8,26 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+   <header>
+       <div class="logo">
+           <img src="Images/logo.png" alt="Garage bar" />
+           <div class="big-logo">G<span class="another-color">a</span>rage</div>
+           <div class="small-logo">on web</div>
+       </div>
+       <div class="social">
+           <div class="icon">
+               <a href="#"><img src="Images/twitter.png" alt="Alternate Text" /></a>
+               <a href="#"><img src="Images/facebook.png" alt="Alternate Text" /></a>               
+               <a href="#"><img src="Images/gmail.png" alt="Alternate Text" /></a>
+           </div>
+       </div>
+   </header>
+    <ul class="menu"> 
+        <li><a href="#">Головна</a></li>
+        <li><a href="#">МЕНЮ</a></li>
+        <li><a href="#">Новини</a></li>
+    </ul>
+    <div class="body-content">
         @RenderBody()
         <hr />
         <footer>

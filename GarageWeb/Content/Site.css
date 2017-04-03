@@ -1,24 +1,93 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@font-face {
+    font-family: "Impact";
+    src: url("../fonts/Impact.ttf");
+    font-style: normal;
+    font-weight: normal;
 }
 
-/* Set padding to keep content from hitting the edges */
+
+body {
+    padding: 20px 0;
+    background-image: url(../Images/back.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-width:1000px;
+    height:100vh;
+}
+header{
+    width:970px;
+    margin:auto;
+    text-align:center;
+    position:relative;
+}
+.social{
+    position:absolute;
+    right:0;
+    bottom:10px;
+}
+.icon {
+    width: 200px;
+    text-align: center;
+}
+
+.icon a {
+    width: 32px;
+    display: inline-block;
+    margin: 0 3px;
+}
+.logo{
+    display:inline-block;
+}
+.logo img{
+   border-radius:50%;
+   max-width:80px;
+}
+.big-logo {
+    font-family: "Impact";
+    text-align: center;
+    color: #585656;
+    font-size: 42px;
+    margin-top: -15px;
+}
+.small-logo {
+    font-size: 25px;
+    margin-top: -15px;
+    font-family: "Impact";
+    text-align: center;
+    color: #585656
+}
+.another-color {
+    color: #c39b33;
+}
+.menu {
+    background-image: url(../Images/menu.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 1060px;
+    min-width: 1060px;
+    height: 80px;
+    margin: auto;
+    text-align: center;
+    padding-top: 30px;
+    -webkit-padding-start: 0px;
+}
+.menu li {
+    display: inline-block;
+    width:150px;
+}
+.menu li a{
+    font-size: 24px;
+    font-family: "Impact";
+    color: rgb(255, 240, 222);
+    text-transform: uppercase;
+    text-shadow: 0.5px 0.866px 0px rgba(0, 0, 0, 0.44);
+}
 .body-content {
+    margin: auto;
+    width: 970px; 
+    background-color: white;
     padding-left: 15px;
     padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
 }
