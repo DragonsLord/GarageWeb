@@ -1,0 +1,34 @@
+﻿@using GarageWeb.Models.ViewModel
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div id="loginForm">
+    <h4>Для керування системою ви повинні авторизуватисяяк адмінстратор</h4>
+    @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Login)
+            <div class="input-field">
+                @Html.TextBoxFor(m => m.Login, new { @class = "control" })
+                
+            </div>
+            <div class="error-message">@Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })</div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            <div class="input-field">
+                @Html.PasswordFor(m => m.Password, new { @class = "control" })
+               
+            </div>
+            <div class="error-message"> @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })</div>
+        </div>
+        <div class="form-group">
+                <input type="submit" value="Увійти" />
+        </div>              
+    }
+</div>

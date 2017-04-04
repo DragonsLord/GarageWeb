@@ -10,6 +10,8 @@ namespace GarageWeb.Controllers
     {
         public ActionResult Index()
         {
+            var helper = new GarageWeb.Infrastructure.AdminAuthHelper();
+
             return View();
         }
 
@@ -25,6 +27,11 @@ namespace GarageWeb.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public HomeController()
+        {
+
         }
     }
 }
