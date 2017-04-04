@@ -8,7 +8,7 @@
     <h4>Для керування системою ви повинні авторизуватисяяк адмінстратор</h4>
     @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
     {
-        @Html.AntiForgeryToken()
+        @*@Html.AntiForgeryToken()*@
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
