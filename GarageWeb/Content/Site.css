@@ -1,11 +1,18 @@
-﻿@font-face {
+﻿
+/*
+    Import font-face
+*/
+
+@font-face {
     font-family: "Impact";
     src: url("../fonts/Impact.ttf");
     font-style: normal;
     font-weight: normal;
 }
 
-
+/*
+    Layout style
+*/
 body {
     padding: 20px 0;
     background-image: url(../Images/back.png);
@@ -93,7 +100,83 @@ footer {
 .body-content {
     margin: auto;
     width: 970px; 
-    background-color: white;
+    background-color: rgba(255,255,255,0.5);
     padding-left: 15px;
     padding-right: 15px;
+}
+
+
+/*
+    Admin form style
+*/
+
+#loginForm h4 {
+    text-align: center;
+    width: 800px;
+    padding: 20px 0 0;
+    margin: 0 auto;
+    color: #925d21;
+    font-family:Impact;
+    font-size:24px;
+}
+#loginForm form{
+    width:400px;
+    margin:0 auto;
+    padding:20px;
+    text-align:center;
+}
+.form-group label {
+    color: #b5902d;
+    width: 80px;
+    display: inline-block;
+    text-align: left;
+    font-weight: normal;
+    font-family: Impact;
+    font-size: 20px;
+    vertical-align: bottom;
+    margin-bottom: 0;
+}
+.form-group .control {
+    width: 200px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border-bottom: 1px solid #585656;
+    border-radius: 0px;
+    color: #66480d;
+    font-size: 18px;
+}
+.form-group input[type="submit"] {
+    font-size: 18px;
+    padding: 5px 40px;
+    background-color: #754a00;
+    color: #e0cfb9;
+    outline: none;
+    border: 1px solid #a01a07;
+    border-radius: 3px;
+    margin-top: 20px;
+}
+.input-field{
+    display:inline-block;
+}
+body input:focus:required:invalid {
+    border: none !important;
+}
+body input:required:valid {
+    border: none !important;
+}
+.error-message{
+    text-align: left;
+    color:#a01a07;
+    font-weight:bold;
+    padding-left: 40px;
+    margin-top:5px;
+}
+.panels h2 {
+    margin: 0;
+    padding: 20px 0 ;
+    text-align: center;
+    color: #925d21;
+    font-family: Impact;
 }
