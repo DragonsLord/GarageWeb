@@ -180,3 +180,11 @@ body input:required:valid {
     color: #925d21;
     font-family: Impact;
 }
+.text-danger ul {
+    list-style-type:none;
+}
+.text-danger ul li {
+    color: #a01a07;
+    font-family: Impact;
+    font-size:16px;
+}

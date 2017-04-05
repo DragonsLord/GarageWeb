@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace GarageWeb.Infrastructure
 {
-    public class AdminAuthHelper
+    public class AdminAuthHelper : IAuthHelper
     {
         private static class AdminInfo
         {

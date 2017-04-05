@@ -15,15 +15,26 @@
            <div class="small-logo">on web</div>
        </div>
        <div class="social">
+           @if (HttpContext.Current.User.Identity.IsAuthenticated)
+           {
+               <div>
+                   Ви авторизовані як @HttpContext.Current.User.Identity.Name
+               </div>
+               <div>
+                   @Html.ActionLink("Вийти", "LogOut", "Admin")
+               </div>
+           }else{
+
            <div class="icon">
-               <a href="#"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>               
+               <a href="#"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>
                <a href="#"><img src="~/Images/vk.png" alt="Alternate Text" /></a>
                <a href="#"><img src="~/Images/ok.png" alt="Alternate Text" /></a>
            </div>
+            }
        </div>
    </header>
     <ul class="menu"> 
-        <li><a href="#">Головна</a></li>
+        <li>@Html.ActionLink("Головна", "Index", "Home")</li>
         <li><a href="#">МЕНЮ</a></li>
         <li><a href="#">Новини</a></li>
     </ul>

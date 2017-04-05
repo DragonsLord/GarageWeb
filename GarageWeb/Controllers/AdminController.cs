@@ -13,19 +13,25 @@ namespace GarageWeb.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        AdminAuthHelper authHelper = new AdminAuthHelper();
+        private IAuthHelper authHelper;
+
+        public AdminController(IAuthHelper helper)
+        {
+            authHelper = helper;
+        }
 
         // GET: Admin
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if (HttpContext.User.IsInRole("Admin"))
+                return RedirectToAction("Index", "Admin");
             return View();
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Panel()
+        public ActionResult Index()
         {
             return View();
         }
@@ -34,8 +40,7 @@ namespace GarageWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -46,8 +51,14 @@ namespace GarageWeb.Controllers
                 ModelState.AddModelError("", "Не правильний логін або пароль");
                 return View(model);
             }
-            return RedirectToAction("Panel");
+            return RedirectToAction("Index", "Admin");
             
+        }
+
+        public ActionResult LogOut()
+        {
+            authHelper.LogOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
