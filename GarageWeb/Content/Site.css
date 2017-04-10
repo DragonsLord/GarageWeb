@@ -188,3 +188,28 @@ body input:required:valid {
     font-family: Impact;
     font-size:16px;
 }
+.login {
+    text-align: center;
+    color: #585656;
+    font-family: Impact;
+    font-size: 14px;
+}
+
+.logout {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.logout a {
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    color: #585656;
+    font-family: Impact;
+}
+
+.user-name {
+    padding-left: 5px;
+    font-size: 16px;
+    color: #925d21;
+}

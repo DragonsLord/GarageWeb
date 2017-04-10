@@ -1,6 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security;
 
 [assembly: OwinStartup(typeof(GarageWeb.Startup))]
 namespace GarageWeb

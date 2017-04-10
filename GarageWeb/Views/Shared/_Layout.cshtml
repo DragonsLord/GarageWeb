@@ -17,10 +17,10 @@
        <div class="social">
            @if (HttpContext.Current.User.Identity.IsAuthenticated)
            {
-               <div>
-                   Ви авторизовані як @HttpContext.Current.User.Identity.Name
+               <div class="login">
+                   Ви авторизовані як <span class="user-name">@HttpContext.Current.User.Identity.Name</span>
                </div>
-               <div>
+               <div class="logout">
                    @Html.ActionLink("Вийти", "LogOut", "Admin")
                </div>
            }else{
