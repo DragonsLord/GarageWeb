@@ -5,7 +5,7 @@
 }
 
 <div id="loginForm">
-    <h4>Для керування системою ви повинні авторизуватисяяк адмінстратор</h4>
+    <h4>Для керування системою ви повинні авторизуватися як адмінстратор</h4>
     @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
     {
         @*@Html.AntiForgeryToken()*@

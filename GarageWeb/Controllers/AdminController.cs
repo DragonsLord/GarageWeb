@@ -60,5 +60,22 @@ namespace GarageWeb.Controllers
             authHelper.LogOut();
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public ActionResult ChangeLoginInfo(ChangeLoginViewModel model)
+        {
+            model.IsSelected = true;
+            if (!ModelState.IsValid)
+            {
+                return View("Index", model);
+            }
+            if (authHelper.SetNewPassword(model.OldPassword, model.NewPassword) && authHelper.SetNewLogin(model.Login))
+            {
+                model.IsSelected = false;
+                return View("Index", model);
+            }
+            ModelState.AddModelError("", "Не правильний старий пароль");
+            return View("Index", model); ;
+        }
     }
 }

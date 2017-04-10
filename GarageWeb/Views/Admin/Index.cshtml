@@ -1,10 +1,57 @@
-﻿
+﻿@using GarageWeb.Models.ViewModel
+@model ChangeLoginViewModel
 @{
     ViewBag.Title = "Panel";
 }
 
+@Styles.Render("~/Content/AdminPanel.css")
 <div class="panels">
-    <h2>Привіт адмін</h2>
+    <ul>
+        <li>
+            @Html.CheckBox("ChangeLoginInfo", Model == null ? true : !Model.IsSelected)
+            <i></i>
+            <h2>Змінити логін та пароль</h2>
+            <div class="function-content" id="loginForm">
+                @using (Html.BeginForm("ChangeLoginInfo", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.OldPassword)
+                        <div class="input-field">
+                            @Html.PasswordFor(m => m.OldPassword, new { @class = "control" })
+
+                        </div>
+                        <div class="error-message"> @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "text-danger" })</div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Login)
+                        <div class="input-field">
+                            @Html.TextBoxFor(m => m.Login, new { @class = "control" })
+
+                        </div>
+                        <div class="error-message">@Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })</div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NewPassword)
+                        <div class="input-field">
+                            @Html.PasswordFor(m => m.NewPassword, new { @class = "control" })
+
+                        </div>
+                        <div class="error-message"> @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "text-danger" })</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Змінити" />
+                    </div>
+                }
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" checked>
+            <i></i>
+            <h2>Інше</h2>
+            <div class="function-content">В розробці</div>
+        </li>
+    </ul>
 </div>
 
 
