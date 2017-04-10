@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using GarageWeb.Infrastructure;
+using System.Security.Claims;
+
 namespace GarageWeb.Controllers
 {
     public class UserController : Controller
@@ -66,27 +68,16 @@ namespace GarageWeb.Controllers
             {
                 return RedirectToAction("Index","Home");
             }
+            ClaimsIdentity claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            for (int i = 0; i < loginInfo.ExternalIdentity.Claims.Count() - 1; i++)
+                claim.AddClaim(loginInfo.ExternalIdentity.Claims.ElementAt(i));
 
-            // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: true);
-            switch (result)
+            AuthenticationManager.SignOut();
+            AuthenticationManager.SignIn(new AuthenticationProperties
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                //case SignInStatus.Failure:
-                //default:
-                //    // If the user does not have an account, then prompt the user to create an account
-                //    ViewBag.ReturnUrl = returnUrl;
-                //    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                //    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-                case SignInStatus.Failure:
-                default:
-                    return View("Index", "Home");
-            }
+                IsPersistent = true
+            }, claim);
+            return RedirectToAction("Index", "Home");
         }
 
         private IAuthenticationManager AuthenticationManager
