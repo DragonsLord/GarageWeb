@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Owin.Security;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,14 +25,33 @@
                <div class="logout">
                    @Html.ActionLink("Вийти", "LogOut", "Admin")
                </div>
-           }else{
+           }
+           else
+           {
+            
+                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = HttpContext.Current.Request.Url.AbsolutePath}))
+                {
+                @Html.AntiForgeryToken()
+                <div class="icon">
+                    <div id="socialLoginList">
+                        <p>
+                            @foreach (AuthenticationDescription p in loginProviders)
+                            {
+                                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                            }
+                        </p>
+                    </div>
 
-           <div class="icon">
-               <a href="#"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>
-               <a href="#"><img src="~/Images/vk.png" alt="Alternate Text" /></a>
-               <a href="#"><img src="~/Images/ok.png" alt="Alternate Text" /></a>
-           </div>
-            }
+                    @*<a href="#" name="provider" value="Facebook"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>
+                        <a href="#" name="provider" value="Vk"><img src="~/Images/vk.png" alt="Alternate Text" /></a>
+                        <a href="#" name="provider" value="Google"><img src="~/Images/google.png" alt="Google" /></a>*@
+
+                </div>
+               }
+
+
+           }
        </div>
    </header>
     <ul class="menu"> 
