@@ -8,11 +8,11 @@ namespace GarageWeb.Models.ViewModel
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Логін обов'язковий для введення!")]
         [Display(Name = "Логін")]
         public string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Пароль обов'язковий для введення!")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

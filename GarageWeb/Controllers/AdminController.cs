@@ -6,23 +6,32 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
+using GarageWeb.Infrastructure;
+
 namespace GarageWeb.Controllers
 {
     [Authorize]
     public class AdminController : Controller
     {
+        private IAuthHelper authHelper;
+
+        public AdminController(IAuthHelper helper)
+        {
+            authHelper = helper;
+        }
+
         // GET: Admin
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if (HttpContext.User.IsInRole("Admin"))
+                return RedirectToAction("Index", "Admin");
             return View();
         }
 
-        //[Authorize(Roles = "Admin")]
-        [AllowAnonymous]
-        public ActionResult Panel()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
         {
             return View();
         }
@@ -30,16 +39,26 @@ namespace GarageWeb.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            return RedirectToAction("Panel");
+            if (!authHelper.SignIn(model.Login, model.Password))
+            {
+                ModelState.AddModelError("", "Не правильний логін або пароль");
+                return View(model);
+            }
+            return RedirectToAction("Index", "Admin");
             
+        }
+
+        public ActionResult LogOut()
+        {
+            authHelper.LogOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

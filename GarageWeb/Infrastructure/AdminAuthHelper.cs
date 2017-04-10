@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace GarageWeb.Infrastructure
 {
-    public class AdminAuthHelper
+    public class AdminAuthHelper : IAuthHelper
     {
         private static class AdminInfo
         {
@@ -59,6 +59,7 @@ namespace GarageWeb.Infrastructure
             {
 
                 ClaimsIdentity claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, "admin", ClaimValueTypes.String));
                 claim.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, "Administrator", ClaimValueTypes.String));
                 claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
                     "OWIN Provider", ClaimValueTypes.String));
