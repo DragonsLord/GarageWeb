@@ -127,14 +127,15 @@ footer {
 }
 .form-group label {
     color: #b5902d;
-    width: 80px;
+    width: 150px;
     display: inline-block;
-    text-align: left;
+    text-align: right;
     font-weight: normal;
     font-family: Impact;
     font-size: 20px;
     vertical-align: bottom;
     margin-bottom: 0;
+    margin-right: 3px;
 }
 .form-group .control {
     width: 200px;
@@ -157,8 +158,9 @@ footer {
     border-radius: 3px;
     margin-top: 20px;
 }
-.input-field{
-    display:inline-block;
+.input-field {
+    display: inline-block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 body input:focus:required:invalid {
     border: none !important;
@@ -166,20 +168,22 @@ body input:focus:required:invalid {
 body input:required:valid {
     border: none !important;
 }
-.error-message{
+.error-message {
     text-align: left;
-    color:#a01a07;
-    font-weight:bold;
+    color: #a01a07;
+    font-weight: bold;
     padding-left: 40px;
-    margin-top:5px;
+    margin-top: 5px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
 }
-.panels h2 {
+/*.panels h2 {
     margin: 0;
     padding: 20px 0 ;
     text-align: center;
     color: #925d21;
     font-family: Impact;
-}
+}*/
 .text-danger ul {
     list-style-type:none;
 }
