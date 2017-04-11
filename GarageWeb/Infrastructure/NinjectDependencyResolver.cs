@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ninject;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using System.Web;
+using Ninject.Web.Common;
 
 namespace GarageWeb.Infrastructure
 {
@@ -18,6 +23,11 @@ namespace GarageWeb.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IAuthHelper>().To<AdminAuthHelper>();
+            kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
+            kernel.Bind<UserManager<ApplicationUser>>().ToSelf();
+            kernel.Bind<IAuthenticationManager>().ToMethod(
+            c =>
+        HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
         }
 
         public object GetService(Type serviceType) => kernel.TryGet(serviceType);

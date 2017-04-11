@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Owin.Security;
+@using System.Security.Claims;
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,20 +21,35 @@
        <div class="social">
            @if (HttpContext.Current.User.Identity.IsAuthenticated)
            {
+
+               var identity = HttpContext.Current.User.Identity as ClaimsIdentity;
+               string avatar = identity?.FindFirst("Avatar")?.Value;
+
+               <div class="avatar">
+                   <img src="@avatar" alt="You avatar" />
+               </div>
                <div class="login">
                    Ви авторизовані як <span class="user-name">@HttpContext.Current.User.Identity.Name</span>
                </div>
                <div class="logout">
                    @Html.ActionLink("Вийти", "LogOut", "Admin")
                </div>
-           }else{
+           }
+           else
+           {
 
-           <div class="icon">
-               <a href="#"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>
-               <a href="#"><img src="~/Images/vk.png" alt="Alternate Text" /></a>
-               <a href="#"><img src="~/Images/ok.png" alt="Alternate Text" /></a>
-           </div>
-            }
+               var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+               using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = HttpContext.Current.Request.Url.AbsolutePath }))
+               {
+                @Html.AntiForgeryToken()
+                    <div class="icon">
+                            @foreach (AuthenticationDescription p in loginProviders)
+                            {
+                                <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
+                            }
+                    </div>
+               }
+           }
        </div>
    </header>
     <ul class="menu"> 
