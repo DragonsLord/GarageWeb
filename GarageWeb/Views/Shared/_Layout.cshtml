@@ -1,4 +1,6 @@
 ﻿@using Microsoft.Owin.Security;
+@using System.Security.Claims;
+
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +21,13 @@
        <div class="social">
            @if (HttpContext.Current.User.Identity.IsAuthenticated)
            {
+
+               var identity = HttpContext.Current.User.Identity as ClaimsIdentity;
+               string avatar = identity?.FindFirst("Avatar")?.Value;
+
+               <div class="avatar">
+                   <img src="@avatar" alt="You avatar" />
+               </div>
                <div class="login">
                    Ви авторизовані як <span class="user-name">@HttpContext.Current.User.Identity.Name</span>
                </div>
@@ -28,29 +37,18 @@
            }
            else
            {
-            
-                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = HttpContext.Current.Request.Url.AbsolutePath}))
-                {
+
+               var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+               using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = HttpContext.Current.Request.Url.AbsolutePath }))
+               {
                 @Html.AntiForgeryToken()
-                <div class="icon">
-                    <div id="socialLoginList">
-                        <p>
+                    <div class="icon">
                             @foreach (AuthenticationDescription p in loginProviders)
                             {
-                                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                                <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
                             }
-                        </p>
                     </div>
-
-                    @*<a href="#" name="provider" value="Facebook"><img src="~/Images/facebook.png" alt="Alternate Text" /></a>
-                        <a href="#" name="provider" value="Vk"><img src="~/Images/vk.png" alt="Alternate Text" /></a>
-                        <a href="#" name="provider" value="Google"><img src="~/Images/google.png" alt="Google" /></a>*@
-
-                </div>
                }
-
-
            }
        </div>
    </header>
