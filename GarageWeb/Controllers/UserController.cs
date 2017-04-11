@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using GarageWeb.Infrastructure;
 using System.Security.Claims;
+using Duke.Owin.VkontakteMiddleware;
+using KatanaContrib.Security.VK;
 
 namespace GarageWeb.Controllers
 {
@@ -69,8 +71,7 @@ namespace GarageWeb.Controllers
                 return RedirectToAction("Index","Home");
             }
             ClaimsIdentity claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            for (int i = 0; i < loginInfo.ExternalIdentity.Claims.Count() - 1; i++)
-                claim.AddClaim(loginInfo.ExternalIdentity.Claims.ElementAt(i));
+            claim.AddClaims(loginInfo.ExternalIdentity.Claims);
 
             AuthenticationManager.SignOut();
             AuthenticationManager.SignIn(new AuthenticationProperties
@@ -120,6 +121,7 @@ namespace GarageWeb.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {

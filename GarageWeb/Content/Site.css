@@ -44,9 +44,27 @@ footer {
     width: 200px;
     text-align: center;
 }
-
-.icon a {
+#Google{
+    background-image:url(../Images/google.png);
+}
+#GitHub {
+    background-image: url(../Images/github.png);
+}
+#Vkontakte {
+    background-image: url(../Images/vkontakte.png);
+}
+#Facebook {
+    background-image: url(../Images/facebook.png);
+}
+.icon button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
     width: 32px;
+    height:32px;
+    background-size:cover;
     display: inline-block;
     margin: 0 3px;
 }
@@ -212,4 +230,16 @@ body input:required:valid {
     padding-left: 5px;
     font-size: 16px;
     color: #925d21;
+}
+.avatar img {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px #585656 solid;
+    margin-right: 10px;
+    margin-bottom:5px;
+}
+.avatar{
+    text-align:right;
 }
