@@ -21,16 +21,9 @@ namespace GarageWeb.Models.ViewModel
         [Display(Name = "Новий Пароль")]
         public string NewPassword { get; set; }
 
-        [Required(ErrorMessage = "Пароль обов'язковий для введення!")]
+        [Required(ErrorMessage = "Старий пароль обов'язковий для введення!")]
         [DataType(DataType.Password)]
         [Display(Name = "Старий Пароль")]
         public string OldPassword { get; set; }
-
-        //public ChangeLoginViewModel()
-        //{
-        //    Login = WebConfigurationManager.AppSettings["AdminLogin"];
-        //}
-
-        Microsoft.Owin.Security.Infrastructure.AuthenticationHandler
     }
 }
