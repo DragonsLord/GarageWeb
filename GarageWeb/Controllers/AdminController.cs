@@ -62,16 +62,17 @@ namespace GarageWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeLoginInfo(ChangeLoginViewModel model)
+        public ActionResult ChangeLoginInfo(AdminPanelViewModel model)
         {
-            model.IsSelected = true;
+            model.ChangeLoginBlock.IsSelected = true;
             if (!ModelState.IsValid)
             {
                 return View("Index", model);
             }
-            if (authHelper.SetNewPassword(model.OldPassword, model.NewPassword) && authHelper.SetNewLogin(model.Login))
+            if (authHelper.SetNewPassword(model.ChangeLoginBlock.OldPassword, model.ChangeLoginBlock.NewPassword) && authHelper.SetNewLogin(model.ChangeLoginBlock.Login))
             {
-                model.IsSelected = false;
+                model.ChangeLoginBlock.IsSelected = false;
+                model.Message = "Дані успішно змінено";
                 return View("Index", model);
             }
             ModelState.AddModelError("", "Не правильний старий пароль");

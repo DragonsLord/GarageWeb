@@ -64,7 +64,7 @@ namespace GarageWeb.Infrastructure
                 claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
                     "OWIN Provider", ClaimValueTypes.String));
                 claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, "Admin", ClaimValueTypes.String));
-                claim.AddClaim(new Claim("Avatar", "~/Images/AdminAvatar.jpg"));
+                claim.AddClaim(new Claim("Avatar", "/Images/AdminAvatar.jpg"));
 
                 AuthenticationManager.SignOut();
                 AuthenticationManager.SignIn(new AuthenticationProperties

@@ -23,7 +23,6 @@ namespace GarageWeb
             });
             app.UseExternalSignInCookie("ExternalCookie");
             app.SetDefaultSignInAsAuthenticationType("ExternalCookie");
-
             app.UseGitHubAuthentication(new GitHubAuthenticationOptions()
             {
                 ClientId = "037d0dfd9476aa09bf70",

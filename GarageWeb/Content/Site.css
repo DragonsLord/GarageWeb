@@ -247,3 +247,28 @@ body input:required:valid {
 .avatar{
     text-align:right;
 }
+
+/*----Error page */
+.error h1 {
+    font-size: 120px;
+    color: #585656;
+    text-align: center;
+    padding-top: 30px;
+    font-family: Impact;
+    margin:0;
+}
+.error h3 {
+    margin:0;
+    font-size: 18px;
+    color: #585656;
+    text-align: center;
+    font-family: Impact;
+    padding-bottom:20px;
+}
+
+.message-info{
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #37a800;
+}
