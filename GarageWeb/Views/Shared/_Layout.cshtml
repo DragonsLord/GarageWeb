@@ -7,7 +7,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="shortcut icon" href="~/Images/logo.png">
+    <title>@ViewBag.Title - Garage on Web</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -56,6 +57,10 @@
         <li>@Html.ActionLink("Головна", "Index", "Home")</li>
         <li><a href="#">МЕНЮ</a></li>
         <li><a href="#">Новини</a></li>
+        @if (HttpContext.Current.User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Налаштування", "Index", "Admin")</li>
+        }
     </ul>
     <div class="body-content">
         @RenderBody()
@@ -66,6 +71,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/Main.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
