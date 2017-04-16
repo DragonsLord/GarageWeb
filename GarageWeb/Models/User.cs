@@ -20,7 +20,7 @@ namespace GarageWeb.Models
         public string Name { get; set; }
         public string AvatarUrl { get; set; }
 
-        public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

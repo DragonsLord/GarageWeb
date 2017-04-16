@@ -26,8 +26,8 @@ namespace GarageWeb.Models
         [StringLength(20)]
         public string Category { get; set; } = "Main";
 
-        public virtual ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
         public string GetImageUrl()
         {
