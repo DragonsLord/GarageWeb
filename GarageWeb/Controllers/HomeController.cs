@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GarageWeb.Models;
 
 namespace GarageWeb.Controllers
 {
@@ -10,7 +11,34 @@ namespace GarageWeb.Controllers
     {
         public ActionResult Index()
         {
-            var helper = new GarageWeb.Infrastructure.AdminAuthHelper();
+            using (CoffeDBContext db = new CoffeDBContext())
+            {
+                //db.Database.ExecuteSqlCommand("DROP TABLE [Ratings]");
+                //db.Database.ExecuteSqlCommand("DROP TABLE [Users]");
+                //db.Database.ExecuteSqlCommand("DROP TABLE [Dishes]");
+                Dish d = new Dish()
+                {
+                    Name = "Test",
+                    Weight = 100,
+                    Price = 20
+                };
+                db.Dishes.Add(d);
+                User u = new Models.User()
+                {
+                    Name = "TestUser",
+                    Token = "Test",
+                    Provider = "Test"
+                };
+                db.Users.Add(u);
+                Rating r = new Rating()
+                {
+                    Dish = d,
+                    User = u,
+                    Value = 5
+                };
+                db.Ratings.Add(r);
+                db.SaveChanges();
+            }
 
             return View();
         }

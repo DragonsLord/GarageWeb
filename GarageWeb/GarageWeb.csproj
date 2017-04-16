@@ -224,6 +224,12 @@
     <Compile Include="Infrastructure\Encrypt.cs" />
     <Compile Include="Infrastructure\IAuthHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\CoffeDBContext.cs" />
+    <Compile Include="Models\Dish.cs" />
+    <Compile Include="Models\NewsEntry.cs" />
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\AdminPanelViewModel.cs" />
     <Compile Include="Models\ViewModel\ChangeLoginViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
