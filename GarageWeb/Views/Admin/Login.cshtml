@@ -6,10 +6,10 @@
 
 <div id="loginForm">
     <h4>Для керування системою ви повинні авторизуватися як адмінстратор</h4>
-    @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
+    @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "form-admin", role = "form" }))
     {
-        @*@Html.AntiForgeryToken()*@
-        
+        @Html.AntiForgeryToken()
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(m => m.Login)

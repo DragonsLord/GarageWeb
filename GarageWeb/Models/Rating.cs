@@ -16,7 +16,12 @@ namespace GarageWeb.Models
         public int DishId { get; set; }
         [Required]
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        [Column(Order = 2)]
+        public string UserToken { get; set; }
+        [Required]
+        [ForeignKey("User")]
+        [Column(Order = 3)]
+        public string UserProvider { get; set; }
         [Required]
         [Range(0,5)]
         public int Value { get; set; }

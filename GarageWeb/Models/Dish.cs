@@ -44,5 +44,14 @@ namespace GarageWeb.Models
                 return Ratings.Average(r => r.Value);
             }
         }
+        public void Edit(Dish new_val)
+        {
+            Name = new_val.Name;
+            Weight = new_val.Weight;
+            Price = new_val.Price;
+            Image = new_val.Image;
+            Description = new_val.Description;
+            Category = new_val.Category;
+        }
     }
 }
