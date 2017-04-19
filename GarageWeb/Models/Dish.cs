@@ -14,16 +14,20 @@ namespace GarageWeb.Models
         public int Id { get; set; }
         [Required]
         [StringLength(50)]
+        [Display(Name = "Назва")]
         public string Name { get; set; }
         [Required]
+        [Display(Name = "Вага порції")]
         public float Weight { get; set; }
         [Required]
+        [Display(Name = "Ціна")]
         public float Price { get; set; }
-
+        [Display(Name = "Зображення")]
         public byte[] Image { get; set; }
-
+        [Display(Name = "Опис")]
         public string Description { get; set; }
         [StringLength(20)]
+        [Display(Name = "Категорія")]
         public string Category { get; set; } = "Main";
 
         public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
@@ -43,6 +47,15 @@ namespace GarageWeb.Models
                 if (Ratings.Count == 0) return 0;
                 return Ratings.Average(r => r.Value);
             }
+        }
+        public void Edit(Dish new_val)
+        {
+            Name = new_val.Name;
+            Weight = new_val.Weight;
+            Price = new_val.Price;
+            Image = new_val.Image;
+            Description = new_val.Description;
+            Category = new_val.Category;
         }
     }
 }

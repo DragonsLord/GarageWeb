@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using GarageWeb.Models;
 using GarageWeb.Models.Interfaces;
+using System.Security.Claims;
 using System.IO;
 
 namespace GarageWeb.Controllers
@@ -48,7 +49,7 @@ namespace GarageWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
             
             if (ModelState.IsValid)
@@ -60,7 +61,7 @@ namespace GarageWeb.Controllers
                     array = ms.GetBuffer();
                 }
                 dish.Image = array;
-                _dishes.Add(dish);
+                await _dishes.AddAsync(dish);
                 return RedirectToAction("Index");
             }
 
@@ -85,50 +86,86 @@ namespace GarageWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Exclude = "CurrentRating")]*/ Dish dish)
+        public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish)
         {
             if (ModelState.IsValid)
             {
-                _dishes.Edit();
+                await _dishes.EditAsync(dish);
                 return RedirectToAction("Index");
             }
             return View(dish);
         }
 
         // GET: Dishes/Delete/5
-        //public async Task<ActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Dish dish = await db.Dishes.FindAsync(id);
-        //    if (dish == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(dish);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Dish dish = _dishes.Data.FirstOrDefault(d => d.Id == id);
+            if (dish == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dish);
+        }
 
-        //// POST: Dishes/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    Dish dish = await db.Dishes.FindAsync(id);
-        //    db.Dishes.Remove(dish);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
+        // POST: Dishes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            await _dishes.RemoveAsync(id);
+            return RedirectToAction("Index");
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dishes.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        [NonAction]
+        public async void SetRatingAsync(int dish_id, int value)
+        {
+            var dish = await _dishes.Data.FirstOrDefaultAsync(d => d.Id == dish_id);
+            string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
+                userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
+            if (!dish.Ratings.Any(r => r.UserToken == userToken && r.UserProvider == userProvider))
+            {
+                var r = new Rating()
+                {
+                    UserToken = userToken,
+                    UserProvider = userProvider,
+                    DishId = dish_id,
+                    Value = value
+                };
+                dish.Ratings.Add(r);
+                _dishes.Save();
+            }
+        }
+        [NonAction]
+        public async void SetReviewAsync(int dish_id, string text)
+        {
+            var dish = await _dishes.Data.FirstOrDefaultAsync(d => d.Id == dish_id);
+            string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
+                userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
+            if (!dish.Reviews.Any(r => r.UserToken == userToken && r.UserProvider == userProvider))
+            {
+                var r = new Review()
+                {
+                    UserToken = userToken,
+                    UserProvider = userProvider,
+                    DishId = dish_id,
+                    Content = text
+                };
+                dish.Reviews.Add(r);
+                _dishes.Save();
+            }
+        }
     }
     
 }

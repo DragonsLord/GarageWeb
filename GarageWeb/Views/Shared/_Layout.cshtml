@@ -42,9 +42,10 @@
            {
 
                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-               using (Html.BeginForm("ExternalLogin", "User"))
+
+               using (Html.BeginForm("ExternalLogin", "User", FormMethod.Post))
                {
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
                     <div class="icon">
                             @foreach (AuthenticationDescription p in loginProviders)
                             {
