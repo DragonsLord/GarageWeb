@@ -5,12 +5,24 @@
     var customCulture = new System.Globalization.CultureInfo("en-US");
     System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 }
+@Scripts.Render("~/Scripts/Main.js")
+@using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
+    {
+
+    <h3>Ви впевнені що хочите видалити страву:</h3>
+    <h2></h2>
+    <input type="hidden" name="id" value=""/>
+    <a onclick="$('#recall').fancybox.close()"></a>
+    <input type="submit" value="Видалити">
+}
 <div class="all-dishes">
-    <div class="dish">
-        <a href="@Url.Action("Edit","Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-    </div>
-
-
+    @if (Context.User.IsInRole("Admin"))
+    {
+        <div class="dish">
+            <a href="@Url.Action("Create", "Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+        </div>
+        }
+    
     @foreach (var item in Model)
     {
         <div class="dish">
@@ -19,7 +31,7 @@
            {
                <div class="admin-menu">
                    <a href="@Url.Action("Edit","Menu",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                   <a href="@Url.Action("Delete","Menu",new { id = item.Id})" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                   <a href="#recall"  onclick="displayFancybox('@item.Name', @item.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
                </div>
            }
             <div class="name">

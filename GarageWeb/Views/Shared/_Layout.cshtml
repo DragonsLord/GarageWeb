@@ -8,15 +8,11 @@
     <meta charset="utf-8" />
 
     <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
-    
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/Images/logo.png">
     <title>@ViewBag.Title - Garage on Web</title>
     @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+   
 </head>
 <body>
    <header>
@@ -62,7 +58,7 @@
     <ul class="menu"> 
         <li>@Html.ActionLink("Головна", "Index", "Home")</li>
         <li>@Html.ActionLink("Меню", "Index", "Menu")</li>
-        <li><a href="#">Новини</a></li>
+        <li>@Html.ActionLink("Новини", "Index", "News")</a></li>
         @if (HttpContext.Current.User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Налаштування", "Index", "Admin")</li>
@@ -75,11 +71,15 @@
         <p>&copy; @DateTime.Now.Year - Serdiuk & Truba Production</p>
     </footer>
 
+    
+    @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/Main.js")
-    <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
-    @RenderSection("scripts", required: false)
-
+    @Scripts.Render("~/Scripts/bootstrap-rating/bootstrap-rating.min.js")
+    @Scripts.Render("~/Content/fancybox/jquery.fancybox.pack.js");
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fancybox/jquery.fancybox.css")
 </body>
 </html>

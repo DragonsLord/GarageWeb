@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using GarageWeb.Models;
 using GarageWeb.Models.Interfaces;
+using System.IO;
 
 namespace GarageWeb.Controllers
 {
@@ -47,11 +48,18 @@ namespace GarageWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "CurrentRating")] Dish dish)
+        public ActionResult Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
             
             if (ModelState.IsValid)
             {
+                byte[] array;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    array = ms.GetBuffer();
+                }
+                dish.Image = array;
                 _dishes.Add(dish);
                 return RedirectToAction("Index");
             }
@@ -87,7 +95,7 @@ namespace GarageWeb.Controllers
             return View(dish);
         }
 
-        //// GET: Dishes/Delete/5
+        // GET: Dishes/Delete/5
         //public async Task<ActionResult> Delete(int? id)
         //{
         //    if (id == null)

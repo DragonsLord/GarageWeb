@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GarageWeb.Models.NewsEntry>
+
+@{
+    ViewBag.Title = "Новини";
+}
+
+<div class="all-news">
+    @if (Context.User.IsInRole("Admin"))
+    {
+        <div class="dish">
+            <a href="@Url.Action("Edit","Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="news">
+            <img src="@item.GetImageUrl()" />
+
+            <div class="left-block">
+                <div class="name">
+                    @item.Title
+                </div>
+                <div class="description">
+                    @item.Description
+                </div>
+            </div>
+
+            @if (Context.User.IsInRole("Admin"))
+            {
+                <div class="admin-menu">
+                    <a href="@Url.Action("Edit","Menu",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Delete","Menu",new { id = item.Id})" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+
+                </div>
+            }
+        </div>
+    }
+</div>
