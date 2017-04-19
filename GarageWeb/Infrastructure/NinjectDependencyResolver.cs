@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Ninject;
 using Microsoft.AspNet.Identity;
@@ -8,6 +7,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System.Web;
 using Ninject.Web.Common;
+using GarageWeb.Models.Interfaces;
+using GarageWeb.Models;
+using GarageWeb.Models.Repositories;
 
 namespace GarageWeb.Infrastructure
 {
@@ -25,9 +27,9 @@ namespace GarageWeb.Infrastructure
             kernel.Bind<IAuthHelper>().To<AdminAuthHelper>();
             kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
             kernel.Bind<UserManager<ApplicationUser>>().ToSelf();
-            kernel.Bind<IAuthenticationManager>().ToMethod(
-            c =>
-        HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+            kernel.Bind<IAuthenticationManager>().ToMethod(c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+            kernel.Bind<IRepository<Dish>>().To<DishesRepository>();
+            kernel.Bind<IRepository<NewsEntry>>().To<NewsLine>();
         }
 
         public object GetService(Type serviceType) => kernel.TryGet(serviceType);

@@ -8,9 +8,6 @@ namespace GarageWeb.Models
 {
     public class CoffeDBContext : DbContext
     {
-        public CoffeDBContext() : base()
-        { }
-
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<NewsEntry> News { get; set; }
         public DbSet<User> Users { get; set; }

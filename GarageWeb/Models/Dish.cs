@@ -31,6 +31,7 @@ namespace GarageWeb.Models
 
         public string GetImageUrl()
         {
+            if (Image == null) return "/Images/dish.png";
             var temp = Convert.ToBase64String(Image);
             return $"data:image;base64,{temp}";
         }
@@ -39,6 +40,7 @@ namespace GarageWeb.Models
         {
             get
             {
+                if (Ratings.Count == 0) return 0;
                 return Ratings.Average(r => r.Value);
             }
         }

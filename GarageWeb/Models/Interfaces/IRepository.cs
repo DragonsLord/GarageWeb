@@ -11,6 +11,6 @@ namespace GarageWeb.Models.Interfaces
         IQueryable<T> Data { get; }
         void Add(T entry);
         void Edit();
-        void Remove(T entry);
+        void Remove(int id);
     }
 }

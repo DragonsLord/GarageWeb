@@ -1,61 +1,20 @@
 ﻿using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.Owin;
 using GarageWeb.Infrastructure;
 using System.Security.Claims;
-using Duke.Owin.VkontakteMiddleware;
-using KatanaContrib.Security.VK;
 
 namespace GarageWeb.Controllers
 {
-    public class UserController : Controller
+    public partial class UserController : Controller
     {
-
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
         // GET: User
         public ActionResult Index()
         {
             return View();
         }
         
-
-
         //[HttpPost]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -80,15 +39,7 @@ namespace GarageWeb.Controllers
             }, claim);
             return RedirectToAction("Index", "Home");
         }
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
+        
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -97,37 +48,11 @@ namespace GarageWeb.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        private const string XsrfKey = "UserId";
-
-        internal class ChallengeResult : HttpUnauthorizedResult
+        private IAuthenticationManager AuthenticationManager
         {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
+            get
             {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public string UserId { get; set; }
-
-
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                return HttpContext.GetOwinContext().Authentication;
             }
         }
     }

@@ -72,15 +72,12 @@ namespace GarageWeb
             });
             app.UseVkontakteAuthentication(new VkAuthenticationOptions()
             {
-                //ClientId= "5467899",
-                //ClientSecret = "6ImWrU5jNOzKvBZrbaCM",               
                 AppId = "5467899",
                 AppSecret = "6ImWrU5jNOzKvBZrbaCM",
                 Scope = "email,photos",
                 Provider = new VkAuthenticationProvider()
                 {
                     OnAuthenticated = context => {
-                        //context.Identity.AddClaim(new Claim("urn:vk:profile", context.AccessToken));
                         context.Identity.RemoveClaim(context.Identity.FindFirst(ClaimsIdentity.DefaultNameClaimType));
                         context.Identity.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, context.FullName));
                         context.Identity.AddClaim(new Claim("Avatar", context.Link));
@@ -89,7 +86,6 @@ namespace GarageWeb
                     }
                 }
             });
-            
         }
     }
 }

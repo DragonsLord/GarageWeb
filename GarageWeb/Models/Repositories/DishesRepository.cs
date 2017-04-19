@@ -30,11 +30,11 @@ namespace GarageWeb.Models.Repositories
             catch { throw; }
         }
 
-        public async void Remove(Dish entry)
+        public async void Remove(int id)
         {
             try
             {
-                _context.Dishes.Remove(entry);
+                _context.Dishes.Remove(_context.Dishes.First(t=>t.Id==id));
                 await _context.SaveChangesAsync();
             }
             catch { throw; }
