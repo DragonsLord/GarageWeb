@@ -106,7 +106,7 @@ footer {
 }
 .menu li {
     display: inline-block;
-    width:150px;
+    padding: 0 30px;
 }
 .menu li a{
     font-size: 24px;
@@ -319,7 +319,7 @@ body input:required:valid {
     margin-left:5px;
     font-weight:bold;
 }
-.detail {
+.detail, #recall input[type="submit"] {
     display: inline-block;
     margin: 10px 0;
     padding: 10px 30px;
@@ -334,12 +334,12 @@ body input:required:valid {
     -o-transition: all .5s ease-out;
     transition: all .5s ease-out;
 }
-.detail:hover {
-    color: #fff0de;
-    background-color: #925d21;
-    border: 1px solid #925d21;
-    text-decoration:none;
-}
+    .detail:hover, #recall input[type="submit"]:hover {
+        color: #fff0de;
+        background-color: #925d21;
+        border: 1px solid #925d21;
+        text-decoration: none;
+    }
 .price, .weight {
     font-family: "Impact";
     color: #925d21;
@@ -378,4 +378,72 @@ body input:required:valid {
 
 .menu-create:hover {
     color: #5cb85c;
+}
+.all-news{
+    padding:10px 0;
+}
+.news {
+    width: 100%;
+    padding: 10px;
+    padding-bottom:30px;
+    border-bottom: 3px solid #585656;
+    margin-bottom:20px;
+}
+.news img{
+    width:300px;
+    display:inline-block;
+}
+.news .left-block{
+    width:calc(100% - 310px);
+    display:inline-block;
+    padding-left:20px;
+    vertical-align:top;
+}
+.news .left-block .name {
+    font-size: 36px;
+    font-family: Impact;
+        
+}
+#recall{
+    text-align:center;
+}
+#recall h3{
+    font-size:18px;
+}
+#recall h2 {
+    font-size:32px;
+    font-family:Impact;
+}
+
+#recall input[type="submit"] {
+    background-color:transparent;
+}
+.rating-sybmol{
+    cursor:pointer;
+}
+#file{
+    display:none;
+}
+.form-group .file-label {
+    text-align: center;
+    width: 300px;
+    line-height: 20px;
+    cursor: pointer;
+    vertical-align:middle;
+    position:relative;
+}
+#preload{
+    display:none;
+    width:200px;
+    position:absolute;
+    left:200px;
+    bottom:0px;
+    z-index:2;
+}
+.form-group label .load-image {
+    height: 200px;
+    vertical-align: middle;
+}
+.form-horizontal{
+    padding:20px 0;
 }

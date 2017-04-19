@@ -26,5 +26,11 @@ namespace GarageWeb.Models
             Image = new_val.Image;
             Description = new_val.Description;
         }
+        public string GetImageUrl()
+        {
+            if (Image == null) return "/Images/dish.png";
+            var temp = Convert.ToBase64String(Image);
+            return $"data:image;base64,{temp}";
+        }
     }
 }

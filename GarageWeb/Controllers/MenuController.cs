@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using GarageWeb.Models;
 using GarageWeb.Models.Interfaces;
 using System.Security.Claims;
+using System.IO;
 
 namespace GarageWeb.Controllers
 {
@@ -48,11 +49,18 @@ namespace GarageWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Exclude = "CurrentRating")] Dish dish)
+        public async Task<ActionResult> Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
             
             if (ModelState.IsValid)
             {
+                byte[] array;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    array = ms.GetBuffer();
+                }
+                dish.Image = array;
                 await _dishes.AddAsync(dish);
                 return RedirectToAction("Index");
             }
