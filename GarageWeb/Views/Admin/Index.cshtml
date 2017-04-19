@@ -20,7 +20,7 @@
             <i></i>
             <h2>Змінити логін та пароль</h2>
             <div class="function-content" id="loginForm">
-                @using (Html.BeginForm("ChangeLoginInfo", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-admin", role = "form" }))
+                @using (Html.BeginForm("ChangeLoginInfo", "Admin", FormMethod.Post, new { @class = "form-admin", role = "form" }))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">

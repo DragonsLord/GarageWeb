@@ -12,9 +12,12 @@ namespace GarageWeb.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Заголовок")]
         public string Title { get; set; }
         [Required]
+        [Display(Name = "Опис")]
         public string Description { get; set; }
+        [Display(Name = "Зображення")]
         public byte[] Image { get; set; }
 
         public void Edit(NewsEntry new_val)
