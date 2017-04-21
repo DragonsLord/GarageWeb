@@ -11,7 +11,7 @@
             $("#preload").hide("slow");
         });
 });
-    
+
 function displayFancybox(param1, param2) {
     // Open FancyBox
     $("#recall h2").text(param1);

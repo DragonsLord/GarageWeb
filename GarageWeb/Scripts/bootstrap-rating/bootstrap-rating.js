@@ -125,7 +125,9 @@
       // Keep rating control and its associated input in sync.
       $input
         .on('change', function () {
-          updateRate($(this).val());
+            updateRate($(this).val());
+            var id = $(this).next("input").val();
+            $.post("/Menu/UpdateRating", { value: $(this).val(), dishID: id });
         });
 
       var fractionalIndex = function (e) {

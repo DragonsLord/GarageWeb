@@ -10,6 +10,10 @@ namespace GarageWeb.Models
 {
     public class Dish
     {
+        public Dish()
+        {
+            _imageUrl = new Lazy<string>(GetImageUrl, true);
+        }
         [Key]
         public int Id { get; set; }
         [Required]
@@ -33,12 +37,15 @@ namespace GarageWeb.Models
         public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-        public string GetImageUrl()
+        private string GetImageUrl()
         {
             if (Image == null) return "/Images/dish.png";
             var temp = Convert.ToBase64String(Image);
             return $"data:image;base64,{temp}";
         }
+        private Lazy<string> _imageUrl;
+        [NotMapped]
+        public string ImageUrl => _imageUrl.Value;
         [NotMapped]
         public double CurrentRating
         {

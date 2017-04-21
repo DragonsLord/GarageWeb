@@ -87,6 +87,6 @@ namespace GarageWeb.Models.Repositories
             });
         }
 
-        public void Save() => _context.SaveChangesAsync();
+        public void Save() => _context.SaveChanges();
     }
 }

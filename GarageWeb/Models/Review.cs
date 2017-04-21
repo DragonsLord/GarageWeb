@@ -23,7 +23,10 @@ namespace GarageWeb.Models
         [Column(Order = 3)]
         public string UserProvider { get; set; }
         [Required]
+        [Column(TypeName = "ntext")]
         public string Content { get; set; }
+        [Required]
+        public DateTime Time { get; set; }
 
         public virtual Dish Dish { get; set; }
         public virtual User User { get; set; }

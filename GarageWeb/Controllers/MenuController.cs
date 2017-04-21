@@ -120,6 +120,19 @@ namespace GarageWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UpdateRating(int value, int dishID)
+        {
+            await SetRatingAsync(dishID, value);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<ActionResult> ReviewDish(int dishID, string content)
+        {
+            await SetReviewAsync(dishID, content);
+            return new RedirectResult($"/Menu/Details/{dishID}");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,42 +142,46 @@ namespace GarageWeb.Controllers
             base.Dispose(disposing);
         }
         [NonAction]
-        public async void SetRatingAsync(int dish_id, int value)
+        public Task SetRatingAsync(int dish_id, int value)
         {
-            var dish = await _dishes.Data.FirstOrDefaultAsync(d => d.Id == dish_id);
-            string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
-                userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
-            if (!dish.Ratings.Any(r => r.UserToken == userToken && r.UserProvider == userProvider))
+            return Task.Run(() =>
             {
-                var r = new Rating()
+                var dish = _dishes.Data.FirstOrDefault(d => d.Id == dish_id);
+                string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
+                    userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
+                if (!dish.Ratings.Any(r => r.UserToken == userToken && r.UserProvider == userProvider))
                 {
-                    UserToken = userToken,
-                    UserProvider = userProvider,
-                    DishId = dish_id,
-                    Value = value
-                };
-                dish.Ratings.Add(r);
-                _dishes.Save();
-            }
+                    var r = new Rating()
+                    {
+                        UserToken = userToken,
+                        UserProvider = userProvider,
+                        DishId = dish_id,
+                        Value = value
+                    };
+                    dish.Ratings.Add(r);
+                    _dishes.Save();
+                }
+            });
         }
         [NonAction]
-        public async void SetReviewAsync(int dish_id, string text)
+        public Task SetReviewAsync(int dish_id, string text)
         {
-            var dish = await _dishes.Data.FirstOrDefaultAsync(d => d.Id == dish_id);
-            string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
-                userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
-            if (!dish.Reviews.Any(r => r.UserToken == userToken && r.UserProvider == userProvider))
+            return Task.Run(() =>
             {
+                var dish = _dishes.Data.FirstOrDefault(d => d.Id == dish_id);
+                string userToken = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value,
+                userProvider = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("Provider").Value;
                 var r = new Review()
                 {
                     UserToken = userToken,
                     UserProvider = userProvider,
                     DishId = dish_id,
-                    Content = text
+                    Content = text,
+                    Time = DateTime.Now
                 };
                 dish.Reviews.Add(r);
                 _dishes.Save();
-            }
+            });
         }
     }
     

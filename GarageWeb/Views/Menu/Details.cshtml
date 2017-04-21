@@ -59,6 +59,20 @@
         </dd>
 
     </dl>
+    @using (Html.BeginForm("ReviewDish", "Menu", FormMethod.Post))
+    {
+        <input type="hidden" name="dishID" value="@Model.Id" />
+        <textarea name="content"></textarea>
+        <div>
+            <input type="submit" value="Залишити відгук" />
+        </div>
+    }
+        @foreach (var r in Model.Reviews)
+        {
+            <img src="@r.User.AvatarUrl"/> @r.User.Name
+            <div>@r.Time</div>
+            <pre>@Html.Encode(r.Content)</pre>
+        }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
