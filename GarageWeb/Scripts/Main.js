@@ -10,6 +10,29 @@
         function () {
             $("#preload").hide("slow");
         });
+    var owl = $("#owl-demo");
+
+    owl.owlCarousel({
+        nav: false,
+        pagination: true,
+        autoplay: false,
+        dots: true,
+        autoplayHoverPause: false,
+        items: 3,
+        loop: true,
+        mouseDrag: true,
+        touchDrag: true,
+        smartSpeed: 800,
+    });
+
+    $(".slider-block .right").click(function (event) {
+        event.preventDefault();
+        owl.trigger("next.owl.carousel");
+    });
+    $(".slider-block .left").click(function (event) {
+        event.preventDefault();
+        owl.trigger("prev.owl.carousel");
+    });
 });
     
 function displayFancybox(param1, param2) {
@@ -36,10 +59,12 @@ function readURL(input) {
 $("#file").change(function () {
     readURL(this);
 });
+
+/*
 var input = document.getElementById("file");
 
 input.addEventListener('change', function (e) {
     var fileName = '';
     fileName = e.target.value.split('\\').pop();
     $(".file-label span").text(fileName);
-});
+});*/

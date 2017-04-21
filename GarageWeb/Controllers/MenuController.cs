@@ -54,13 +54,16 @@ namespace GarageWeb.Controllers
             
             if (ModelState.IsValid)
             {
-                byte[] array;
-                using (MemoryStream ms = new MemoryStream())
+                if (file !=null)
                 {
-                    file.InputStream.CopyTo(ms);
-                    array = ms.GetBuffer();
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    dish.Image = array;
                 }
-                dish.Image = array;
                 await _dishes.AddAsync(dish);
                 return RedirectToAction("Index");
             }
