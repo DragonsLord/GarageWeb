@@ -27,6 +27,8 @@ namespace GarageWeb.Models
         public string Content { get; set; }
         [Required]
         public DateTime Time { get; set; }
+        [Column(TypeName = "ntext")]
+        public string AdminAnswer { get; set; }
 
         public virtual Dish Dish { get; set; }
         public virtual User User { get; set; }

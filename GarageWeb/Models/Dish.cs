@@ -16,14 +16,14 @@ namespace GarageWeb.Models
         }
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Назва\" не може бути порожнім")]
         [StringLength(50)]
         [Display(Name = "Назва")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Вага\" не може бути порожнім")]
         [Display(Name = "Вага порції")]
         public float Weight { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Ціна\" не може бути порожнім")]
         [Display(Name = "Ціна")]
         public float Price { get; set; }
         [Display(Name = "Зображення")]

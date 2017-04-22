@@ -47,7 +47,7 @@ namespace GarageWeb.Controllers
             return View();
         }
         
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
@@ -68,7 +68,7 @@ namespace GarageWeb.Controllers
             return View(dish);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id=0)
         {
             if (id == null)
@@ -83,8 +83,7 @@ namespace GarageWeb.Controllers
             return View(dish);
         }
 
-
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish)
         {
@@ -96,7 +95,7 @@ namespace GarageWeb.Controllers
             return View(dish);
         }
 
-        // GET: Dishes/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,9 +109,7 @@ namespace GarageWeb.Controllers
             }
             return View(dish);
         }
-
-        // POST: Dishes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
@@ -120,16 +117,25 @@ namespace GarageWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdateRating(int value, int dishID)
         {
             await SetRatingAsync(dishID, value);
-            return RedirectToAction("Index");
+            return new RedirectResult($"/Menu");
         }
-        [HttpPost]
+        [HttpPost, Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ReviewDish(int dishID, string content)
         {
             await SetReviewAsync(dishID, content);
+            return new RedirectResult($"/Menu/Details/{dishID}");
+        }
+        [HttpPost, Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AnswerToReview(int dishID, int reviewID, string content)
+        {
+            await SetReviewAnswerAsync(dishID, reviewID, content);
             return new RedirectResult($"/Menu/Details/{dishID}");
         }
 
@@ -142,7 +148,7 @@ namespace GarageWeb.Controllers
             base.Dispose(disposing);
         }
         [NonAction]
-        public Task SetRatingAsync(int dish_id, int value)
+        private Task SetRatingAsync(int dish_id, int value)
         {
             return Task.Run(() =>
             {
@@ -164,7 +170,7 @@ namespace GarageWeb.Controllers
             });
         }
         [NonAction]
-        public Task SetReviewAsync(int dish_id, string text)
+        private Task SetReviewAsync(int dish_id, string text)
         {
             return Task.Run(() =>
             {
@@ -180,6 +186,16 @@ namespace GarageWeb.Controllers
                     Time = DateTime.Now
                 };
                 dish.Reviews.Add(r);
+                _dishes.Save();
+            });
+        }
+        [NonAction]
+        private Task SetReviewAnswerAsync(int dish_id, int review_id, string text)
+        {
+            return Task.Run(() =>
+            {
+                var review = _dishes.Data.FirstOrDefault(d => d.Id == dish_id).Reviews.FirstOrDefault(r => r.Id == review_id);
+                review.AdminAnswer = text;
                 _dishes.Save();
             });
         }

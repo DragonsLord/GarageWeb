@@ -54,6 +54,7 @@
                      @Html.BootstrapRating().Value(item.CurrentRating).ReadOnly
                 }
                 <input type="hidden" value="@item.Id" class='dishID'>
+                @Html.AntiForgeryToken()
             </div>
             @Html.ActionLink("Детальніше", "Details", new { id = @item.Id }, new { @class = "detail" })
         </div>

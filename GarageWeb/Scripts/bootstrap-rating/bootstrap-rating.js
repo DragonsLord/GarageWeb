@@ -127,7 +127,8 @@
         .on('change', function () {
             updateRate($(this).val());
             var id = $(this).next("input").val();
-            $.post("/Menu/UpdateRating", { value: $(this).val(), dishID: id });
+            var token = $(this).next("input").next("input").val();
+            $.post("/Menu/UpdateRating", { __RequestVerificationToken: token, value: $(this).val(), dishID: id });
         });
 
       var fractionalIndex = function (e) {

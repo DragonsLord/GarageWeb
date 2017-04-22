@@ -17,7 +17,7 @@ namespace GarageWeb.Models.Repositories
             try
             {
                 _context.News.Add(entry);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch { throw; }
         }
@@ -46,7 +46,7 @@ namespace GarageWeb.Models.Repositories
             {
                 var n = _context.News.FirstOrDefault(e => e.Id == entry.Id);
                 n.Edit(entry);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch { throw; }
         }
@@ -70,7 +70,7 @@ namespace GarageWeb.Models.Repositories
             try
             {
                 _context.News.Remove(_context.News.First(t => t.Id == id));
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch { throw; }
         }
@@ -87,6 +87,6 @@ namespace GarageWeb.Models.Repositories
                 catch { throw; }
             });
         }
-        public void Save() => _context.SaveChangesAsync();
+        public void Save() => _context.SaveChanges();
     }
 }
