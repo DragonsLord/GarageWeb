@@ -54,13 +54,16 @@ namespace GarageWeb.Controllers
             
             if (ModelState.IsValid)
             {
-                byte[] array;
-                using (MemoryStream ms = new MemoryStream())
+                if (file !=null)
                 {
-                    file.InputStream.CopyTo(ms);
-                    array = ms.GetBuffer();
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    dish.Image = array;
                 }
-                dish.Image = array;
                 await _dishes.AddAsync(dish);
                 return RedirectToAction("Index");
             }
@@ -85,10 +88,20 @@ namespace GarageWeb.Controllers
 
         [HttpPost, Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish)
+        public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    dish.Image = array;
+                }
                 await _dishes.EditAsync(dish);
                 return RedirectToAction("Index");
             }

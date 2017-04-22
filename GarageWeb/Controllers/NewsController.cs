@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using GarageWeb.Models;
 using GarageWeb.Models.Interfaces;
+using System.IO;
+using System.Web;
+using System.Net;
 
 namespace GarageWeb.Controllers
 {
@@ -14,115 +17,120 @@ namespace GarageWeb.Controllers
         {
             _news = n;
         }
-
-        // GET: News
+        
         public async Task<ActionResult> Index()
         {
             return View(await _news.Data.ToListAsync());
         }
+        
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NewsEntry newsEntry = await _news.Data.FirstAsync(t => t.Id == id.Value);
+            if (newsEntry == null)
+            {
+                return HttpNotFound();
+            }
+            return View(newsEntry);
+        }
 
-        // GET: News/Details/5
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    NewsEntry newsEntry = await db.News.FindAsync(id);
-        //    if (newsEntry == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(newsEntry);
-        //}
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-        //// GET: News/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "Id,Titile,Description,Image")] NewsEntry news, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    news.Image = array;
+                }
+                await _news.AddAsync(news);
+                return RedirectToAction("Index");
+            }
+            return View(news);
+        }
 
-        //// POST: News/Create
-        //// Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        //// сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "Id,Titile,Description,Image")] NewsEntry newsEntry)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.News.Add(newsEntry);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
 
-        //    return View(newsEntry);
-        //}
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NewsEntry newsEntry = await _news.Data.FirstAsync(t => t.Id == id.Value);
+            if (newsEntry == null)
+            {
+                return HttpNotFound();
+            }
+            return View(newsEntry);
+        }
 
-        //// GET: News/Edit/5
-        //public async Task<ActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    NewsEntry newsEntry = await db.News.FindAsync(id);
-        //    if (newsEntry == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(newsEntry);
-        //}
 
-        //// POST: News/Edit/5
-        //// Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        //// сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit([Bind(Include = "Id,Titile,Description,Image")] NewsEntry newsEntry)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(newsEntry).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(newsEntry);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Titile,Description,Image")] NewsEntry news, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    news.Image = array;
+                }
+                await _news.AddAsync(news);
+                return RedirectToAction("Index");
+            }
+            return View(news);
+        }
+        
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NewsEntry newsEntry =  await _news.Data.FirstAsync(t=>t.Id== id.Value);
+            if (newsEntry == null)
+            {
+                return HttpNotFound();
+            }
+            return View(newsEntry);
+        }
+        
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            await _news.RemoveAsync(id);
+            return RedirectToAction("Index");
+        }
 
-        //// GET: News/Delete/5
-        //public async Task<ActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    NewsEntry newsEntry = await db.News.FindAsync(id);
-        //    if (newsEntry == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(newsEntry);
-        //}
-
-        //// POST: News/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    NewsEntry newsEntry = await db.News.FindAsync(id);
-        //    db.News.Remove(newsEntry);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _news.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

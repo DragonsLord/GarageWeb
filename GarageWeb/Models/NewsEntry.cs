@@ -20,6 +20,10 @@ namespace GarageWeb.Models
         [Display(Name = "Зображення")]
         public byte[] Image { get; set; }
 
+        [Required]
+        [Display(Name = "Час")]
+        public DateTime DateTime { get; set; }
+
         public void Edit(NewsEntry new_val)
         {
             Title = new_val.Title;
