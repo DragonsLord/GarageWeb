@@ -59,6 +59,49 @@
         </dd>
 
     </dl>
+    @if (!Context.User.IsInRole("Admin"))
+    {
+        using (Html.BeginForm("ReviewDish", "Menu", FormMethod.Post))
+        {
+            Html.AntiForgeryToken();
+            <input type="hidden" name="dishID" value="@Model.Id" />
+            <textarea name="content"></textarea>
+            if (Context.User.Identity.IsAuthenticated)
+            {
+                <div><input type="submit" value="Залишити відгук" /></div>
+            }
+            else
+            {
+                <div><input type="submit" value="Залишити відгук" disabled/></div>
+                <div>Необхідно авторизуватися</div>
+            }
+        }
+    }
+    @foreach (var r in Model.Reviews)
+    {
+        <img src="@r.User.AvatarUrl"/> @r.User.Name
+        <div>@r.Time</div>
+        <pre>@Html.Encode(r.Content)</pre>
+        if (!string.IsNullOrEmpty(r.AdminAnswer))
+        {
+            <img src="/Images/AdminAvatar.jpg" />            
+            <p>Адміністратор</p>
+            <pre>@Html.Encode(r.AdminAnswer)</pre>
+        }
+        else if (Context.User.IsInRole("Admin"))
+        {
+            using (Html.BeginForm("AnswerToReview", "Menu", FormMethod.Post))
+            {
+                Html.AntiForgeryToken();
+                <input type="hidden" name="dishID" value="@Model.Id" />
+                <input type="hidden" name="reviewID" value="@r.Id" />
+                <textarea name="content"></textarea>
+                <div>
+                    <input type="submit" value="Відповісти" />
+                </div>
+            }
+        }
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

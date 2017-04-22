@@ -34,7 +34,7 @@
         owl.trigger("prev.owl.carousel");
     });
 });
-    
+
 function displayFancybox(param1, param2) {
 
     $("#recall h2").text(param1);

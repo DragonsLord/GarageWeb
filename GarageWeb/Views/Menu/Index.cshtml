@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<GarageWeb.Models.Dish>
+@using GarageWeb.Infrastructure
 
 @{
     ViewBag.Title = "Меню";
@@ -6,7 +7,6 @@
     System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 }
 @Scripts.Render("~/Scripts/Main.js")
-
 @using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
 {
     @Html.AntiForgeryToken()
@@ -18,14 +18,13 @@
 <div class="all-dishes">
     @if (Context.User.IsInRole("Admin"))
     {
-        <a href="@Url.Action("Create", "Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-        
+        <a href="@Url.Action("Create", "Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>  
     }
     
     @foreach (var item in Model)
     {
         <div class="dish">
-             <img src="@item.GetImageUrl()"/>
+             <img src="@item.ImageUrl"/>
            @if (Context.User.IsInRole("Admin"))
            {
                <div class="admin-menu">
@@ -43,15 +42,16 @@
                 <span class="for-weight">@item.Weight</span> г
             </div>
             <div class="rating">
-                @if (Context.User.Identity.IsAuthenticated)
+                @if (Context.User.Identity.IsAuthenticated && !((System.Security.Claims.ClaimsIdentity)Context.User.Identity).IsRated(item))
                 {
                     @Html.BootstrapRating().Value(item.CurrentRating)
                 }
                 else
                 {
-                    @Html.BootstrapRating().Value(item.CurrentRating).ReadOnly
+                     @Html.BootstrapRating().Value(item.CurrentRating).ReadOnly
                 }
-
+                <input type="hidden" value="@item.Id" class='dishID'>
+                @Html.AntiForgeryToken()
             </div>
             @Html.ActionLink("Детальніше", "Details", new { id = @item.Id }, new { @class = "detail" })
         </div>

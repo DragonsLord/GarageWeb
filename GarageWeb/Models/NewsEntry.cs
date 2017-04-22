@@ -11,10 +11,10 @@ namespace GarageWeb.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Заголовок\" не може бути порожнім")]
         [Display(Name = "Заголовок")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Опис\" не може бути порожнім")]
         [Display(Name = "Опис")]
         public string Description { get; set; }
         [Display(Name = "Зображення")]

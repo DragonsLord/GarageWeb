@@ -10,16 +10,20 @@ namespace GarageWeb.Models
 {
     public class Dish
     {
+        public Dish()
+        {
+            _imageUrl = new Lazy<string>(GetImageUrl, true);
+        }
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Назва\" не може бути порожнім")]
         [StringLength(50)]
         [Display(Name = "Назва")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Вага\" не може бути порожнім")]
         [Display(Name = "Вага порції")]
         public float Weight { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле \"Ціна\" не може бути порожнім")]
         [Display(Name = "Ціна")]
         public float Price { get; set; }
         [Display(Name = "Зображення")]
@@ -33,12 +37,15 @@ namespace GarageWeb.Models
         public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-        public string GetImageUrl()
+        private string GetImageUrl()
         {
             if (Image == null) return "/Images/dish.png";
             var temp = Convert.ToBase64String(Image);
             return $"data:image;base64,{temp}";
         }
+        private Lazy<string> _imageUrl;
+        [NotMapped]
+        public string ImageUrl => _imageUrl.Value;
         [NotMapped]
         public double CurrentRating
         {

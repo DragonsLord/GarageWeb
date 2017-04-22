@@ -18,7 +18,7 @@ namespace GarageWeb.Models.Repositories
             try
             {
                 _context.Dishes.Add(entry);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             } catch { throw; }
         }
 
@@ -45,7 +45,7 @@ namespace GarageWeb.Models.Repositories
             {
                 var dish = _context.Dishes.FirstOrDefault(d => d.Id == entry.Id);
                 dish.Edit(entry);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch { throw; }
         }
@@ -69,7 +69,7 @@ namespace GarageWeb.Models.Repositories
             try
             {
                 _context.Dishes.Remove(_context.Dishes.First(t=>t.Id==id));
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch { throw; }
         }
@@ -87,6 +87,6 @@ namespace GarageWeb.Models.Repositories
             });
         }
 
-        public void Save() => _context.SaveChangesAsync();
+        public void Save() => _context.SaveChanges();
     }
 }
