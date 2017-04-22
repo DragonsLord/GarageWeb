@@ -6,22 +6,21 @@
     System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 }
 @Scripts.Render("~/Scripts/Main.js")
-@using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
-    {
 
+@using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
+{
+    @Html.AntiForgeryToken()
     <h3>Ви впевнені що хочите видалити страву:</h3>
     <h2></h2>
     <input type="hidden" name="id" value=""/>
-    <a onclick="$('#recall').fancybox.close()"></a>
     <input type="submit" value="Видалити">
 }
 <div class="all-dishes">
     @if (Context.User.IsInRole("Admin"))
     {
-        <div class="dish">
-            <a href="@Url.Action("Create", "Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-        </div>
-        }
+        <a href="@Url.Action("Create", "Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+        
+    }
     
     @foreach (var item in Model)
     {

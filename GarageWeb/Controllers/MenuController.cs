@@ -89,10 +89,20 @@ namespace GarageWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish)
+        public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    byte[] array;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        array = ms.GetBuffer();
+                    }
+                    dish.Image = array;
+                }
                 await _dishes.EditAsync(dish);
                 return RedirectToAction("Index");
             }

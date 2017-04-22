@@ -18,25 +18,25 @@
         autoplay: false,
         dots: true,
         autoplayHoverPause: false,
-        items: 3,
+        items: 1,
         loop: true,
         mouseDrag: true,
         touchDrag: true,
         smartSpeed: 800,
     });
 
-    $(".slider-block .right").click(function (event) {
+    $(".slider-block .right-arrear").click(function (event) {
         event.preventDefault();
         owl.trigger("next.owl.carousel");
     });
-    $(".slider-block .left").click(function (event) {
+    $(".slider-block .left-arrear").click(function (event) {
         event.preventDefault();
         owl.trigger("prev.owl.carousel");
     });
 });
     
 function displayFancybox(param1, param2) {
-    // Open FancyBox
+
     $("#recall h2").text(param1);
 
     $("input[name='id']").val(param2);

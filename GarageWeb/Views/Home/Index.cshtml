@@ -1,41 +1,57 @@
-﻿@{
+﻿@model  GarageWeb.Models.ViewModel.HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
+<h2>Наші користувачі рекомендують</h2>
 <div class="slider-block">
     <div id="owl-demo" class="owl-carousel">
-        @foreach (var item in ViewBag.PopularDish)
-        {   <div class="item">
-            <div class="dish">
-                <img src="@item.GetImageUrl()" />
-                @if (Context.User.IsInRole("Admin"))
-                {
-                    <div class="admin-menu">
-                        <a href="@Url.Action("Edit","Menu",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                        <a href="#recall" onclick="displayFancybox('@item.Name', @item.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+        @foreach (var item in Model.Dishes)
+        {   
+            <div class="item">
+                <a href="@Url.Action("Details", "Menu", new { id = @item.Id })" class="dish">
+                    <img src="@item.GetImageUrl()" />
+                    <div class="name">
+                        @item.Name
                     </div>
-                }
-                <div class="name">
-                    @item.Name
-                </div>
-                <div class="price">
-                    <span class="for-price">@item.Price</span> грн
-                </div>
-                <div class="weight">
-                    <span class="for-weight">@item.Weight</span> г
-                </div>
-                <div class="rating">
-                    @if (Context.User.Identity.IsAuthenticated)
-                {
-                        @Html.BootstrapRating().Value(item.CurrentRating)
-                    }
-                    else
-                    {
-                        @Html.BootstrapRating().Value(item.CurrentRating).ReadOnly
-                    }
-
-                </div>
-                @Html.ActionLink("Детальніше", "Details", new { id = @item.Id }, new { @class = "detail" })
+                    <div class="price">
+                        <span class="for-price">@item.Price</span> грн
+                    </div>
+                    <div class="weight">
+                        <span class="for-weight">@item.Weight</span> г
+                    </div>
+                    <div class="rating">
+                            @Html.BootstrapRating().Value(item.CurrentRating).Disabled
+                    </div>
+                </a>
             </div>
+        }
+    </div>
+    <a href="#carousel" class="left-arrear carousel-control">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </a>
+    <a href="#carousel" class="right-arrear carousel-control">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+</div>
+<h2>Останні новини </h2>
+<div class="slider-block">
+    <div id="owl-demo" class="owl-carousel">
+        @foreach (var item in Model.News)
+        {   
+            <div class="item">
+                <div class="news">
+                    <img src="@item.GetImageUrl()" />
+
+                    <div class="left-block">
+                        <div class="name">
+                            @item.Title
+                        </div>
+                        <div class="description">
+                            @item.Description
+                        </div>
+                    </div>
+                </div>
         </div>
         }
     </div>

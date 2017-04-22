@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Новини";
 }
-
+@using (Html.BeginForm("Delete", "News", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
+{
+    @Html.AntiForgeryToken()
+    <h3>Ви впевнені що хочите видалити новину:</h3>
+    <h2></h2>
+    <input type="hidden" name="id" value="" />
+    <input type="submit" value="Видалити">
+}
 <div class="all-news">
     @if (Context.User.IsInRole("Admin"))
     {
@@ -30,7 +37,7 @@
             {
                 <div class="admin-menu">
                     <a href="@Url.Action("Edit","Menu",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a href="@Url.Action("Delete","Menu",new { id = item.Id})" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                    <a href="#recall" onclick="displayFancybox('@item.Title', @item.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
 
                 </div>
             }
