@@ -1,0 +1,105 @@
+﻿@model GarageWeb.Models.Dish
+@using GarageWeb.Infrastructure
+@{
+    ViewBag.Title = "Details";
+}
+@using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
+{
+    @Html.AntiForgeryToken()
+    <h3>Ви впевнені що хочите видалити страву:</h3>
+    <h2></h2>
+    <input type="hidden" name="id" value="" />
+    <input type="submit" value="Видалити">
+}
+<div>
+    <div class="dish-detail">
+        <div class="right-block">
+            <img src="@Model.ImageUrl" alt="" />
+            @if (Context.User.IsInRole("Admin"))
+            {
+                <div class="admin-menu">
+                    <a href="@Url.Action("Edit","Menu",new { id = Model.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="#recall" onclick="displayFancybox('@Model.Name', @Model.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                </div>
+            }
+        </div>
+        <div class="left-block">
+            <div class="title">@Model.Name</div>
+            <div class="text">@Model.Description</div>
+            <div class="price">
+                <span class="for-price">@Model.Price</span> грн
+            </div>
+            <div class="weight">
+                <span class="for-weight">@Model.Weight</span> г
+            </div>
+            <div class="rating">
+                @if (Context.User.Identity.IsAuthenticated && !((System.Security.Claims.ClaimsIdentity)Context.User.Identity).IsRated(Model))
+                {
+                    @Html.BootstrapRating().Value(Model.CurrentRating)
+                }
+                else
+                {
+                    @Html.BootstrapRating().Value(Model.CurrentRating).ReadOnly
+                }
+                <input type="hidden" value="@Model.Id" class='dishID'>
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+
+    </div>
+    @if (!Context.User.IsInRole("Admin"))
+    {
+        using (Html.BeginForm("ReviewDish", "Menu", FormMethod.Post,new { @class="comment"}))
+        {
+            @Html.AntiForgeryToken();
+            if (!Context.User.Identity.IsAuthenticated)
+            {
+                <div class="text-danger">Необхідно авторизуватися</div>
+            }
+            <input type="hidden" name="dishID" value="@Model.Id" />
+            <textarea name="content"></textarea>
+            if (Context.User.Identity.IsAuthenticated)
+            {
+                <input type="submit" value="Залишити відгук" class="detail"/>
+            }
+            else
+            {
+                <input type="submit" value="Залишити відгук" class="detail" disabled/>
+            }
+        }
+    }
+    <div class="all-reviews">
+        @foreach (var r in Model.Reviews)
+        {
+            <div class="review">
+                <img src="@r.User.AvatarUrl" />
+                <div class="review-container">
+                    <div class="name">@r.User.Name</div>
+                    <div class="date">@r.Time</div>
+                    <div class="pre-text">@Html.Encode(r.Content)</div>
+                    @if (!string.IsNullOrEmpty(r.AdminAnswer))
+                    {
+                        <div class="admin-review">
+                            <img src="/Images/AdminAvatar.jpg" />
+                            <div class="review-container">
+                                <div class="name">Адміністратор</div>
+                                <div class="pre-text">@Html.Encode(r.AdminAnswer)</div>
+                            </div>
+                        </div>
+                    }
+                    else if (Context.User.IsInRole("Admin"))
+                    {
+                        using (Html.BeginForm("AnswerToReview", "Menu", FormMethod.Post, new { @class = "comment" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="dishID" value="@Model.Id" />
+                            <input type="hidden" name="reviewID" value="@r.Id" />
+                            <textarea name="content"></textarea>
+                            <input type="submit" value="Відповісти" class="detail" />
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,16 +1,20 @@
-﻿@using Microsoft.Owin.Security;
+@using Microsoft.Owin.Security;
 @using System.Security.Claims;
-
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
+
+    <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/Images/logo.png">
     <title>@ViewBag.Title - Garage on Web</title>
+    
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
+    @Styles.Render("~/Content/slick/slick.css")
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+   
 </head>
 <body>
    <header>
@@ -38,25 +42,28 @@
            }
            else
            {
-
                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-               using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = HttpContext.Current.Request.Url.AbsolutePath }))
+
+               using (Html.BeginForm("ExternalLogin", "User", new { returnUrl = HttpContext.Current.Request.Url.AbsoluteUri }, FormMethod.Post))
                {
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
                     <div class="icon">
-                            @foreach (AuthenticationDescription p in loginProviders)
-                            {
-                                <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
-                            }
+                        
+                        @foreach (AuthenticationDescription p in loginProviders)
+                        {
+                            <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
+                        }
                     </div>
+                   <div>Сейчас в корзине:<span class="count">@Session["Bucket"]</span></div>
                }
            }
        </div>
    </header>
     <ul class="menu"> 
         <li>@Html.ActionLink("Головна", "Index", "Home")</li>
-        <li><a href="#">МЕНЮ</a></li>
-        <li><a href="#">Новини</a></li>
+        <li>@Html.ActionLink("Меню", "Index", "Menu")</li>
+        <li>@Html.ActionLink("Новини", "Index", "News")</a></li>
+
         @if (HttpContext.Current.User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Налаштування", "Index", "Admin")</li>
@@ -69,9 +76,15 @@
         <p>&copy; @DateTime.Now.Year - Serdiuk & Truba Production</p>
     </footer>
 
+    
+    @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/bootstrap-rating/bootstrap-rating.js")
+    @Scripts.Render("~/Content/fancybox/jquery.fancybox.pack.js");
+    @Scripts.Render("~/Content/slick/slick.min.js");
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fancybox/jquery.fancybox.css")
     @Scripts.Render("~/Scripts/Main.js")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

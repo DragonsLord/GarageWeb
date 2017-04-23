@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BootstrapRating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\bootstrap-rating.mvc.1.0.0\lib\net452\BootstrapRating.dll</HintPath>
+    </Reference>
     <Reference Include="Duke.Owin.VkontakteMiddleware, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Duke.Owin.VkontakteMiddleware.1.2.0.0\lib\net45\Duke.Owin.VkontakteMiddleware.dll</HintPath>
     </Reference>
@@ -213,32 +216,52 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BucketController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AdminAuthHelper.cs" />
     <Compile Include="Infrastructure\AppManager.cs" />
+    <Compile Include="Infrastructure\ChallengeResult.cs" />
     <Compile Include="Infrastructure\Encrypt.cs" />
+    <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\IAuthHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\UserHelper.cs" />
+    <Compile Include="Models\Busket.cs" />
+    <Compile Include="Models\BusketModelBinder.cs" />
+    <Compile Include="Models\CoffeDBContext.cs" />
+    <Compile Include="Models\Dish.cs" />
+    <Compile Include="Models\Interfaces\IRepository.cs" />
+    <Compile Include="Models\NewsEntry.cs" />
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Repositories\DishesRepository.cs" />
+    <Compile Include="Models\Repositories\NewsLine.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\AdminPanelViewModel.cs" />
     <Compile Include="Models\ViewModel\ChangeLoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\DishOrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminPanel.css" />
+    <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.js" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -248,8 +271,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -277,16 +298,21 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Menu\Create.cshtml" />
+    <Content Include="Views\Menu\Details.cshtml" />
+    <Content Include="Views\Menu\Edit.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AppManager\" />
+    <Folder Include="Views\Bucket\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

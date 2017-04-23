@@ -1,11 +1,5 @@
-﻿using GarageWeb.Models.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+using GarageWeb.Models.ViewModel;
 using System.Web.Mvc; 
-
 using GarageWeb.Infrastructure;
 
 namespace GarageWeb.Controllers
@@ -39,7 +33,7 @@ namespace GarageWeb.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
