@@ -280,7 +280,7 @@ body input:required:valid {
     font-size:0;
 }
 .dish {
-
+    color: #925d21;
     position:relative;
     padding-bottom: 10px;
     vertical-align: middle;
@@ -294,6 +294,9 @@ body input:required:valid {
     -moz-transition: all .5s ease-out;
     -o-transition: all .5s ease-out;
     transition: all .5s ease-out;
+}
+a.dish:hover {
+    color: #925d21;
 }
 
 a.dish:hover{

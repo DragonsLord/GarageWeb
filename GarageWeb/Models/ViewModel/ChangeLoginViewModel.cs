@@ -8,10 +8,6 @@ using System.Threading;
 
 namespace GarageWeb.Models.ViewModel
 {
-    public sealed partial interface IGssd
-    {
-
-    }
     public class ChangeLoginViewModel
     {
         public bool IsSelected { get; set; }
