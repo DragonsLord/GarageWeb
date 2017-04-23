@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -43,7 +43,7 @@
             <div class="col-md-10">
                 <input type="file" name="file" id="file" style="width: 100%;" />
                 <label for="file" class="form-control file-label">
-                    <span> Виберіть картинку</span>
+                    <span> Виберіть нову картинку</span>
                     <img id="preload" src="@Model.ImageUrl" alt="your image" />
                 </label>
             </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                <textarea id="Description" name="Description">@Model.Description</textarea>
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -20,13 +20,13 @@ namespace GarageWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider)
+        public ActionResult ExternalLogin(string provider,string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "User"));
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "User", new { returnUrl = returnUrl }));
         }
 
-        public async Task<ActionResult> ExternalLoginCallback()
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -50,7 +50,7 @@ namespace GarageWeb.Controllers
                     await _db.SaveChangesAsync();
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return Redirect(returnUrl);
         }
         
         private ActionResult RedirectToLocal(string returnUrl)

@@ -10,31 +10,76 @@
         function () {
             $("#preload").hide("slow");
         });
-    var owl = $("#owl-demo");
 
-    owl.owlCarousel({
-        nav: false,
-        pagination: true,
+    var carousel_menu = $("#owl-demo-menu");
+    var carousel_news = $("#owl-demo-news");
+
+    carousel_menu.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+    });
+
+    carousel_news.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
         autoplay: false,
-        dots: true,
-        autoplayHoverPause: false,
-        items: 1,
-        loop: true,
-        mouseDrag: true,
-        touchDrag: true,
-        smartSpeed: 800,
+        autoplaySpeed: 2000,
+        arrows: false,
     });
 
-    $(".slider-block .right-arrear").click(function (event) {
+    $(".order a").click(function (e) {
+        e.preventDefault();
+    })
+    $(".menu-slider .right-arrear").click(function (event) {
         event.preventDefault();
-        owl.trigger("next.owl.carousel");
+        carousel_menu.slick('slickNext');
     });
-    $(".slider-block .left-arrear").click(function (event) {
+    $(".menu-slider .left-arrear").click(function (event) {
         event.preventDefault();
-        owl.trigger("prev.owl.carousel");
+        carousel_menu.slick('slickPrev');
+    });
+
+    $(".news-slider .right-arrear").click(function (event) {
+        event.preventDefault();
+        carousel_news.slick('slickNext');
+    });
+    $(".news-slider .left-arrear").click(function (event) {
+        event.preventDefault();
+        carousel_news.slick('slickPrev');
+    });
+
+    $.ajax({ method: "POST", url: "/Busket/GetCount" })
+        .done(function (data) {
+            $(".count").text(data);
+        })
+        .fail(function () {
+        })
+        .always(function () {
+        });
+
+
+    $("#file").on("change", function (e) {
+        var fileName = '';
+        fileName = e.target.value.split('\\').pop();
+        $(this).parent().find(".file-label span").text(fileName);
     });
 });
-
+function addToBusket(id) {
+       $.post("/Busket/AddToBucket", { id: id });
+        console.log(id);
+    
+    $.ajax({ method: "POST", url: "/Busket/GetCount" })
+        .done(function (data) {
+            $(".count").text(data);
+        })
+        .fail(function () {
+        })
+        .always(function () {
+    });
+}
 function displayFancybox(param1, param2) {
 
     $("#recall h2").text(param1);
@@ -60,11 +105,3 @@ $("#file").change(function () {
     readURL(this);
 });
 
-/*
-var input = document.getElementById("file");
-
-input.addEventListener('change', function (e) {
-    var fileName = '';
-    fileName = e.target.value.split('\\').pop();
-    $(".file-label span").text(fileName);
-});*/

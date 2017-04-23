@@ -6,6 +6,8 @@ using GarageWeb.Models.Interfaces;
 using System.IO;
 using System.Web;
 using System.Net;
+using System;
+using System.Linq;
 
 namespace GarageWeb.Controllers
 {
@@ -44,7 +46,7 @@ namespace GarageWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Titile,Description,Image")] NewsEntry news, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Exclude = "DateTime,ImageUrl ")] NewsEntry news, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +60,7 @@ namespace GarageWeb.Controllers
                     }
                     news.Image = array;
                 }
+                news.DateTime = DateTime.Now;
                 await _news.AddAsync(news);
                 return RedirectToAction("Index");
             }
@@ -65,13 +68,13 @@ namespace GarageWeb.Controllers
         }
 
 
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NewsEntry newsEntry = await _news.Data.FirstAsync(t => t.Id == id.Value);
+            NewsEntry newsEntry = _news.Data.First(t => t.Id == id.Value);
             if (newsEntry == null)
             {
                 return HttpNotFound();
@@ -82,7 +85,7 @@ namespace GarageWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Titile,Description,Image")] NewsEntry news, HttpPostedFileBase file)
+        public async Task<ActionResult> Edit([Bind(Exclude = "ImageUrl ")] NewsEntry news, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +99,7 @@ namespace GarageWeb.Controllers
                     }
                     news.Image = array;
                 }
-                await _news.AddAsync(news);
+                await _news.EditAsync(news);
                 return RedirectToAction("Index");
             }
             return View(news);

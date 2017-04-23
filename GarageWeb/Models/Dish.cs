@@ -12,7 +12,7 @@ namespace GarageWeb.Models
     {
         public Dish()
         {
-            _imageUrl = new Lazy<string>(GetImageUrl, true);
+            _imageUrl = new Lazy<string>(GetImageUrl,true);
         }
         [Key]
         public int Id { get; set; }

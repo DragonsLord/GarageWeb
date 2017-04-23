@@ -1,7 +1,6 @@
 ﻿@using Microsoft.Owin.Security;
 @using System.Security.Claims;
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,8 @@
     <link rel="shortcut icon" href="~/Images/logo.png">
     <title>@ViewBag.Title - Garage on Web</title>
     @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
-    @Styles.Render("~/Content/owl-carousel/owl.carousel.css")
+    @Styles.Render("~/Content/slick/slick.css")
+    @Styles.Render("~/Content/css")
    
 </head>
 <body>
@@ -41,18 +41,19 @@
            }
            else
            {
-
                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
 
-               using (Html.BeginForm("ExternalLogin", "User", FormMethod.Post))
+               using (Html.BeginForm("ExternalLogin", "User", new { returnUrl = HttpContext.Current.Request.Url.AbsoluteUri }, FormMethod.Post))
                {
                     @Html.AntiForgeryToken()
                     <div class="icon">
-                            @foreach (AuthenticationDescription p in loginProviders)
-                            {
-                                <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
-                            }
+                        
+                        @foreach (AuthenticationDescription p in loginProviders)
+                        {
+                            <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
+                        }
                     </div>
+                   <div>Сейчас в корзине:<span class="count">@Session["Bucket"]</span></div>
                }
            }
        </div>
@@ -77,11 +78,9 @@
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/Main.js")
     @Scripts.Render("~/Scripts/bootstrap-rating/bootstrap-rating.js")
     @Scripts.Render("~/Content/fancybox/jquery.fancybox.pack.js");
-    @Scripts.Render("~/Content/owl-carousel/owl.carousel.js");
-    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/slick/slick.min.js");
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fancybox/jquery.fancybox.css")
     @Scripts.Render("~/Scripts/Main.js")

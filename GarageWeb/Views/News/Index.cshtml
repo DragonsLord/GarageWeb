@@ -14,16 +14,24 @@
 <div class="all-news">
     @if (Context.User.IsInRole("Admin"))
     {
-        <div class="dish">
-            <a href="@Url.Action("Edit","Menu")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-        </div>
+            <a href="@Url.Action("Create","News")" class="menu-create"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+       
     }
 
     @foreach (var item in Model)
     {
         <div class="news">
-            <img src="@item.GetImageUrl()" />
+            <div class="right-block">
+                <img src="@item.ImageUrl" />
+                @if (Context.User.IsInRole("Admin"))
+                {
+                    <div class="admin-menu">
+                        <a href="@Url.Action("Edit","News",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a href="#recall" onclick="displayFancybox('@item.Title', @item.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
 
+                    </div>
+                }
+            </div>
             <div class="left-block">
                 <div class="name">
                     @item.Title
@@ -33,14 +41,7 @@
                 </div>
             </div>
 
-            @if (Context.User.IsInRole("Admin"))
-            {
-                <div class="admin-menu">
-                    <a href="@Url.Action("Edit","Menu",new { id = item.Id})" class="menu-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a href="#recall" onclick="displayFancybox('@item.Title', @item.Id);" class="menu-remove"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
-
-                </div>
-            }
+            
         </div>
     }
 </div>

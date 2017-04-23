@@ -126,8 +126,7 @@ footer {
     margin: auto;
     width: 970px; 
     background-color: rgba(255,255,255,0.5);
-    padding-left: 15px;
-    padding-right: 15px;
+    padding:20px 15px 10px;
 }
 
 
@@ -202,13 +201,6 @@ body input:required:valid {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
 }
-/*.panels h2 {
-    margin: 0;
-    padding: 20px 0 ;
-    text-align: center;
-    color: #925d21;
-    font-family: Impact;
-}*/
 .text-danger ul {
     list-style-type:none;
 }
@@ -288,11 +280,13 @@ body input:required:valid {
     font-size:0;
 }
 .dish {
-    vertical-align:middle;
+
+    position:relative;
+    padding-bottom: 10px;
+    vertical-align: middle;
     background-color: white;
     width: 240px;
     display: inline-block;
-    /*border: 1px solid #585656;*/
     text-align: center;
     border-radius: 3px;
     margin: 0 10px 20px;
@@ -324,7 +318,7 @@ a.dish:hover{
     padding: 20px 40px;
     text-align: center;
 }
-    .left-arrear, .right-arrear, .slider-block a:focus {
+    .left-arrear, .right-arrear, .slider-block a#carousel:focus {
         top: 45%;
         position: absolute;
         font-size: 32px;
@@ -349,6 +343,27 @@ a.dish:hover{
     color: #925d21;
     text-transform: uppercase;
 }
+.dish .order {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+}
+.dish .order a {
+    font-size: 34px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 50%;
+    color: #b37a3a;
+    border: 1px solid #585656;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+.dish .order a:hover {
+    color: #925d21;
+}
 .rating {
     color: #66480d;
     font-size:30px;
@@ -360,6 +375,7 @@ a.dish:hover{
     font-weight:bold;
 }
 .detail, #recall input[type="submit"] {
+    background-color:transparent;
     display: inline-block;
     margin: 10px 0;
     padding: 10px 30px;
@@ -373,13 +389,14 @@ a.dish:hover{
     -moz-transition: all .5s ease-out;
     -o-transition: all .5s ease-out;
     transition: all .5s ease-out;
+    cursor:pointer;
 }
-    .detail:hover, #recall input[type="submit"]:hover {
-        color: #fff0de;
-        background-color: #925d21;
-        border: 1px solid #925d21;
-        text-decoration: none;
-    }
+.detail:hover, #recall input[type="submit"]:hover {
+    color: #fff0de;
+    background-color: #925d21;
+    border: 1px solid #925d21;
+    text-decoration: none;
+}
 .price, .weight {
     font-family: "Impact";
     color: #925d21;
@@ -389,13 +406,37 @@ a.dish:hover{
     margin: 10px 0;
     font-size:14px;
 }
-.for-price, .for-weight{
-    font-size:26px;
-    font-weight:bold;
+.for-price, .for-weight {
+    font-size: 26px;
+    font-weight: bold;
+}
+.all-news .admin-menu {
+    margin-top:10px;
+}
+textarea#Description {
+    display: block;
+    width: 100%;
+    height: 150px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .admin-menu {
     color: #925d21;
-    font-size:32px;
+    width:100%;
+    font-size: 32px;
+    display: inline-block;
+    text-align: center;
 }
 .menu-edit {
     color: #337ab7;
@@ -424,22 +465,49 @@ a.dish:hover{
 .all-news{
     padding:10px 0;
 }
+.all-news a.menu-create{
+    display:block;
+    text-align:center;
+}
+.news-slider {
+    padding:0 40px;
+}
+.header-news {
+    padding:0;
+}
 .news {
     width: 100%;
     padding: 10px;
-    padding-bottom:30px;
-    border-bottom: 3px solid #585656;
-    margin-bottom:20px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(192, 192, 192);
+    margin-bottom: 20px;
 }
-.news img{
-    width:300px;
-    display:inline-block;
+.news:last-child {
+    border-bottom: none;
 }
-.news .left-block{
-    width:calc(100% - 310px);
+.news .right-block {
+   text-align:center;
+}
+.news .right-block img{
     display:inline-block;
-    padding-left:20px;
-    vertical-align:top;
+    height:auto;
+    max-width:100%;
+}
+.news .right-block,.dish-detail img {
+    width: 300px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.dish-detail img {
+    margin-bottom: 0px;
+}
+.news .left-block, .dish-detail .left-block {
+    text-align: left;
+    width: calc(100% - 310px);
+    display: inline-block;
+    padding-left: 50px;
+    vertical-align: top;
 }
 .news .left-block .name {
     font-size: 36px;
@@ -488,4 +556,126 @@ a.dish:hover{
 }
 .form-horizontal{
     padding:20px 0;
+}
+
+.dish-detail .right-block
+{
+    width:300px;
+    display:inline-block;
+}
+.dish-detail .left-block {
+    padding-top: 30px;
+    font-size: 0;
+}
+.dish-detail .left-block .title {
+    font-family: "Impact";
+    color: #585656;
+    font-size: 42px;
+}
+
+.dish-detail .left-block .rating {
+    font-size:36px;
+    margin-top:10px;
+}
+.dish-detail .price, .dish-detail .weight {
+    width:50%;
+}
+.comment{
+    width:60%;
+    margin-top:30px;
+    margin-left:20px;
+    text-align:right;
+}
+.comment textarea {
+    display: block;
+    width: 100%;
+    height: 100px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.comment input[disabled] {
+    color: #fff0de;
+    background-color: rgba(146, 93, 33, 0.7);
+    border: 1px solid #925d21;
+}
+.comment .text-danger {
+    color: #a94442;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    text-align:center;
+}
+.all-reviews {
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+.review {
+    padding-top: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e6e1da;
+}
+.review:last-child{
+    border-bottom: none;
+}
+.review img{
+   border-radius:50%;
+   width:50px;
+   height:50px;
+}
+.review img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display:inline-block;
+    vertical-align:top;
+}
+.review .review-container
+{
+    width:calc(100% - 65px);
+    display:inline-block;
+    margin-left:10px;
+}
+.review .review-container .name {
+    color: #585656;
+    font-weight:bold;
+    font-size:16px;
+}
+.review .review-container .date {
+    font-size: 11px;
+    color: #808080;
+}
+    .review .review-container .pre-text {
+        font-family: monospace;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #585656;
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 15px;
+    }
+.review  .comment {
+    margin-top: 10px;
+    margin-left:10px;
+    text-align: right;
+}
+.review .admin-review {
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.review .admin-review pre {
+    margin-top: 25px;
 }

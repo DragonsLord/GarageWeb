@@ -3,45 +3,14 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<h2>Наші користувачі рекомендують</h2>
-<div class="slider-block">
-    <div id="owl-demo" class="owl-carousel">
-        @foreach (var item in Model.Dishes)
-        {   
-            <div class="item">
-                <a href="@Url.Action("Details", "Menu", new { id = @item.Id })" class="dish">
-                    <img src="@item.GetImageUrl()" />
-                    <div class="name">
-                        @item.Name
-                    </div>
-                    <div class="price">
-                        <span class="for-price">@item.Price</span> грн
-                    </div>
-                    <div class="weight">
-                        <span class="for-weight">@item.Weight</span> г
-                    </div>
-                    <div class="rating">
-                            @Html.BootstrapRating().Value(item.CurrentRating).Disabled
-                    </div>
-                </a>
-            </div>
-        }
-    </div>
-    <a href="#carousel" class="left-arrear carousel-control">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </a>
-    <a href="#carousel" class="right-arrear carousel-control">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-    </a>
-</div>
-<h2>Останні новини </h2>
-<div class="slider-block">
-    <div id="owl-demo" class="owl-carousel">
+<h2 class="header-news">Останні новини </h2>
+<div class="slider-block news-slider">
+    <div id="owl-demo-news" class="owl-carousel">
         @foreach (var item in Model.News)
-        {   
+        {
             <div class="item">
                 <div class="news">
-                    <img src="@item.GetImageUrl()" />
+                    <img src="@item.ImageUrl" />
 
                     <div class="left-block">
                         <div class="name">
@@ -52,7 +21,41 @@
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
+        }
+    </div>
+    <a href="#carousel" class="left-arrear carousel-control">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </a>
+    <a href="#carousel" class="right-arrear carousel-control">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+</div>
+
+<h2>Наші користувачі рекомендують</h2>
+<div class="slider-block menu-slider">
+    <div id="owl-demo-menu">
+        @foreach (var item in Model.Dishes)
+        {   
+            <div class="item">
+                <div>
+                    <a href="@Url.Action("Details", "Menu", new { id = @item.Id })" class="dish">
+                        <img src="@item.ImageUrl" />
+                        <div class="name">
+                            @item.Name
+                        </div>
+                        <div class="price">
+                            <span class="for-price">@item.Price</span> грн
+                        </div>
+                        <div class="weight">
+                            <span class="for-weight">@item.Weight</span> г
+                        </div>
+                        <div class="rating">
+                            @Html.BootstrapRating().Value(item.CurrentRating).Disabled
+                        </div>
+                    </a>
+                </div>
+            </div>
         }
     </div>
     <a href="#carousel" class="left-arrear carousel-control">

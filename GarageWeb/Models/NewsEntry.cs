@@ -4,13 +4,19 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GarageWeb.Models
 {
     public class NewsEntry
     {
+        public NewsEntry()
+        {
+            _imageUrl = new Lazy<string>(GetImageUrl, true);
+        }
         [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Поле \"Заголовок\" не може бути порожнім")]
         [Display(Name = "Заголовок")]
         public string Title { get; set; }
@@ -30,11 +36,16 @@ namespace GarageWeb.Models
             Image = new_val.Image;
             Description = new_val.Description;
         }
-        public string GetImageUrl()
+        private string GetImageUrl()
         {
             if (Image == null) return "/Images/dish.png";
             var temp = Convert.ToBase64String(Image);
             return $"data:image;base64,{temp}";
         }
+
+        private Lazy<string> _imageUrl;
+
+        [NotMapped]
+        public string ImageUrl => _imageUrl.Value;
     }
 }

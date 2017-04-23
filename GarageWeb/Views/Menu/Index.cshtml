@@ -6,7 +6,7 @@
     var customCulture = new System.Globalization.CultureInfo("en-US");
     System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 }
-@Scripts.Render("~/Scripts/Main.js")
+
 @using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "recall", style = "display: none;padding: 0 10px;" }))
 {
     @Html.AntiForgeryToken()
@@ -40,6 +40,9 @@
              </div>
             <div class="weight">
                 <span class="for-weight">@item.Weight</span> г
+            </div>
+            <div class="order">
+                <a href="" onclick="addToBusket(@item.Id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </div>
             <div class="rating">
                 @if (Context.User.Identity.IsAuthenticated && !((System.Security.Claims.ClaimsIdentity)Context.User.Identity).IsRated(item))
