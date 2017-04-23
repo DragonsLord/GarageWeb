@@ -1,4 +1,4 @@
-﻿using GarageWeb.Models.ViewModel;
+using GarageWeb.Models.ViewModel;
 using System.Web.Mvc; 
 using GarageWeb.Infrastructure;
 

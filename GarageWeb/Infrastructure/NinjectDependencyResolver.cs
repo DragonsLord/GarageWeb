@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
@@ -30,6 +30,7 @@ namespace GarageWeb.Infrastructure
             kernel.Bind<IAuthenticationManager>().ToMethod(c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
             kernel.Bind<IRepository<Dish>>().To<DishesRepository>();
             kernel.Bind<IRepository<NewsEntry>>().To<NewsLine>();
+
         }
 
         public object GetService(Type serviceType) => kernel.TryGet(serviceType);

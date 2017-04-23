@@ -1,4 +1,4 @@
-﻿using Microsoft.Owin.Security;
+using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -17,7 +17,6 @@ namespace GarageWeb.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider,string returnUrl)
@@ -25,7 +24,6 @@ namespace GarageWeb.Controllers
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "User", new { returnUrl = returnUrl }));
         }
-
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -52,7 +50,6 @@ namespace GarageWeb.Controllers
             }
             return Redirect(returnUrl);
         }
-        
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -66,6 +63,7 @@ namespace GarageWeb.Controllers
             get
             {
                 return HttpContext.GetOwinContext().Authentication;
+
             }
         }
     }

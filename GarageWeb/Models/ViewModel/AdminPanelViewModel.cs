@@ -1,4 +1,4 @@
-﻿namespace GarageWeb.Models.ViewModel
+namespace GarageWeb.Models.ViewModel
 {
     public class AdminPanelViewModel
     {

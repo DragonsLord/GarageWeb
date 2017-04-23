@@ -84,6 +84,7 @@ namespace GarageWeb
                         context.Identity.RemoveClaim(context.Identity.FindFirst(ClaimsIdentity.DefaultNameClaimType));
                         context.Identity.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, context.FullName));
                         context.Identity.AddClaim(new Claim("Provider", "VK"));
+
                         context.Identity.AddClaim(new Claim("Avatar", context.Link));
 
                         return Task.FromResult(true);

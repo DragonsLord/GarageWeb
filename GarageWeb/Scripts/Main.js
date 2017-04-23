@@ -1,6 +1,6 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     $(".message-info").delay(3000).fadeOut("slow");
-    
+
     $(".file-label").hover(
         function () {
             if ($("#preload").attr('src') != '#') {

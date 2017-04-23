@@ -1,4 +1,4 @@
-﻿@using Microsoft.Owin.Security;
+@using Microsoft.Owin.Security;
 @using System.Security.Claims;
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/Images/logo.png">
     <title>@ViewBag.Title - Garage on Web</title>
+    
     @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
     @Styles.Render("~/Content/slick/slick.css")
     @Styles.Render("~/Content/css")
@@ -62,6 +63,7 @@
         <li>@Html.ActionLink("Головна", "Index", "Home")</li>
         <li>@Html.ActionLink("Меню", "Index", "Menu")</li>
         <li>@Html.ActionLink("Новини", "Index", "News")</a></li>
+
         @if (HttpContext.Current.User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Налаштування", "Index", "Admin")</li>
