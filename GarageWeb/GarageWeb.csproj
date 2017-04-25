@@ -232,6 +232,7 @@
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\IAuthHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\Settings.cs" />
     <Compile Include="Infrastructure\UserHelper.cs" />
     <Compile Include="Models\Busket.cs" />
     <Compile Include="Models\BusketModelBinder.cs" />
@@ -245,7 +246,9 @@
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\AdminPanelViewModel.cs" />
-    <Compile Include="Models\ViewModel\ChangeLoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\AdminPanel\ChangeLoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\AdminPanel\MainPageSettingsViewModel.cs" />
+    <Compile Include="Models\ViewModel\AdminPanel\OrderingSettingsViewModel.cs" />
     <Compile Include="Models\ViewModel\DishOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
@@ -277,6 +280,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -309,6 +314,9 @@
     <Content Include="Views\News\Create.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Admin\ChangeMainPageSettings.cshtml" />
+    <Content Include="Views\Admin\ChangeLoginInfo.cshtml" />
+    <Content Include="Views\Admin\ChangeOrderingSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
