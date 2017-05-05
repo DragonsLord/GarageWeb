@@ -69,37 +69,42 @@
         }
     }
     <div class="all-reviews">
-        @foreach (var r in Model.Reviews)
-        {
-            <div class="review">
-                <img src="@r.User.AvatarUrl" />
-                <div class="review-container">
-                    <div class="name">@r.User.Name</div>
-                    <div class="date">@r.Time</div>
-                    <div class="pre-text">@Html.Encode(r.Content)</div>
-                    @if (!string.IsNullOrEmpty(r.AdminAnswer))
-                    {
-                        <div class="admin-review">
-                            <img src="/Images/AdminAvatar.jpg" />
-                            <div class="review-container">
-                                <div class="name">Адміністратор</div>
-                                <div class="pre-text">@Html.Encode(r.AdminAnswer)</div>
-                            </div>
-                        </div>
-                    }
-                    else if (Context.User.IsInRole("Admin"))
-                    {
-                        using (Html.BeginForm("AnswerToReview", "Menu", FormMethod.Post, new { @class = "comment" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="dishID" value="@Model.Id" />
-                            <input type="hidden" name="reviewID" value="@r.Id" />
-                            <textarea name="content"></textarea>
-                            <input type="submit" value="Відповісти" class="detail" />
-                        }
-                    }
-                </div>
-            </div>
-        }
+        @Html.Action("Reviews", new { dishId = Model.Id, skipCount = 0, takeCount = 5 })
     </div>
 </div>
+<script>
+    $(document).ready(
+        function () {
+            $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                GetNextReviews();
+            }
+        });
+    });
+
+    var skipCount = 5; // start at 6th record (assumes first 5 included in initial view)
+    var takeCount = 5; // return new 5 records
+    var hasMoreRecords = true;
+
+    function GetNextReviews() {
+      if (!hasMoreRecords) {
+        return;
+      }
+      $.ajax({
+        url: '@Url.Action("Reviews")',
+        data: { dishId: @Model.Id, skipCount : skipCount, takeCount: takeCount },
+        datatype: 'html',
+        success: function (data) {
+          if (data === null) {
+            hasMoreRecords = false; // signal no more records to display
+          } else {
+              $(".all-reviews").append(data);
+            skipCount += takeCount; // update for next iteration
+          }
+        },
+        error: function () {
+          alert("error");
+        }
+      });
+    }
+</script>

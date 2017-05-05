@@ -15,7 +15,12 @@ namespace GarageWeb.Controllers
             authHelper = helper;
         }
 
-        // GET: Admin
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
+        {
+            return View(new AdminPanelViewModel());
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
@@ -25,13 +30,6 @@ namespace GarageWeb.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public ActionResult Index()
-        {
-            return View(new AdminPanelViewModel());
-        }
-        
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -71,7 +69,6 @@ namespace GarageWeb.Controllers
             ModelState.AddModelError("", "Не правильний старий пароль");
             return PartialView(model); ;
         }
-
         [HttpPost]
         public PartialViewResult ChangeMainPageSettings(MainPageSettingsViewModel model)
         {

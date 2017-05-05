@@ -317,6 +317,7 @@
     <Content Include="Views\Admin\ChangeMainPageSettings.cshtml" />
     <Content Include="Views\Admin\ChangeLoginInfo.cshtml" />
     <Content Include="Views\Admin\ChangeOrderingSettings.cshtml" />
+    <Content Include="Views\Menu\Reviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
