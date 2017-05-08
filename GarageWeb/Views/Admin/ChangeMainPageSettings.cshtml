@@ -1,0 +1,39 @@
+﻿@using GarageWeb.Models.ViewModel.AdminPanel
+@model MainPageSettingsViewModel
+
+@if (!String.IsNullOrEmpty(Model.Message))
+{
+    <div class="message-info">
+        @Model.Message
+    </div>
+}
+@using (Ajax.BeginForm("ChangeMainPageSettings", new AjaxOptions() { UpdateTargetId = MainPageSettingsViewModel.Name }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewsNumber, new { style = "width: 230px;" })
+        <div class="input-field">
+            @Html.TextBoxFor(m => m.NewsNumber, new { @class = "control", style = "width: 50px;" })
+        </div>
+        <div class="error-message"> @Html.ValidationMessageFor(m => m.NewsNumber, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DishesNumber, new { style = "width: 230px;" })
+        <div class="input-field">
+            @Html.TextBoxFor(m => m.DishesNumber, new { @class = "control", style = "width: 50px;" })
+
+        </div>
+        <div class="error-message">@Html.ValidationMessageFor(m => m.DishesNumber, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DishChangeDelay, new { style = "width: 230px;" })
+        <div class="input-field">
+            @Html.TextBoxFor(m => m.DishChangeDelay, new { @class = "control", style = "width: 50px;" })
+
+        </div>
+        <div class="error-message"> @Html.ValidationMessageFor(m => m.DishChangeDelay, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Змінити" />
+    </div>
+}

@@ -26,7 +26,7 @@ namespace GarageWeb.Controllers
         {
             return View(await _dishes.Data.ToListAsync());
         }
-        
+
         public async Task<ActionResult> Details(int? id = 0)
         {
             if (id == null)
@@ -45,8 +45,7 @@ namespace GarageWeb.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-        
+        }      
         [HttpPost, Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
@@ -70,7 +69,6 @@ namespace GarageWeb.Controllers
 
             return View(dish);
         }
-
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id=0)
         {
@@ -85,7 +83,6 @@ namespace GarageWeb.Controllers
             }
             return View(dish);
         }
-
         [HttpPost, Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Exclude = "CurrentRating")] Dish dish, HttpPostedFileBase file)
@@ -107,7 +104,6 @@ namespace GarageWeb.Controllers
             }
             return View(dish);
         }
-
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
@@ -135,7 +131,8 @@ namespace GarageWeb.Controllers
         public async Task<ActionResult> UpdateRating(int value, int dishID)
         {
             await SetRatingAsync(dishID, value);
-            return new RedirectResult($"/Menu");
+            var dish = _dishes.Data.FirstOrDefault(d => d.Id == dishID);
+            return Json(dish.CurrentRating, JsonRequestBehavior.DenyGet);
         }
         [HttpPost, Authorize]
         [ValidateAntiForgeryToken]
@@ -150,6 +147,20 @@ namespace GarageWeb.Controllers
         {
             await SetReviewAnswerAsync(dishID, reviewID, content);
             return new RedirectResult($"/Menu/Details/{dishID}");
+        }
+
+        public ActionResult Reviews(int dishId, int skipCount, int takeCount)
+        {
+            var dish = _dishes.Data.FirstOrDefault(d => d.Id == dishId);
+            var model = dish.Reviews.OrderByDescending(r => r.Time).Skip(skipCount).Take(takeCount);
+            if (model.Any())
+            {
+                return PartialView(model);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         protected override void Dispose(bool disposing)

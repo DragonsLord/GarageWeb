@@ -1,0 +1,26 @@
+﻿@using GarageWeb.Models.ViewModel.AdminPanel
+@model OrderingSettingsViewModel
+
+@if (!String.IsNullOrEmpty(Model.Message))
+{
+    <div class="message-info">
+        @Model.Message
+    </div>
+}
+@using (Ajax.BeginForm("ChangeOrderingSettings", new AjaxOptions() { UpdateTargetId = OrderingSettingsViewModel.Name }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsEnabled, new { style = "width: 200px;" })
+        @Html.CheckBoxFor(m => m.IsEnabled, new { style = "opacity: 1;position: initial;width: 18px;height: 18px;" })
+        <div class="error-message"> @Html.ValidationMessageFor(m => m.IsEnabled, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsShippingEnabled, new { style = "width: 200px;" })
+        @Html.CheckBoxFor(m => m.IsShippingEnabled, new { style= "opacity: 1;position: initial;width: 18px;height: 18px;" })
+        <div class="error-message">@Html.ValidationMessageFor(m => m.IsShippingEnabled, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Змінити" />
+    </div>
+}

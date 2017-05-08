@@ -1,4 +1,5 @@
 ﻿@using GarageWeb.Models.ViewModel
+@using GarageWeb.Models.ViewModel.AdminPanel
 @model AdminPanelViewModel
 @{
     ViewBag.Title = "Panel";
@@ -7,57 +8,28 @@
 @Styles.Render("~/Content/AdminPanel.css")
 
 <div class="panels">
-    
-        @if (Model != null && !String.IsNullOrEmpty(Model.Message))
-        {
-            <div class="message-info">
-                @Model.Message
-            </div>
-        }
+
     <ul>
         <li>
-            @Html.CheckBox("ChangeLoginInfo", Model == null ? true : !Model.ChangeLoginBlock.IsSelected)
-            <i></i>
+            <input type="checkbox" checked><i></i>
             <h2>Змінити логін та пароль</h2>
-            <div class="function-content" id="loginForm">
-                @using (Html.BeginForm("ChangeLoginInfo", "Admin", FormMethod.Post, new { @class = "form-admin", role = "form" }))
-                {
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ChangeLoginBlock.OldPassword)
-                        <div class="input-field">
-                            @Html.PasswordFor(m => m.ChangeLoginBlock.OldPassword, new { @class = "control" })
-
-                        </div>
-                        <div class="error-message"> @Html.ValidationMessageFor(m => m.ChangeLoginBlock.OldPassword, "", new { @class = "text-danger" })</div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ChangeLoginBlock.Login)
-                        <div class="input-field">
-                            @Html.TextBoxFor(m => m.ChangeLoginBlock.Login, new { @class = "control" })
-
-                        </div>
-                        <div class="error-message">@Html.ValidationMessageFor(m => m.ChangeLoginBlock.Login, "", new { @class = "text-danger" })</div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ChangeLoginBlock.NewPassword)
-                        <div class="input-field">
-                            @Html.PasswordFor(m => m.ChangeLoginBlock.NewPassword, new { @class = "control" })
-
-                        </div>
-                        <div class="error-message"> @Html.ValidationMessageFor(m => m.ChangeLoginBlock.NewPassword, "", new { @class = "text-danger" })</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Змінити" />
-                    </div>
-                }
+            <div class="function-content" id="@ChangeLoginViewModel.Name">
+                @Html.Partial("ChangeLoginInfo", Model.ChangeLoginBlock)
             </div>
         </li>
         <li>
-            <input type="checkbox" checked>
-            <i></i>
-            <h2>Інше</h2>
-            <div class="function-content">В розробці</div>
+            <input type="checkbox" checked><i></i>
+            <h2>Налаштування Головної сторінки</h2>
+            <div class="function-content" id="@MainPageSettingsViewModel.Name">
+               @Html.Partial("ChangeMainPageSettings", Model.MainPageBlock)
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" checked><i></i>
+            <h2>Налаштування Онлайн замовлень</h2>
+            <div class="function-content" id="@MainPageSettingsViewModel.Name">
+                @Html.Partial("ChangeOrderingSettings", Model.OrderingBlock)
+            </div>
         </li>
     </ul>
 </div>

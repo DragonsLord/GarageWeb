@@ -1,4 +1,5 @@
 using GarageWeb.Models.ViewModel;
+using GarageWeb.Models.ViewModel.AdminPanel;
 using System.Web.Mvc; 
 using GarageWeb.Infrastructure;
 
@@ -14,7 +15,12 @@ namespace GarageWeb.Controllers
             authHelper = helper;
         }
 
-        // GET: Admin
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
+        {
+            return View(new AdminPanelViewModel());
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
@@ -24,13 +30,6 @@ namespace GarageWeb.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public ActionResult Index()
-        {
-            return View();
-        }
-        
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -56,21 +55,41 @@ namespace GarageWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeLoginInfo(AdminPanelViewModel model)
+        public PartialViewResult ChangeLoginInfo(ChangeLoginViewModel model)
         {
-            model.ChangeLoginBlock.IsSelected = true;
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
+                return PartialView(model);
             }
-            if (authHelper.SetNewPassword(model.ChangeLoginBlock.OldPassword, model.ChangeLoginBlock.NewPassword) && authHelper.SetNewLogin(model.ChangeLoginBlock.Login))
+            if (authHelper.SetNewPassword(model.OldPassword, model.NewPassword) && authHelper.SetNewLogin(model.Login))
             {
-                model.ChangeLoginBlock.IsSelected = false;
                 model.Message = "Дані успішно змінено";
-                return View("Index", model);
+                return PartialView(model);
             }
             ModelState.AddModelError("", "Не правильний старий пароль");
-            return View("Index", model); ;
+            return PartialView(model); ;
+        }
+        [HttpPost]
+        public PartialViewResult ChangeMainPageSettings(MainPageSettingsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+            model.SaveChanges();
+            model.Message = "Дані успішно збережено";
+            return PartialView(model);
+        }
+        [HttpPost]
+        public PartialViewResult ChangeOrderingSettings(OrderingSettingsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+            model.SaveChanges();
+            model.Message = "Дані успішно збережено";
+            return PartialView(model);
         }
     }
 }
