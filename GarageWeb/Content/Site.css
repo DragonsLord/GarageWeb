@@ -9,10 +9,22 @@
     font-style: normal;
     font-weight: normal;
 }
+@font-face {
+    font-family: "Halter";
+    src: url("../fonts/HALTER.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
 
 /*
     Layout style
 */
+/*body input:focus:required:invalid {
+    border: none !important;
+}
+body input:required:valid {
+    border: none !important;
+}*/
 body {
     padding: 20px 0;
     background-image: url(../Images/back.png);
@@ -21,8 +33,8 @@ body {
     background-size: cover;
     background-attachment: fixed;
     width: 100%;
-    min-width:1000px;
-    height:100vh;
+    min-width: 1000px;
+    height: 100vh;
 }
 h2 {
     margin: 0;
@@ -44,8 +56,8 @@ footer {
 }
 .social{
     position:absolute;
-    right:0;
-    bottom:10px;
+    left:10px;
+    bottom:20px;
 }
 .icon {
     width: 200px;
@@ -186,12 +198,6 @@ footer {
     display: inline-block;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-body input:focus:required:invalid {
-    border: none !important;
-}
-body input:required:valid {
-    border: none !important;
-}
 .error-message {
     text-align: left;
     color: #a01a07;
@@ -330,7 +336,7 @@ a.dish:hover{
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
-.left-arrear:hover, .right-arrear:hover {
+.left-arrear:hover, .right-arrear:hover, .left-arrear:focus, .right-arrear:focus {
     color: #ca8231;
 }
 .left-arrear {
@@ -355,7 +361,7 @@ a.dish:hover{
 .dish .order a {
     font-size: 34px;
     background-color: white;
-    padding: 5px;
+    padding: 4px 6px;
     border-radius: 50%;
     color: #b37a3a;
     border: 1px solid #585656;
@@ -681,4 +687,239 @@ textarea#Description {
 }
 .review .admin-review pre {
     margin-top: 25px;
+}
+.plate, .summary {
+    display: inline-block;
+}
+.basket{
+    position:absolute;
+    right:0;
+    bottom:20px;
+    padding-top:10px;
+}
+.plate{
+    background-image:url("../Images/bucket.png");
+    width:70px;
+    height:50px;
+    background-repeat:no-repeat;
+    background-size:contain;
+    cursor:pointer;
+    position:relative;
+}
+.plate:hover {
+    text-decoration:none;
+    color: #585656;
+}
+.plate .count {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    padding-top: 8px;
+    text-align: center;
+    font-family: "Impact";
+    font-size: 22px;
+    color: #585656;
+}
+.summary {
+    vertical-align: top;
+    font-family: "Impact";
+    color: #925d21;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 5px;
+}
+.basket .my-order {
+    border-bottom: 1px solid rgba(88, 86, 86, 0.29);
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+.order-list {
+    width: 100%;
+    text-align: center;
+}
+.order-list td{
+    padding:10px 0;
+}
+.col-4{
+    width:70%;
+}
+.col-2{
+    width:10%;
+}
+.button-block{
+    margin:20px 0;
+    text-align:center
+}
+.button-block a{
+    margin:0 20px;
+} 
+.clear{
+    text-align:left;
+}
+.order-block{
+    text-align:center;
+}
+.order-block .item{
+    margin-bottom:20px;
+}
+.order-block input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #606060;
+    outline: none;
+    background-color: transparent;
+    width:300px;
+}
+.order-block .name {
+    font-weight:bold;
+    font-size:18px;
+}
+#order-form {
+    display: inline-block;
+    text-align: left;
+}
+.wrapper-pay, .order-time {
+    font-size: 0;
+    margin-top: 10px;
+}
+.wrapper-pay .wrapper-input {
+    display: inline-block;
+    width: 200px;
+    font-size:16px;
+}
+.wrapper-pay .wrapper-input input {
+    height: 18px;
+    width: 18px;
+    vertical-align: top;
+    margin:0;
+    margin-right:10px;
+}
+.wrapper-pay .text{
+    display:inline-block;
+    width:calc(100% - 200px);
+    font-size:16px;
+}
+.order-time .name {
+    display: inline-block;
+    vertical-align:top;
+    width:200px;
+}
+.order-time .item {
+    margin:0 30px;
+    font-size:18px;
+    display: inline-block;
+}
+.order-time .item .time{
+    font-size: 14px;
+    margin-bottom:5px;
+}
+.order-time select {
+    padding:5px 10px;
+}
+.delivery{
+    margin-top:20px;
+    font-size:16px;
+}
+.delivery input{
+    width:18px;
+    height:18px;
+    vertical-align:middle;
+    margin:0;
+}
+.order-block .cart {
+    background-image: url(../Images/cart.png);
+    background-position: center;
+    background-size: contain;
+    height: 289px;
+    width: 571px;
+    margin-top: 50px;
+    padding: 90px 30px 0;
+    position:relative;
+}
+.cart-name {
+    font-size: 16px;
+    font-family: "Arial";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: left;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+}
+.cart-number {
+    margin-top:30px;
+}
+    .cart-number input[type="text"] {
+        color: #5b6261;
+        font-family: Halter;
+        padding: 5px 10px;
+        width: 75px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #37705c;
+        border-radius: 2px;
+        background-image: -moz-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+        /*opacity: 0.6;*/
+        box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(0, 66, 113, 0.3);
+}
+.datetime{
+    width:200px;
+    font-size:0;
+    margin-top:20px;
+    margin-left:30px;
+}
+.datetime .item{
+    display:inline-block;
+    margin-right:20px;
+}
+    .datetime .item .title {
+    font-size: 13px;
+    font-family: "Arial";
+    color: rgba(215, 255, 240, 0.902);
+    text-transform: uppercase;
+    line-height: 1.231;
+    text-align: left;
+}
+    .datetime .item select {
+        font-size: 16px;
+        padding: 5px 15px 5px 5px;
+        margin-top: 5px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #235a48;
+        border-radius: 2px;
+        background-image: -moz-linear-gradient( 90deg, rgb(195,234,221) 0%, rgb(255,255,255) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(195,234,221) 0%, rgb(255,255,255) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(195,234,221) 0%, rgb(255,255,255) 100%);
+        box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(0, 66, 113, 0.3);
+    }
+.cart .cvv {
+    position: absolute;
+    right: 30px;
+    top: 99px;
+}
+.cvv .title {
+    font-size: 13px;
+    font-family: "Arial";
+    color: rgba(208, 255, 238, 0.902);
+    text-transform: uppercase;
+    line-height: 1.231;
+    text-align: left;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom:10px;
+}
+.cvv input[type="text"] {
+    padding: 10px 10px;
+    width: 75px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a6a6a6;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(238,238,238) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(238,238,238) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(238,238,238) 100%);
+    box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(66, 66, 66, 0.3);
 }

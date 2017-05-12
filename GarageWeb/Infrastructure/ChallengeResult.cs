@@ -1,7 +1,4 @@
 ﻿using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,7 +17,6 @@ namespace GarageWeb.Infrastructure
         
         public override void ExecuteResult(ControllerContext context)
         {
-
             var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
             context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
         }

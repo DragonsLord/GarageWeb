@@ -16,7 +16,7 @@ namespace GarageWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
-            ModelBinders.Binders.Add(typeof(Busket), new BusketModelBinder());
+            ModelBinders.Binders.Add(typeof(Basket), new BasketModelBinder());
         }
     }
 }

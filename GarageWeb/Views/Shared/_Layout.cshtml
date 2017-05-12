@@ -1,11 +1,11 @@
 ﻿@using Microsoft.Owin.Security;
 @using System.Security.Claims;
+@using GarageWeb.Models;
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-16" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">  
     <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/Images/logo.png">
@@ -55,9 +55,40 @@
                             <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
                         }
                     </div>
-                   <div>Сейчас в корзине:<span class="count">@Session["Bucket"]</span></div>
+
                }
            }
+       </div>
+       <div class="basket">
+           
+           <a class="plate" href="@Url.Action("Index","Basket", new { returnUrl = HttpContext.Current.Request.Url.AbsoluteUri })">
+               <div class="count">
+                   @if (Session["Basket"] != null)
+                   {
+                       Basket b = (Basket)Session["Basket"];
+
+                       if (b.Count != 0)
+                       {
+                        @b.Count;
+                       }
+                   }
+               </div>
+           </a>
+           <div class="summary">
+               <div class="my-order">Моє замовлення </div>
+               <div class="summ">
+                   @if (Session["Basket"] != null)
+                   {
+                       Basket b = (Basket)Session["Basket"];
+                       if (b.Count != 0)
+                       {
+                            @b.Price;
+                            @:грн
+                       }
+                   }
+                   
+                </div>
+           </div>
        </div>
    </header>
     <ul class="menu"> 

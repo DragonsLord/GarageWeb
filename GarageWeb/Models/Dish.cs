@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,7 +31,9 @@ namespace GarageWeb.Models
         [StringLength(20)]
         [Display(Name = "Категорія")]
         public string Category { get; set; } = "Main";
-
+       
+        
+        public virtual ICollection<DishOrder> DishOrder { get; set; } = new List<DishOrder>();
         public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 

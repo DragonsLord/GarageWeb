@@ -57,7 +57,7 @@
                 <div class="text-danger">Необхідно авторизуватися</div>
             }
             <input type="hidden" name="dishID" value="@Model.Id" />
-            <textarea name="content"></textarea>
+            <textarea name="content" required></textarea>
             if (Context.User.Identity.IsAuthenticated)
             {
                 <input type="submit" value="Залишити відгук" class="detail"/>
@@ -70,6 +70,39 @@
     }
     <div class="all-reviews">
         @Html.Action("Reviews", new { dishId = Model.Id, skipCount = 0, takeCount = 5 })
+
+        @foreach (var r in Model.Reviews)
+        {
+            <div class="review">
+                <img src="@r.User.AvatarUrl" />
+                <div class="review-container">
+                    <div class="name">@r.User.Name</div>
+                    <div class="date">@r.Time</div>
+                    <div class="pre-text">@Html.Encode(r.Content)</div>
+                    @if (!string.IsNullOrEmpty(r.AdminAnswer))
+                    {
+                        <div class="admin-review">
+                            <img src="/Images/AdminAvatar.jpg" />
+                            <div class="review-container">
+                                <div class="name">Адміністратор</div>
+                                <div class="pre-text">@Html.Encode(r.AdminAnswer)</div>
+                            </div>
+                        </div>
+                    }
+                    else if (Context.User.IsInRole("Admin"))
+                    {
+                        using (Html.BeginForm("AnswerToReview", "Menu", FormMethod.Post, new { @class = "comment" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="dishID" value="@Model.Id" />
+                            <input type="hidden" name="reviewID" value="@r.Id" />
+                            <textarea name="content" required></textarea>
+                            <input type="submit" value="Відповісти" class="detail" />
+                        }
+                    }
+                </div>
+            </div>
+        }
     </div>
 </div>
 <script>

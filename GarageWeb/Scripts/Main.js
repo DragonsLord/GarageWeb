@@ -50,36 +50,87 @@ $(document).ready(function () {
         event.preventDefault();
         carousel_news.slick('slickPrev');
     });
-
-    $.ajax({ method: "POST", url: "/Busket/GetCount" })
-        .done(function (data) {
-            $(".count").text(data);
-        })
-        .fail(function () {
-        })
-        .always(function () {
-        });
-
-
+    
     $("#file").on("change", function (e) {
         var fileName = '';
         fileName = e.target.value.split('\\').pop();
         $(this).parent().find(".file-label span").text(fileName);
     });
-});
-function addToBusket(id) {
-       $.post("/Busket/AddToBucket", { id: id });
-        console.log(id);
-    
-    $.ajax({ method: "POST", url: "/Busket/GetCount" })
-        .done(function (data) {
-            $(".count").text(data);
-        })
-        .fail(function () {
-        })
-        .always(function () {
+
+    $("#file").change(function () {
+        readURL(this);
     });
+});
+
+function addToBusket(id) {
+    $.post("/Basket/AddToBasket", { id: id }).then(function () {
+        $.ajax({ method: "POST", url: "/Basket/GetCount" })
+            .done(function (data) {
+                $(".basket .count").text(data.Count);
+                $(".basket .summ, .whole-price").text(data.Price);})
+            .fail(function () {})
+            .always(function () {});
+    });
+};
+function changeWorth(element, state) {
+
+    var diff = state == 0 ? 1 : -1;
+
+    var count = parseInt($(element).parent().find(".count").text()) + diff;
+    if (count >= 0) {
+        var price = parseInt($(element).parent().parent().find(".worth").text());
+
+        $(element).parent().parent().find(".dish-price").text(count * price);
+
+        $(element).parent().find(".count").text(count);
+    }
 }
+function addOneToBusket(id, link) {
+    addToBusket(id);
+    changeWorth(link,0);
+};
+
+function RemoveOneFromBasket(id,link) {
+    $.post("/Basket/RemoveOneFromBasket", { id: id }).then(function () {
+        $.ajax({ method: "POST", url: "/Basket/GetCount" })
+            .done(function (data) {
+                $(".basket .count").text(data.Count);
+                $(".basket .summ, .whole-price").text(data.Price);
+            })
+            .fail(function () { })
+            .always(function () { });
+    });
+
+    changeWorth(link,1);
+};
+
+function RemoveFromBasket(id,link) {
+    $.post("/Basket/RemoveFromBasket", { id: id }).then(function () {
+        $.ajax({ method: "POST", url: "/Basket/GetCount" })
+            .done(function (data) {
+                $(".basket .count").text(data.Count);
+                $(".basket .summ, .whole-price").text(data.Price);
+            })
+            .fail(function () { })
+            .always(function () { });
+    });
+    $(link).parent().parent().remove();
+};
+
+function clearBasket(link) {
+    $.post("/Basket/ClearBasket").then(function () {
+        $.ajax({ method: "POST", url: "/Basket/GetCount" })
+            .done(function (data) {
+                $(".basket .count").text(data.Count);
+                $(".basket .summ, .whole-price").text(data.Price);
+            })
+            .fail(function () { })
+            .always(function () { });
+    });
+    $(link).parents(".order-list").remove();
+};
+
+
 function displayFancybox(param1, param2) {
 
     $("#recall h2").text(param1);
@@ -101,7 +152,4 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#file").change(function () {
-    readURL(this);
-});
 
