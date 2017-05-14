@@ -21,6 +21,16 @@
         <div class="error-message">@Html.ValidationMessageFor(m => m.IsShippingEnabled, "", new { @class = "text-danger" })</div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.OrdersDeleteTime, new { style = "width: 200px;" })
+        @Html.TextBoxFor(m => m.OrdersDeleteTime)
+        <div class="error-message"> @Html.ValidationMessageFor(m => m.OrdersDeleteTime, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrdersDeleteDaysInterval, new { style = "width: 200px;" })
+        @Html.TextBoxFor(m => m.OrdersDeleteDaysInterval)
+        <div class="error-message">@Html.ValidationMessageFor(m => m.OrdersDeleteDaysInterval, "", new { @class = "text-danger" })</div>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Змінити" />
     </div>
 }

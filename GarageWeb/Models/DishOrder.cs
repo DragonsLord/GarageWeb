@@ -6,13 +6,11 @@ namespace GarageWeb.Models
 {
     public class DishOrder
     {
-        [Key]
-        public int Id { get; set; }
-
+        [Key, Column(Order = 1)]
         [Required]
         [ForeignKey("Order")]
         public int OrderId { get; set; }
-
+        [Key, Column(Order = 2)]
         [Required]
         [ForeignKey("Dish")]
         public int DishId { get; set; }

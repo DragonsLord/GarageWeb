@@ -10,6 +10,7 @@ namespace GarageWeb.Infrastructure
     {
         private static object _mutexOnMain = new object();
         private static object _mutexOnOrdering = new object();
+        private static object _mutexOnTimer = new object();
         public static string AdminLogin
         {   
             get
@@ -97,6 +98,43 @@ namespace GarageWeb.Infrastructure
                 Monitor.Enter(_mutexOnOrdering);
                 WebConfigurationManager.AppSettings["IsShippingEnabled"] = value.ToString();
                 Monitor.Exit(_mutexOnOrdering);
+            }
+        }
+
+        public static event Action<TimeSpan> OnOrdersDeleteTimeChange;
+        public static event Action<short> OnOrdersDeleteDayIntervalChange;
+        public static TimeSpan OrdersDeleteTime
+        {
+            get
+            {
+                Monitor.Enter(_mutexOnTimer);
+                var val = TimeSpan.Parse(WebConfigurationManager.AppSettings["OrdersDeleteTime"]);
+                Monitor.Exit(_mutexOnTimer);
+                return val;
+            }
+            set
+            {
+                Monitor.Enter(_mutexOnTimer);
+                WebConfigurationManager.AppSettings["OrdersDeleteTime"] = value.ToString();
+                OnOrdersDeleteTimeChange?.Invoke(value);
+                Monitor.Exit(_mutexOnTimer);
+            }
+        }
+        public static short OrdersDeleteDaysInterval
+        {
+            get
+            {
+                Monitor.Enter(_mutexOnTimer);
+                var val = short.Parse(WebConfigurationManager.AppSettings["OrdersDeleteDaysInterval"]);
+                Monitor.Exit(_mutexOnTimer);
+                return val;
+            }
+            set
+            {
+                Monitor.Enter(_mutexOnTimer);
+                WebConfigurationManager.AppSettings["OrdersDeleteDaysInterval"] = value.ToString();
+                OnOrdersDeleteDayIntervalChange?.Invoke(value);
+                Monitor.Exit(_mutexOnTimer);
             }
         }
     }
