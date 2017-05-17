@@ -7,28 +7,36 @@
 
 @if (Model != null && Model.Count!=0)
 {
-    <table class="order-list">
-        <tr>
-            <td class="col-4"></td>
-            <td class="col-2"></td>
-            <td class="col-2"></td>
-            <td class="col-2"></td>
+    <table class="order-list table-bordered table-hover table-striped">
+        <tr class="table-head">
+            <td class="col-4">Назва страви</td>
+            <td class="col-2">Ціна за порцію</td>
+            <td class="col-2">Кількість порцій</td>
+            <td class="col-2">Загальна ціна</td>
         </tr>
         @foreach (var item in Model.Orders)
         {
             <tr>
                 <td>@item.Dish.Name</td>
                 <td class="worth">@item.Dish.Price</td>
-                <td><a onclick="RemoveOneFromBasket(@item.Dish.Id,this)"><i class="fa fa-minus" aria-hidden="true"></i></a><span class="count">@item.Count</span><a onclick="addOneToBusket(@item.Dish.Id,this)"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-                <td>
+                <td class="change-count">
+                    <a onclick="RemoveOneFromBasket(@item.Dish.Id,this)" class="remove-one"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                    <span class="count">@item.Count</span>
+                    <a onclick="addOneToBusket(@item.Dish.Id,this)"  class="add-one">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                </td>
+                <td  class="change-count">
                     <span class="dish-price">@(item.Count * item.Dish.Price)</span>
-                    <a onclick="RemoveFromBasket(@item.Dish.Id,this)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    <a onclick="RemoveFromBasket(@item.Dish.Id,this)" class="remove-all">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </a>
                 </td>
             </tr>
         }
         <tr>
             <td colspan="2" class="clear"><a onclick="clearBasket(this)">Очистити корзину</a></td>
-            <td colspan="2">
+            <td colspan="2" class="all-sum">
                 Загальна сума:<span class="whole-price">@Model.Price</span>
              </td>
         </tr>

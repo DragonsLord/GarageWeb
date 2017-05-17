@@ -41,9 +41,12 @@
             <div class="weight">
                 <span class="for-weight">@item.Weight</span> г
             </div>
-            <div class="order">
-                <a href="" onclick="addToBusket(@item.Id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-            </div>
+            @if (Settings.IsOrderingEnabled)
+            {
+                <div class="order">
+                    <a href="" onclick="addToBusket(@item.Id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+            }
             <div class="rating">
                 @if (Context.User.Identity.IsAuthenticated && !((System.Security.Claims.ClaimsIdentity)Context.User.Identity).IsRated(item))
                 {

@@ -99,6 +99,10 @@ namespace GarageWeb.Controllers
                     }
                     news.Image = array;
                 }
+                else
+                {
+                    news.Image = _news.Data.First(t => t.Id == news.Id).Image;
+                }
                 await _news.EditAsync(news);
                 return RedirectToAction("Index");
             }

@@ -1,104 +1,126 @@
-﻿
+﻿@model GarageWeb.Models.ViewModel.OrderViewModel
+@using GarageWeb.Infrastructure
 @{
     ViewBag.Title = "Order";
+    var worth = ViewBag.Worth;
+    int partOfWorth;
+    if (worth < 50)
+    {
+        partOfWorth = (int)worth / 2;
+    }
+    else
+    {
+        partOfWorth = 20;
+    }
 }
 
 <div class="order-block">
-    @using (Html.BeginForm("Delete", "Menu", FormMethod.Post, new { id = "order-form"}))
+    @using (Html.BeginForm("ProcessOrder", "Basket", FormMethod.Post, new { id = "order-form" }))
     {
         <div class="item">
             <div class="name">
-                ПІБ
+                @Html.LabelFor(m => m.Name)
             </div> 
-            <input type="text" name="name" value="" required="" />
+            @Html.TextBoxFor(m => m.Name,new { required="true"})
+        </div>
+        <div class="item">
+            <div class="name">
+                @Html.LabelFor(m => m.Phone)
+            </div>
+            <input type="tel" name="Phone" class="Phone" value="" required="" />
         </div>
         <div class="item">
             <div class="name">
                 Оберіть варіант оплати
             </div>
             <div class="wrapper-pay">
-                <div class="wrapper-input"><input type="radio" name="pay" value="" />Аванс</div>
-                <div class="text">40 грн</div>
+                <div class="wrapper-input"><input type="radio" checked name="payment" value="@partOfWorth" />Аванс</div>
+                <div class="text">@partOfWorth грн</div>
             </div>
-                <div class="wrapper-pay">
+            <div class="wrapper-pay">
+                <div class="wrapper-input">
+                    <input type="radio" name="payment" value="@worth" />Повна сума
+                </div>
+                <div class="text">
+                    @worth
+                </div>
+            </div>
+
+        </div>
+        <div class="item">
+            @if (Settings.IsShippingEnabled)
+            {
+                <div class="delivery wrapper-pay">
                     <div class="wrapper-input">
-                        <input type="radio" name="pay" value="" />Повна сума
+                        <input type="checkbox" name="delivery" value="30" /> Доставка
                     </div>
                     <div class="text">
-                        200 грн
+                        30 грн
                     </div>
                 </div>
-            <div class="delivery">
-                <input type="checkbox" name="delivery" value="" /> Доставка
-            </div>
-            
-            </div>
-        <div class="item delivery-address">
-            <div class="name">
-                Адреса
-            </div>
-            <input type="text" name="address" value="" />
+                <div class="item delivery-address">
+                    <div class="name">
+                        @Html.LabelFor(m => m.DeliveryAddress)
+                    </div>
+                    @Html.TextBoxFor(m => m.DeliveryAddress)
+                </div>
+
+            }
         </div>
         <div class="order-time">
             <div class="name">Час замовлення</div>
             <div class="item">
                 <div class="time">Година</div>
-                <select>
-                    <option>16</option>
-                    <option>17</option>
-                    <option>18</option>
-                    <option>19</option>
-                </select>
+                @Html.DropDownListFor(m => m.TargetHour, new List<SelectListItem>()
+               {
+                   new SelectListItem() { Text = "01", Value = "1"},
+                   new SelectListItem() { Text = "02", Value = "2"},
+                   new SelectListItem() { Text = "03", Value = "3"},
+                   new SelectListItem() { Text = "04", Value = "4"},
+                   new SelectListItem() { Text = "05", Value = "5"},
+                   new SelectListItem() { Text = "06", Value = "6"},
+                   new SelectListItem() { Text = "07", Value = "7"},
+                   new SelectListItem() { Text = "08", Value = "8"},
+                   new SelectListItem() { Text = "09", Value = "9"},
+                   new SelectListItem() { Text = "10", Value = "10"},
+                   new SelectListItem() { Text = "11", Value = "11"},
+                   new SelectListItem() { Text = "12", Value = "12"},
+                   new SelectListItem() { Text = "13", Value = "13"},
+                   new SelectListItem() { Text = "14", Value = "14"},
+                   new SelectListItem() { Text = "15", Value = "15"},
+                   new SelectListItem() { Text = "16", Value = "16"},
+                   new SelectListItem() { Text = "17", Value = "17"},
+                   new SelectListItem() { Text = "18", Value = "18"},
+                   new SelectListItem() { Text = "19", Value = "19"},
+                   new SelectListItem() { Text = "20", Value = "20"},
+                   new SelectListItem() { Text = "21", Value = "21"},
+                   new SelectListItem() { Text = "22", Value = "22"},
+                   new SelectListItem() { Text = "23", Value = "23"},
+                   new SelectListItem() { Text = "00", Value = "00"}
+
+               })
             </div>
             <div class="item">
                 <div class="time">Хвилина</div>
-                <select>
-                    <option>0</option>
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                    <option>40</option>
-                    <option>50</option>
-                </select>
+                @Html.DropDownListFor(m => m.TargetMinute, new List<SelectListItem>()
+               {
+                   new SelectListItem() { Text = "10", Value = "10"},
+                   new SelectListItem() { Text = "20", Value = "20"},
+                   new SelectListItem() { Text = "30", Value = "30"},
+                   new SelectListItem() { Text = "40", Value = "40"},
+                   new SelectListItem() { Text = "50", Value = "50"},
+
+               })
             </div>
         </div>
-        <div class="cart">
-            <div class="cart-name">Номер картки</div>
-            <div class="cart-number">
-                <input type="text" maxlength="4" pattern="/d{4}" name="cart_1" id="cart_1" value="" />
-                <input type="text" maxlength="4" name="cart_2" id="cart_2" value="" />
-                <input type="text" maxlength="4" name="cart_3" id="cart_3" value="" />
-                <input type="text" maxlength="4" name="cart_4" id="cart_4" value="" />
-            </div>
-            <div class="datetime">
-                <div class="item">
-                    <div class="title">Місяць</div>
-                    <select>
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                        <option>04</option>
-                        <option>05</option>
-                        <option>06</option>
-                        <option>07</option>
-                        <option>08</option>
-                    </select>
-                </div>
-                <div class="item">
-                    <div class="title">Рік</div>
-                    <select>
-                        <option>18</option>
-                        <option>19</option>
-                    </select>
-                </div>
-            </div>
-            <div class="cvv">
-                <div class="title">СvС Code</div>
-                <input type="text" name="cvv" value="" />
-            </div>
+       
+        @Html.HiddenFor(t=>t.ToPay)
+        <div class="btn-group">
+            @Html.ActionLink("Повернутися до списку", "Index", null, new { @class = "detail" })
+            <input type="submit" class="detail" value="Оплатити" />
         </div>
-        <div class=pay-summ></div>
-        @*@Html.ActionLink("Скасувати", "Details", new { id = @item.Id }, new { @class = "detail" })*@
-        @*@Html.ActionLink("Оплатити", "Details", new { id = @item.Id }, new { @class = "detail" })*@
     }
+    <script>
+            $("input[name='ToPay']").val(@partOfWorth);
+    </script>
 </div>

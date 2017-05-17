@@ -216,9 +216,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BucketController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
-    <Compile Include="Controllers\GgsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -233,6 +231,7 @@
     <Compile Include="Infrastructure\Encrypt.cs" />
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\IAuthHelper.cs" />
+    <Compile Include="Infrastructure\LiqPay.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Settings.cs" />
     <Compile Include="Infrastructure\UserHelper.cs" />
@@ -247,6 +246,7 @@
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Repositories\DishesRepository.cs" />
     <Compile Include="Models\Repositories\NewsLine.cs" />
+    <Compile Include="Models\Repositories\OrdersRepository.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\AdminPanelViewModel.cs" />
@@ -256,6 +256,7 @@
     <Compile Include="Models\ViewModel\DishOrderViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +321,9 @@
     <Content Include="Views\Menu\Reviews.cshtml" />
     <Content Include="Views\Basket\Index.cshtml" />
     <Content Include="Views\Basket\Order.cshtml" />
+    <Content Include="Views\Basket\ProcessOrder.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

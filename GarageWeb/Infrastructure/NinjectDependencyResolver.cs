@@ -30,6 +30,7 @@ namespace GarageWeb.Infrastructure
             kernel.Bind<IAuthenticationManager>().ToMethod(c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
             kernel.Bind<IRepository<Dish>>().To<DishesRepository>();
             kernel.Bind<IRepository<NewsEntry>>().To<NewsLine>();
+            kernel.Bind<IRepository<Order>>().To<OrdersRepository>();
 
         }
 

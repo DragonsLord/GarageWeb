@@ -99,6 +99,10 @@ namespace GarageWeb.Controllers
                     }
                     dish.Image = array;
                 }
+                else
+                {
+                    dish.Image = _dishes.Data.First(t => t.Id == dish.Id).Image;
+                }
                 await _dishes.EditAsync(dish);
                 return RedirectToAction("Index");
             }

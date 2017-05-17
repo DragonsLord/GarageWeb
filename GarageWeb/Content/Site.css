@@ -137,7 +137,7 @@ footer {
 .body-content {
     margin: auto;
     width: 970px; 
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.8);
     padding:20px 15px 10px;
 }
 
@@ -740,13 +740,8 @@ textarea#Description {
     text-align: center;
 }
 .order-list td{
-    padding:10px 0;
-}
-.col-4{
-    width:70%;
-}
-.col-2{
-    width:10%;
+    padding:15px 0;
+    font-size:16px;
 }
 .button-block{
     margin:20px 0;
@@ -819,13 +814,21 @@ textarea#Description {
 }
 .delivery{
     margin-top:20px;
-    font-size:16px;
 }
-.delivery input{
-    width:18px;
-    height:18px;
-    vertical-align:middle;
-    margin:0;
+.order-block input{
+    font-size:18px;
+}
+input[type="tel"] {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #606060;
+}
+.delivery input {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin: 0;
 }
 .order-block .cart {
     background-image: url(../Images/cart.png);
@@ -912,8 +915,12 @@ textarea#Description {
     margin-bottom:10px;
 }
 .cvv input[type="text"] {
-    padding: 10px 10px;
+    margin-top:1px;
+    font-size:18px;
+    padding: 7px 10px;
     width: 75px;
+    font-family:Halter;
+    text-align:center;
     border-style: solid;
     border-width: 1px;
     border-color: #a6a6a6;
@@ -922,4 +929,82 @@ textarea#Description {
     background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(238,238,238) 100%);
     background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(238,238,238) 100%);
     box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(66, 66, 66, 0.3);
+}
+.delivery-address{
+    display:none;
+}
+td.all-sum {
+    text-align: right;
+    padding-right: 20px;
+}
+.table-head{
+    font-weight:bold;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #e4e4e4;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+    background-color: white;
+}
+.table-hover > tbody > tr:hover {
+    background-color: #efefef;
+}
+td.all-sum .whole-price{
+    font-weight:bold;
+    font-size:18px;
+}
+td.clear a {
+    padding-left: 20px;
+    text-decoration: none;
+    color: #925d21;
+    cursor:pointer;
+    font-weight:bold;
+}
+td.change-count span{
+    margin:0 10px;
+    display:inline-block;
+}
+td.change-count a {
+    font-size: 20px;
+    cursor:pointer;
+}
+td.change-count a.add-one {
+    
+    color: #01ab4e;
+}
+td span,td a{
+    vertical-align:middle;
+}
+td.change-count a.remove-one {
+    color: #925d21;
+}
+td.change-count a.remove-all {
+    color: #fd0000;
+}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #a2a1a1;
+}
+.btn-group{
+    text-align:center;
+    margin:20px 0;
+}
+.btn-group .detail{
+    margin: 0 30px;
+    display:inline-block;
+}
+.final-summ{
+    text-align:left;
+}
+dt{
+    margin:10px 0;
+}
+
+dd{
+    padding:10px 0;
+}
+.dl-horizontal dt {
+    width: 210px !important;
+}
+.dl-horizontal dd {
+    margin-left: 230px;
 }

@@ -1,6 +1,7 @@
 ﻿@using Microsoft.Owin.Security;
 @using System.Security.Claims;
 @using GarageWeb.Models;
+@using GarageWeb.Infrastructure;
 
 <!DOCTYPE html>
 <html>
@@ -59,9 +60,10 @@
                }
            }
        </div>
-       <div class="basket">
+       @if (Settings.IsOrderingEnabled)
+       {<div class="basket">
            
-           <a class="plate" href="@Url.Action("Index","Basket", new { returnUrl = HttpContext.Current.Request.Url.AbsoluteUri })">
+           <a class="plate" href="@Url.Action("Index", "Basket", new { returnUrl = HttpContext.Current.Request.Url.AbsoluteUri })">
                <div class="count">
                    @if (Session["Basket"] != null)
                    {
@@ -90,6 +92,7 @@
                 </div>
            </div>
        </div>
+       }
    </header>
     <ul class="menu"> 
         <li>@Html.ActionLink("Головна", "Index", "Home")</li>
@@ -99,6 +102,7 @@
         @if (HttpContext.Current.User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Налаштування", "Index", "Admin")</li>
+            <li>@Html.ActionLink("Замовлення", "Order", "Admin")</li>
         }
     </ul>
     <div class="body-content">
@@ -118,6 +122,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fancybox/jquery.fancybox.css")
     @Scripts.Render("~/Scripts/Main.js")
+    @Scripts.Render("~/Scripts/mask.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 </body>
 </html>
