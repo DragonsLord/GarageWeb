@@ -12,6 +12,7 @@ using GarageWeb.Infrastructure;
 
 namespace GarageWeb.Controllers
 {
+    [RequireHttps]
     public class BasketController : Controller
     {
         IRepository<Dish> _dishes;
@@ -62,6 +63,7 @@ namespace GarageWeb.Controllers
         }
         public ActionResult Order(Basket basket)
         {
+            ViewBag.Worth = basket.Price;
             return View();
         }
         [HttpPost]
@@ -77,11 +79,9 @@ namespace GarageWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ProcessOrder(Basket basket, OrderViewModel order)
+        public async Task<ActionResult> ProcessOrder(Basket basket, OrderViewModel order,string ToPay)
         {
-            LiqPay lp = new LiqPay("","");
-            var result = await lp.PayTest(order.Phone, order.ToPay, order.OrderId, order.Card, order.CardExpMonth, order.CardExpYear, order.CardCVV, order.GetUserIP());
-            System.Diagnostics.Debug.WriteLine(result);
+            LiqPay lp = new LiqPay("i51624724565", "oI7medczLHZmc6ktjuI4s603rGHETvXcmn6ohYif");
 
             //TODO Check result
 
@@ -92,6 +92,7 @@ namespace GarageWeb.Controllers
             {
                 Name = order.Name,
                 DeliveryAddress = order.DeliveryAddress,
+                Status = "Внесено передплату",
                 Phone = order.Phone,
                 ToPay = order.ToPay,
                 Time = new DateTime(day.Year, day.Month, day.Day, order.TargetHour, order.TargetMinute, 0)
@@ -107,7 +108,37 @@ namespace GarageWeb.Controllers
                 });
             }
             await _orders.AddAsync(o);
-            return RedirectToAction("Index","Main");
+            dynamic a = lp.GetCheckOutData(order.ToPay, o.Id.ToString());
+            ViewBag.data = a.data;
+            ViewBag.sign = a.signature;
+            return View(order);
+        }
+
+        [HttpPost]
+        public async Task AddOrder(Basket basket, OrderViewModel order)
+        {
+            //var day = DateTime.Now;
+            //if (day.Hour > order.TargetHour)
+            //    day = day.AddDays(1);
+            //Order o = new Order()
+            //{
+            //    Name = order.Name,
+            //    DeliveryAddress = order.DeliveryAddress,
+            //    Phone = order.Phone,
+            //    ToPay = order.ToPay,
+            //    Time = new DateTime(day.Year, day.Month, day.Day, order.TargetHour, order.TargetMinute, 0)
+            //};
+
+            //foreach (var d in basket.Orders)
+            //{
+            //    o.DishOrder.Add(new DishOrder()
+            //    {
+            //        OrderId = o.Id,
+            //        DishId = d.Dish.Id,
+            //        Count = d.Count
+            //    });
+            //}
+            //await _orders.AddAsync(o);
         }
     }
 }

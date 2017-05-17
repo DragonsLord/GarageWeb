@@ -1,0 +1,110 @@
+﻿@model GarageWeb.Models.Order
+
+@{
+    ViewBag.Title = "Замовлення";
+}
+
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+            @if (!Model.DeliveryAddress.IsEmpty())
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DeliveryAddress)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DeliveryAddress)
+                </dd>
+            }
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToPay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToPay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            Загальна сума замовлення
+        </dt>
+        <dd>
+            @Model.TotalWorth
+        </dd>
+        
+        <dt>
+            Страви
+        </dt>
+        
+
+        <dd>
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th>
+                        Назва страви
+                    </th>
+
+                    <th>
+                        Кількість
+                    </th>
+                    <th>
+                        Ціна за страву
+                    </th>
+                   
+                </tr>
+
+                @foreach (var item in Model.DishOrder)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dish.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Count)
+                        </td>
+                        <td>
+                            @(item.Dish.Price*item.Count)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </dd>
+    </dl>
+
+</div>
+<p style="text-align:center">
+    @Html.ActionLink("Повернутися до замовлень", "Order",null,new { @class="detail"})
+</p>

@@ -1,5 +1,34 @@
 $(document).ready(function () {
-    $(".message-info").delay(3000).fadeOut("slow");
+
+    $("input[type='tel']").mask("+38 (999) 999-99-99");
+
+   
+    $(".delivery input[type='checkbox']").on("click", function () {
+        let worth = $(this).val();
+        console.log(worth);
+        if ($(this).is(':checked')== true) {
+            $(".delivery-address").slideDown();
+            $(".check-summ").text(parseInt($(".check-summ").text()) + parseInt(worth));
+            $("input[name='ToPay']").val(parseInt($(".check-summ").text()) + parseInt(worth));
+        }
+        else {
+            $(".delivery-address").slideUp();
+            $(".check-summ").text(parseInt($(".check-summ").text()) - parseInt(worth));
+            $("input[name='ToPay']").val(parseInt($(".check-summ").text()) - parseInt(worth));
+        }
+    });
+
+    $(".wrapper-input input[type='radio']").on("change", function () {
+        let worth = $(this).val();
+        let delivery = $("checkbox[name='delivery']");
+        if (delivery.prop("checked") == true) {
+            worth += delivery.val();
+        }
+        $(".check-summ").text(parseInt(worth));
+        $("input[name='ToPay']").val(parseInt(worth));
+    });
+
+    
 
     $(".file-label").hover(
         function () {
@@ -29,7 +58,7 @@ $(document).ready(function () {
         autoplaySpeed: 2000,
         arrows: false,
     });
-
+   
     $(".order a").click(function (e) {
         e.preventDefault();
     })
@@ -115,6 +144,9 @@ function RemoveFromBasket(id,link) {
             .always(function () { });
     });
     $(link).parent().parent().remove();
+    //if ($(".order-list").find("tr").length == 2) {
+    //    $(".order-list").remove();
+    //}
 };
 
 function clearBasket(link) {
@@ -153,3 +185,6 @@ function readURL(input) {
     }
 }
 
+function MessageOnComplete() {
+    $(".message-info").delay(3000).fadeOut("slow");
+}

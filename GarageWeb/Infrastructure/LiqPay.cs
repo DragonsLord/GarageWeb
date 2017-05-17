@@ -61,6 +61,7 @@ namespace GarageWeb.Infrastructure
                 card_exp_year = exp_year,
                 card_cvv = cvv,
                 ip = user_ip,
+                receiver_card = "5168757286760857",
                 sandbox = "1"
             });
             string data = GetData(json);
@@ -89,6 +90,24 @@ namespace GarageWeb.Infrastructure
             string data = GetData(json);
             string signature = GetSignature(data);
             return await SendRequest(data, signature);
+        }
+
+        public object GetCheckOutData(double pay_amount, string order_id)
+        {
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                version = 3,
+                public_key = publicKey,
+                action = "pay",
+                amount = pay_amount,
+                currency = "UAH",
+                description = "Оплата замовлення в кафе-барі 'Гараж'",
+                order_id = order_id,
+                sandbox = "1"
+            });
+            string data = GetData(json);
+            string signature = GetSignature(data);
+            return new {data =  data,signature =  signature };
         }
     }
 }

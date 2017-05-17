@@ -17,6 +17,7 @@ namespace GarageWeb.Models.Repositories
             {
                 try
                 {
+                    entry.Id = DateTime.Now.Month.GetHashCode() + Data.Count();
                     _context.Orders.Add(entry);
                     _context.SaveChanges();
                 }
@@ -29,6 +30,7 @@ namespace GarageWeb.Models.Repositories
                 {
                     try
                     {
+                        entry.Id = DateTime.Now.Month.GetHashCode() + Data.Count();
                         _context.Orders.Add(entry);
                         _context.SaveChanges();
                     }

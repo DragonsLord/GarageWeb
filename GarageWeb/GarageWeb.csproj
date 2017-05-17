@@ -217,7 +217,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
-    <Compile Include="Controllers\GgsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -322,6 +321,9 @@
     <Content Include="Views\Menu\Reviews.cshtml" />
     <Content Include="Views\Basket\Index.cshtml" />
     <Content Include="Views\Basket\Order.cshtml" />
+    <Content Include="Views\Basket\ProcessOrder.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

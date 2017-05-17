@@ -2,6 +2,9 @@ using GarageWeb.Models.ViewModel;
 using GarageWeb.Models.ViewModel.AdminPanel;
 using System.Web.Mvc; 
 using GarageWeb.Infrastructure;
+using GarageWeb.Models.Interfaces;
+using GarageWeb.Models;
+using System.Linq;
 
 namespace GarageWeb.Controllers
 {
@@ -9,16 +12,28 @@ namespace GarageWeb.Controllers
     public class AdminController : Controller
     {
         private IAuthHelper authHelper;
-
-        public AdminController(IAuthHelper helper)
+        IRepository<Order> _orders;
+        public AdminController(IAuthHelper helper, IRepository<Order> o)
         {
             authHelper = helper;
+            _orders = o;
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(new AdminPanelViewModel());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Order()
+        {
+            return View(_orders.Data.ToList());
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult Details(int id)
+        {
+            return View(_orders.Data.First(t=>t.Id==id));
         }
 
         [HttpGet]

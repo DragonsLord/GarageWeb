@@ -20,12 +20,15 @@ namespace GarageWeb.Models
         [Display(Name = "Адреса")]
         public string DeliveryAddress { get; set; }
 
+        [Display(Name = "Телефон")]
         public string Phone { get; set; }
 
         [Required]
+        [Display(Name = "Сплачена сума")]
         public double ToPay { get; set; }
 
         [Required]
+        [Display(Name = "Час замовлення")]
         public DateTime Time { get; set; }
 
         [Required]

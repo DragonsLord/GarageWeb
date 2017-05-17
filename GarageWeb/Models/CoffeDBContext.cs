@@ -23,6 +23,7 @@ namespace GarageWeb.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Order>().Property<int>(o => o.Id).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             _ordersTimer = new Timer(TimeSpan.FromDays(Settings.OrdersDeleteDaysInterval).TotalMilliseconds);
             _ordersTimer.Elapsed += (sender, e) =>
             {
