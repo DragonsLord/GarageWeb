@@ -11,6 +11,17 @@ namespace GarageWeb.Infrastructure
         private static object _mutexOnMain = new object();
         private static object _mutexOnOrdering = new object();
         private static object _mutexOnTimer = new object();
+
+        private static System.Configuration.Configuration _webConfig;
+        public static System.Configuration.Configuration WebConfig
+        {
+            get
+            {
+                if (_webConfig == null)
+                    _webConfig = WebConfigurationManager.OpenWebConfiguration("~/");
+                return _webConfig;
+            }
+        }
         public static string AdminLogin
         {   
             get
@@ -19,19 +30,19 @@ namespace GarageWeb.Infrastructure
             }
         }
 
-        public static int NewsOnMain
+        public static int TotalDishesOnMain
         {
             get
             {
                 Monitor.Enter(_mutexOnMain);
-                var val = int.Parse(WebConfigurationManager.AppSettings["NewsOnMain"]);
+                var val = int.Parse(WebConfigurationManager.AppSettings["TotalDishesOnMain"]);
                 Monitor.Exit(_mutexOnMain);
                 return val;
             }
             set
             {
                 Monitor.Enter(_mutexOnMain);
-                WebConfigurationManager.AppSettings["NewsOnMain"] = value.ToString();
+                WebConfig.AppSettings.Settings["TotalDishesOnMain"].Value = value.ToString();
                 Monitor.Exit(_mutexOnMain);
             }
         }
@@ -47,7 +58,7 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnMain);
-                WebConfigurationManager.AppSettings["DishesOnMain"] = value.ToString();
+                WebConfig.AppSettings.Settings["DishesOnMain"].Value = value.ToString();
                 Monitor.Exit(_mutexOnMain);
             }
         }
@@ -63,7 +74,7 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnMain);
-                WebConfigurationManager.AppSettings["DishChangeDelayOnMain"] = value.ToString();
+                WebConfig.AppSettings.Settings["DishChangeDelayOnMain"].Value = value.ToString();
                 Monitor.Exit(_mutexOnMain);
             }
         }
@@ -80,7 +91,7 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnOrdering);
-                WebConfigurationManager.AppSettings["IsOrderingEnabled"] = value.ToString();
+                WebConfig.AppSettings.Settings["IsOrderingEnabled"].Value = value.ToString();
                 Monitor.Exit(_mutexOnOrdering);
             }
         }
@@ -96,7 +107,7 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnOrdering);
-                WebConfigurationManager.AppSettings["IsShippingEnabled"] = value.ToString();
+                WebConfig.AppSettings.Settings["IsShippingEnabled"].Value = value.ToString();
                 Monitor.Exit(_mutexOnOrdering);
             }
         }
@@ -115,7 +126,7 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnTimer);
-                WebConfigurationManager.AppSettings["OrdersDeleteTime"] = value.ToString();
+                WebConfig.AppSettings.Settings["OrdersDeleteTime"].Value = value.ToString();
                 OnOrdersDeleteTimeChange?.Invoke(value);
                 Monitor.Exit(_mutexOnTimer);
             }
@@ -132,10 +143,16 @@ namespace GarageWeb.Infrastructure
             set
             {
                 Monitor.Enter(_mutexOnTimer);
-                WebConfigurationManager.AppSettings["OrdersDeleteDaysInterval"] = value.ToString();
+                WebConfig.AppSettings.Settings["OrdersDeleteDaysInterval"].Value = value.ToString();
                 OnOrdersDeleteDayIntervalChange?.Invoke(value);
                 Monitor.Exit(_mutexOnTimer);
             }
+        }
+
+        public static void SaveCanges()
+        {
+            WebConfig.Save();
+            _webConfig = null;
         }
     }
 }

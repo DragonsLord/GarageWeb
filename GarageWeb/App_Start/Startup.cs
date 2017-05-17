@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Duke.Owin.VkontakteMiddleware;
 using Duke.Owin.VkontakteMiddleware.Provider;
 using Owin.Security.Providers.GitHub;
+using System.Web.Configuration;
 
 [assembly: OwinStartup(typeof(GarageWeb.Startup))]
 namespace GarageWeb
@@ -26,7 +27,7 @@ namespace GarageWeb
             app.UseGitHubAuthentication(new GitHubAuthenticationOptions()
             {
                 ClientId = "037d0dfd9476aa09bf70",
-                ClientSecret = "9553a498f6984a4ed54c65006853bd46c1e5b0de",
+                ClientSecret = WebConfigurationManager.AppSettings["GitHubSecret"],
                 Provider = new GitHubAuthenticationProvider
                 {
                     OnAuthenticated = context =>
@@ -45,7 +46,7 @@ namespace GarageWeb
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "373441158521-on3q879mcd6q0iqfmb4l6n6pd6bjj2gb.apps.googleusercontent.com",
-                ClientSecret = "9dQtQs34jGqQlPRxgCtEgOfS",
+                ClientSecret = WebConfigurationManager.AppSettings["GoogleSecret"],
                 Provider = new GoogleOAuth2AuthenticationProvider
                 {
                     OnAuthenticated = context =>
@@ -62,7 +63,7 @@ namespace GarageWeb
             app.UseFacebookAuthentication(new Microsoft.Owin.Security.Facebook.FacebookAuthenticationOptions()
             {
                 AppId = "800402306775205",
-                AppSecret = "c5d96b4e969b8027b181ce26511ae050",
+                AppSecret = WebConfigurationManager.AppSettings["FacebookSecret"],
                 Provider = new Microsoft.Owin.Security.Facebook.FacebookAuthenticationProvider()
                 {
                     OnAuthenticated = context =>
@@ -76,7 +77,7 @@ namespace GarageWeb
             app.UseVkontakteAuthentication(new VkAuthenticationOptions()
             {
                 AppId = "5467899",
-                AppSecret = "6ImWrU5jNOzKvBZrbaCM",
+                AppSecret = WebConfigurationManager.AppSettings["VKSecret"],
                 Scope = "email,photos",
                 Provider = new VkAuthenticationProvider()
                 {

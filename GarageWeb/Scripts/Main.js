@@ -44,10 +44,10 @@ $(document).ready(function () {
     var carousel_news = $("#owl-demo-news");
 
     carousel_menu.slick({
-        slidesToShow: 1,
+        slidesToShow: dishesOnMain,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: dishesDelay*1000,
         arrows: false,
     });
 

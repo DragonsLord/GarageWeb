@@ -280,6 +280,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ClassDiagram.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -324,10 +325,10 @@
     <Content Include="Views\Basket\ProcessOrder.cshtml" />
     <Content Include="Views\Admin\Order.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="SensitiveData.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bucket\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace GarageWeb.Controllers
         public ActionResult Index()
         {
             HomeViewModel main = new HomeViewModel();
-            main.Dishes= _dishes.Data.ToList().OrderByDescending(t => t.CurrentRating).ThenBy(t => t.Name).Take(5).ToList();
+            main.Dishes= _dishes.Data.ToList().OrderByDescending(t => t.CurrentRating).ThenBy(t => t.Name).Take(Infrastructure.Settings.TotalDishesOnMain).ToList();
             main.News = _news.Data.OrderBy(t => t.DateTime).Take(10).ToList();
             return View(main);
         }

@@ -22,6 +22,7 @@ namespace GarageWeb.Models.ViewModel.AdminPanel
             Settings.IsShippingEnabled = IsShippingEnabled;
             Settings.OrdersDeleteTime = OrdersDeleteTime;
             Settings.OrdersDeleteDaysInterval = OrdersDeleteDaysInterval;
+            Settings.SaveCanges();
         }
     }
 }

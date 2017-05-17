@@ -1,2 +1,679 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GarageWeb.Controllers.AdminController">
+    <Position X="10.5" Y="13.25" Width="2" />
+    <AssociationLine Name="authHelper" Type="GarageWeb.Infrastructure.IAuthHelper" FixedFromPoint="true">
+      <Path>
+        <Point X="12.5" Y="15.375" />
+        <Point X="15.25" Y="15.375" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.355" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEgAAAAAAAACAAAAAQAEQAEAAAAA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="authHelper" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Controllers.BasketController">
+    <Position X="6" Y="13.25" Width="2" />
+    <AssociationLine Name="_orders" Type="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.469" Y="13.25" />
+        <Point X="6.469" Y="12.566" />
+        <Point X="5.438" Y="12.566" />
+        <Point X="5.438" Y="12.191" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.742" Y="0.141" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAUAAIAAAAEAiAAAAAAAAAAAAAAAAAAAAgFAAAAAAEI=</HashCode>
+      <FileName>Controllers\BasketController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dishes" />
+      <Field Name="_orders" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Controllers.ErrorController">
+    <Position X="12.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ErrorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Controllers.HomeController">
+    <Position X="0.5" Y="13.25" Width="1.5" />
+    <AssociationLine Name="_dishes" Type="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="13.25" />
+        <Point X="1.25" Y="11.688" />
+        <Point X="4.25" Y="11.688" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_news" Type="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.656" Y="13.25" />
+        <Point X="1.656" Y="12.125" />
+        <Point X="4.25" Y="12.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAg=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dishes" />
+      <Field Name="_news" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Controllers.MenuController">
+    <Position X="4" Y="13.25" Width="1.75" />
+    <Members>
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="SetRatingAsync" Hidden="true" />
+      <Method Name="SetReviewAnswerAsync" Hidden="true" />
+      <Method Name="SetReviewAsync" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_dishes" Type="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="5.125" Y="13.25" />
+        <Point X="5.125" Y="12.191" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.307" Y="0.643" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAACABAAGAAEAACAAAAAEAAEACCAEAAIBAAAA=</HashCode>
+      <FileName>Controllers\MenuController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dishes" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Controllers.NewsController">
+    <Position X="2.25" Y="13.25" Width="1.5" />
+    <Members>
+      <Method Name="Dispose" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_news" Type="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="13.25" />
+        <Point X="3" Y="12.566" />
+        <Point X="4.75" Y="12.566" />
+        <Point X="4.75" Y="12.191" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAACAAAAAAAAAAAEAAEACAAEAAAAAAAg=</HashCode>
+      <FileName>Controllers\NewsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_news" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Controllers.UserController">
+    <Position X="8.25" Y="13.25" Width="2" />
+    <Members>
+      <Field Name="_db" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_signInManager" Type="GarageWeb.Infrastructure.ApplicationSignInManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.75" Y="13.25" />
+        <Point X="9.75" Y="12.875" />
+        <Point X="15.25" Y="12.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.294" Y="0.05" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_userManager" Type="GarageWeb.Infrastructure.ApplicationUserManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="13.25" />
+        <Point X="9.438" Y="11.125" />
+        <Point X="15.25" Y="11.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.26" Y="0.036" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAhACAAAAAAAAAAAFgAgAAAAAAAAIAAAEBAAAAAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_signInManager" />
+      <Field Name="_userManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.AdminAuthHelper" BaseTypeListCollapsed="true">
+    <Position X="17" Y="14" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GarageWeb.Infrastructure.AdminAuthHelper.AdminInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Infrastructure\AdminAuthHelper.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIAAAACAAAAAAAAAAgAAAAAAABAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\AdminAuthHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.ApplicationUserManager">
+    <Position X="15.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\AppManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.ApplicationSignInManager">
+    <Position X="15.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\AppManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.ApplicationUser">
+    <Position X="17" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\AppManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.ApplicationDbContext">
+    <Position X="17" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\AppManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.ChallengeResult">
+    <Position X="18.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Infrastructure\ChallengeResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.Encrypt">
+    <Position X="18.75" Y="14" Width="1.5" />
+    <Members>
+      <Field Name="initVector" Hidden="true" />
+      <Field Name="keysize" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAACAAAIIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Encrypt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.LiqPay">
+    <Position X="15" Y="16" Width="1.75" />
+    <Members>
+      <Method Name="PayTest" Hidden="true" />
+      <Method Name="SendRequest" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAEAAAAgAARAAAAACAAAAAEAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\LiqPay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Infrastructure.Settings">
+    <Position X="15.5" Y="19.75" Width="2" />
+    <Members>
+      <Field Name="_mutexOnMain" Hidden="true" />
+      <Field Name="_mutexOnOrdering" Hidden="true" />
+      <Field Name="_mutexOnTimer" Hidden="true" />
+      <Event Name="OnOrdersDeleteDayIntervalChange" Hidden="true" />
+      <Event Name="OnOrdersDeleteTimeChange" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AkABAAAAACAAIAQAARAAAgAAAAAEAAAAAAAIAAAQAAA=</HashCode>
+      <FileName>Infrastructure\Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.Basket">
+    <Position X="5.5" Y="17" Width="1.75" />
+    <AssociationLine Name="_orderDishes" Type="GarageWeb.Models.ViewModel.DishOrderViewModel">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.3" Y="0.068" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAQAAgAAAACAAAAQAAAACAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Basket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_orderDishes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.CoffeDBContext">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <Members>
+      <Field Name="_ordersTimer" Hidden="true" />
+      <Field Name="_startTimer" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Dishes" Type="GarageWeb.Models.Dish" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="6.75" />
+        <Point X="6.938" Y="6.75" />
+        <Point X="6.938" Y="5.094" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.291" Y="1.088" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="News" Type="GarageWeb.Models.NewsEntry" FixedToPoint="true">
+      <Path>
+        <Point X="4.25" Y="7.125" />
+        <Point X="2.5" Y="7.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.558" Y="0.076" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Users" Type="GarageWeb.Models.User" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.25" Y="6.387" />
+        <Point X="3.319" Y="6.387" />
+        <Point X="3.319" Y="4.757" />
+        <Point X="1.75" Y="4.757" />
+        <Point X="1.75" Y="4.132" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.862" Y="1.36" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Ratings" Type="GarageWeb.Models.Rating">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.343" Y="0.603" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Reviews" Type="GarageWeb.Models.Review" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="6.438" />
+        <Point X="6.125" Y="6.438" />
+        <Point X="6.125" Y="2.688" />
+        <Point X="5.25" Y="2.688" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.517" Y="-2.939" Height="0.182" Width="0.714" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Orders" Type="GarageWeb.Models.Order" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="7.062" />
+        <Point X="6.5" Y="7.062" />
+        <Point X="6.5" Y="7.062" />
+        <Point X="8.5" Y="7.062" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.476" Y="0.046" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAGAAAAAAAAAIAgQACAAAEAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Models\CoffeDBContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Dishes" />
+      <Property Name="News" />
+      <Property Name="Users" />
+      <Property Name="Ratings" />
+      <Property Name="Reviews" />
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.Dish">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <Members>
+      <Field Name="_imageUrl" Hidden="true" />
+      <Property Name="DishOrder" Hidden="true" />
+      <Method Name="GetImageUrl" Hidden="true" />
+      <Property Name="ImageUrl" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Ratings" Type="GarageWeb.Models.Rating" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="4.375" />
+        <Point X="6.208" Y="4.375" Type="JumpStart" />
+        <Point X="6.042" Y="4.375" Type="JumpEnd" />
+        <Point X="5.5" Y="4.375" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Reviews" Type="GarageWeb.Models.Review" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.5" />
+        <Point X="5.25" Y="2.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.302" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACQEAAAQAgCAAAAgAAAAQAACAAABACAEAgAAAACAA=</HashCode>
+      <FileName>Models\Dish.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ratings" />
+      <Property Name="Reviews" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.DishOrder">
+    <Position X="8.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Models\DishOrder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.NewsEntry">
+    <Position X="1" Y="5.5" Width="1.5" />
+    <Members>
+      <Field Name="_imageUrl" Hidden="true" />
+      <Method Name="GetImageUrl" Hidden="true" />
+      <Property Name="ImageUrl" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAgAEAAAAAAAAAAAAAAABQCAEAgAAAAAAA=</HashCode>
+      <FileName>Models\NewsEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.Order">
+    <Position X="8.5" Y="5.25" Width="1.5" />
+    <AssociationLine Name="DishOrder" Type="GarageWeb.Models.DishOrder">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.513" Y="0.434" Height="0.182" Width="0.975" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAgAgCAAAACAAAAQAAAAAAAAAAAAAIAAAAQA=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DishOrder" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.Rating">
+    <Position X="4" Y="3" Width="1.5" />
+    <AssociationLine Name="Dish" Type="GarageWeb.Models.Dish">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.178" Y="0.071" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="User" Type="GarageWeb.Models.User" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="4.02" />
+        <Point X="2.5" Y="4.02" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.593" Y="0.043" Height="0.182" Width="0.543" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEADAAAAAAAAAAAAAAAAAAAAAEAAABAAAAAgACAAAAA=</HashCode>
+      <FileName>Models\Rating.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.Review">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Dish" Type="GarageWeb.Models.Dish" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="2.188" />
+        <Point X="6.5" Y="2.188" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.416" Y="0.105" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="User" Type="GarageWeb.Models.User" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="2.625" />
+        <Point X="2.5" Y="2.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.348" Y="0.073" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEADAAAQAgAAAAAAAAAAAAAAAEAAABAAAAAAACAAAQA=</HashCode>
+      <FileName>Models\Review.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.User">
+    <Position X="1" Y="2" Width="1.5" />
+    <AssociationLine Name="Ratings" Type="GarageWeb.Models.Rating">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.187" Y="0.053" Height="0.182" Width="0.857" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Reviews" Type="GarageWeb.Models.Review">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.23" Y="0.09" Height="0.182" Width="0.884" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAEAAAIAgAAAAQAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ratings" />
+      <Property Name="Reviews" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.Repositories.DishesRepository" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="8.5" Width="1.5" />
+    <Members>
+      <Method Name="AddAsync" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="EditAsync" Hidden="true" />
+      <Method Name="RemoveAsync" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_context" Type="GarageWeb.Models.CoffeDBContext" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="8.5" />
+        <Point X="5" Y="7.425" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.381" Y="0.411" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAABAAAAAgABAEAAAAAABgCAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Repositories\DishesRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GarageWeb.Models.Repositories.NewsLine" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="8.5" Width="1.5" />
+    <Members>
+      <Method Name="AddAsync" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="EditAsync" Hidden="true" />
+      <Method Name="RemoveAsync" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_context" Type="GarageWeb.Models.CoffeDBContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="8.5" />
+        <Point X="3.25" Y="7.8" />
+        <Point X="4.5" Y="7.8" />
+        <Point X="4.5" Y="7.425" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.077" Y="0.131" Height="0.182" Width="0.841" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAABAAAAAgABAEAAAAAABgCAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Repositories\NewsLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GarageWeb.Models.Repositories.OrdersRepository" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="8.5" Width="1.5" />
+    <Members>
+      <Method Name="AddAsync" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="EditAsync" Hidden="true" />
+      <Method Name="RemoveAsync" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_context" Type="GarageWeb.Models.CoffeDBContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="8.5" />
+        <Point X="7" Y="7.8" />
+        <Point X="5.438" Y="7.8" />
+        <Point X="5.438" Y="7.425" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.844" Y="0.163" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAABAAAAAgABAEAAAAAABgCAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Repositories\OrdersRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.AdminPanel.ChangeLoginViewModel">
+    <Position X="7.25" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAABAAAAQAAEAAAAAAAAAQIAAAAAA=</HashCode>
+      <FileName>Models\ViewModel\AdminPanel\ChangeLoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.AdminPanel.MainPageSettingsViewModel">
+    <Position X="9.5" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAgAIAgAAAA=</HashCode>
+      <FileName>Models\ViewModel\AdminPanel\MainPageSettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.AdminPanel.OrderingSettingsViewModel">
+    <Position X="12" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAAAAAAAAAQEAAAQAAAAAAAAAAAAIIAAAAAA=</HashCode>
+      <FileName>Models\ViewModel\AdminPanel\OrderingSettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.AdminPanelViewModel">
+    <Position X="9.75" Y="17.5" Width="2" />
+    <Members>
+      <Property Name="Message" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_changeLoginBlock" Type="GarageWeb.Models.ViewModel.AdminPanel.ChangeLoginViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.75" Y="18.75" />
+        <Point X="8.281" Y="18.75" />
+        <Point X="8.281" Y="20" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.557" Y="0.268" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_mainPageBlock" Type="GarageWeb.Models.ViewModel.AdminPanel.MainPageSettingsViewModel">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.453" Y="0.289" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_orderingBlock" Type="GarageWeb.Models.ViewModel.AdminPanel.OrderingSettingsViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="18.812" />
+        <Point X="13.062" Y="18.812" />
+        <Point X="13.062" Y="20" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.494" Y="0.258" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAABAAAAAAIAEAAAQEAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\ViewModel\AdminPanelViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_changeLoginBlock" />
+      <Field Name="_mainPageBlock" />
+      <Field Name="_orderingBlock" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.DishOrderViewModel">
+    <Position X="2.5" Y="18.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Models\ViewModel\DishOrderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.HomeViewModel">
+    <Position X="0.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModel\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.LoginViewModel">
+    <Position X="12" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\ViewModel\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageWeb.Models.ViewModel.OrderViewModel">
+    <Position X="4.5" Y="20" Width="1.5" />
+    <Members>
+      <Property Name="Card" Hidden="true" />
+      <Property Name="Card1" Hidden="true" />
+      <Property Name="Card2" Hidden="true" />
+      <Property Name="Card3" Hidden="true" />
+      <Property Name="Card4" Hidden="true" />
+      <Property Name="CardCVV" Hidden="true" />
+      <Property Name="CardExpMonth" Hidden="true" />
+      <Property Name="CardExpYear" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EADAAAAAAgAACAAAACAEAAQAAACAAAEAIAAQIAAIBAQ=</HashCode>
+      <FileName>Models\ViewModel\OrderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GarageWeb.Infrastructure.IAuthHelper">
+    <Position X="15.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAACAAAAAAAAAAgAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\IAuthHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GarageWeb.Models.Interfaces.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="4.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAAAAAAAAAgABAEAAAAAABgCAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

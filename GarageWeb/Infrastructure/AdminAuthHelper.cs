@@ -28,7 +28,8 @@ namespace GarageWeb.Infrastructure
             public static void SetNewLogin(string new_login)
             {
                 Monitor.Enter(mutex);
-                WebConfigurationManager.AppSettings["AdminLogin"] = new_login;
+                Settings.WebConfig.AppSettings.Settings["AdminLogin"].Value = new_login;
+                Settings.SaveCanges();
                 Monitor.Exit(mutex);
             }
 
@@ -37,7 +38,8 @@ namespace GarageWeb.Infrastructure
                 lock (mutex) {
                     if (Encrypt.EncryptString(old_password, salt) == WebConfigurationManager.AppSettings["AdminPassword"])
                     {
-                        WebConfigurationManager.AppSettings["AdminPassword"] = Encrypt.EncryptString(new_password, salt);
+                        Settings.WebConfig.AppSettings.Settings["AdminPassword"].Value = Encrypt.EncryptString(new_password, salt);
+                        Settings.SaveCanges();
                         return true;
                     }
                 }
