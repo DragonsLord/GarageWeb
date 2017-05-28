@@ -7,14 +7,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">  
-    <link href="~/Content/bootstrap-rating.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/Images/logo.png">
     <title>@ViewBag.Title - Garage on Web</title>
     
     @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
     @Styles.Render("~/Content/slick/slick.css")
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/css")
     @Scripts.Render("~/bundles/jquery")
    
 </head>
@@ -114,15 +113,16 @@
 
     
     @RenderSection("scripts", required: false)
-
+    <script language="javascript" type="text/javascript">
+    var dishesOnMain = @GarageWeb.Infrastructure.Settings.DishesOnMain;
+    var dishesDelay = @GarageWeb.Infrastructure.Settings.DishChangeDelayOnMain;
+    </script>
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/bootstrap-rating/bootstrap-rating.js")
     @Scripts.Render("~/Content/fancybox/jquery.fancybox.pack.js");
     @Scripts.Render("~/Content/slick/slick.min.js");
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fancybox/jquery.fancybox.css")
     @Scripts.Render("~/Scripts/Main.js")
     @Scripts.Render("~/Scripts/mask.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 </body>
 </html>

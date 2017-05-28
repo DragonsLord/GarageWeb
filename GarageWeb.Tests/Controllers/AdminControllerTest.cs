@@ -21,7 +21,7 @@ namespace GarageWeb.Tests.Controllers
         [TestMethod]
         public void IncorrectLoginTest()
         {
-            var admin_controller = new AdminController(GetMock());
+            var admin_controller = new AdminController(GetMock(), null);
             var result = admin_controller.Login(new Models.ViewModel.LoginViewModel() { Login = "User", Password = "user" });
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
@@ -30,7 +30,7 @@ namespace GarageWeb.Tests.Controllers
         [TestMethod]
         public void CorrectLoginTest()
         {
-            var admin_controller = new AdminController(GetMock());
+            var admin_controller = new AdminController(GetMock(), null);
             var result = admin_controller.Login(new Models.ViewModel.LoginViewModel() { Login = "Admin", Password = "admin" }) as RedirectToRouteResult;
 
             Assert.IsNotNull(result);

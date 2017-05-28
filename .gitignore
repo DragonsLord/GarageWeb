@@ -252,3 +252,4 @@ paket-files/
 .idea/
 *.sln.iml
 /GarageWeb/SensitiveData.config
+/GarageWeb/_bin_deployableAssemblies/amd64

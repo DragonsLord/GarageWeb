@@ -9,7 +9,8 @@ namespace GarageWeb
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-1.10.2.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,12 +21,17 @@ namespace GarageWeb
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap-rating/bootstrap-rating.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/respond.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                      "~/Content/bootstrap-rating.css",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/admin").Include(
+                "~/Content/AdminPanel.css"));
         }
     }
 }

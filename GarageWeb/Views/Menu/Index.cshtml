@@ -15,6 +15,15 @@
     <input type="hidden" name="id" value=""/>
     <input type="submit" value="Видалити">
 }
+<div class="vert_bar">
+    <ul>
+        @foreach (string category in ViewBag.Categories)
+        {
+            <li>@Html.ActionLink(category, "Index", new { category = category })</li>
+        }
+    </ul>
+</div>
+
 <div class="all-dishes">
     @if (Context.User.IsInRole("Admin"))
     {

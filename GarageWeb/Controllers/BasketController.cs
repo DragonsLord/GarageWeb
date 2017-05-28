@@ -84,8 +84,8 @@ namespace GarageWeb.Controllers
             LiqPay lp = new LiqPay("i51624724565", "oI7medczLHZmc6ktjuI4s603rGHETvXcmn6ohYif");
 
             //TODO Check result
-
-            var day = DateTime.Now;
+            ;
+            var day = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time"));
             if (day.Hour > order.TargetHour)
                 day = day.AddDays(1);
             Order o = new Order()

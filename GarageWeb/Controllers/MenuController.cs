@@ -22,9 +22,13 @@ namespace GarageWeb.Controllers
         {
             _dishes = d;
         }
-        public async Task<ActionResult> Index()
+        [Route("Menu/{category}")]
+        public async Task<ActionResult> Index(string category)
         {
-            return View(await _dishes.Data.ToListAsync());
+            ViewBag.Categories = _dishes.Data.Select(d => d.Category).Distinct();
+            if (string.IsNullOrEmpty(category))
+                return View(await _dishes.Data.ToListAsync());
+            else return View(await _dishes.Data.Where(d => d.Category == category).ToListAsync());
         }
 
         public async Task<ActionResult> Details(int? id = 0)

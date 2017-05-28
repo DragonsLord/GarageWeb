@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Data.Entity;
 using System.Timers;
+using System.Data.SqlServerCe;
 using GarageWeb.Infrastructure;
 
 namespace GarageWeb.Models
@@ -10,6 +11,7 @@ namespace GarageWeb.Models
     {
         private static Timer _ordersTimer;
         private static Timer _startTimer;
+
         private static void InitializeOrdersTimer(TimeSpan time)
         {
             _ordersTimer.Stop();
@@ -22,6 +24,8 @@ namespace GarageWeb.Models
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            SqlCeEngine ce = new SqlCeEngine(Database.Connection.ConnectionString);
+            ce.Compact(Database.Connection.ConnectionString);
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Order>().Property<int>(o => o.Id).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             _ordersTimer = new Timer(TimeSpan.FromDays(Settings.OrdersDeleteDaysInterval).TotalMilliseconds);

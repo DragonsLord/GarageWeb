@@ -24,6 +24,7 @@ namespace GarageWeb.Models
         [Display(Name = "Опис")]
         public string Description { get; set; }
         [Display(Name = "Зображення")]
+        [MaxLength]
         public byte[] Image { get; set; }
 
         [Required]

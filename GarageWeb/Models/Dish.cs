@@ -25,6 +25,7 @@ namespace GarageWeb.Models
         [Display(Name = "Ціна")]
         public float Price { get; set; }
         [Display(Name = "Зображення")]
+        [MaxLength]
         public byte[] Image { get; set; }
         [Display(Name = "Опис")]
         public string Description { get; set; }
