@@ -15,14 +15,18 @@
     <input type="hidden" name="id" value=""/>
     <input type="submit" value="Видалити">
 }
-<div class="vert_bar">
-    <ul>
-        @foreach (string category in ViewBag.Categories)
-        {
-            <li>@Html.ActionLink(category, "Index", new { category = category })</li>
-        }
-    </ul>
-</div>
+@if (ViewBag.Categories!=null)
+{
+    <div class="vert_bar">
+        <ul>
+            @foreach (string category in ViewBag.Categories)
+            {
+                <li>@Html.ActionLink(category, "Index", new { category = category })</li>
+            }
+        </ul>
+    </div>
+}
+
 
 <div class="all-dishes">
     @if (Context.User.IsInRole("Admin"))
@@ -53,7 +57,7 @@
             @if (Settings.IsOrderingEnabled)
             {
                 <div class="order">
-                    <a href="" onclick="addToBusket(@item.Id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    <a class="cursor" onclick="addToBusket(@item.Id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                 </div>
             }
             <div class="rating">

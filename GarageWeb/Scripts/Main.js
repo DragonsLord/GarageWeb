@@ -5,19 +5,24 @@ $(document).ready(function () {
    
     $(".delivery input[type='checkbox']").on("click", function () {
         let worth = $(this).val();
-        console.log(worth);
         if ($(this).is(':checked')== true) {
             $(".delivery-address").slideDown();
-            $(".check-summ").text(parseInt($(".check-summ").text()) + parseInt(worth));
-            $("input[name='ToPay']").val(parseInt($(".check-summ").text()) + parseInt(worth));
+            $("input[name='ToPay']").val(parseInt($("input[name='ToPay']").val()) + parseInt(worth));
         }
         else {
             $(".delivery-address").slideUp();
-            $(".check-summ").text(parseInt($(".check-summ").text()) - parseInt(worth));
-            $("input[name='ToPay']").val(parseInt($(".check-summ").text()) - parseInt(worth));
+            $("input[name='ToPay']").val(parseInt($("input[name='ToPay']").val()) - parseInt(worth));
         }
     });
-
+    $(".cart-number input").on("input", function () {
+        let curr = $(this);
+        if (curr.val().length == 4) {
+            curr.next().focus();
+        }
+        if (curr.val().length == 0) {
+            curr.prev().focus();
+        } 
+    })
     $(".wrapper-input input[type='radio']").on("change", function () {
         let worth = $(this).val();
         let delivery = $("checkbox[name='delivery']");

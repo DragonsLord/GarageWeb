@@ -1,25 +1,11 @@
-﻿@model GarageWeb.Models.ViewModel.OrderViewModel
+﻿@model int
 
 @{
     ViewBag.Title = "ProcessOrder";
 }
 
-<div id="liqpay_checkout"></div>
-<script src="https://static.liqpay.com/libjs/checkout.js" async></script>
-<script>
-    
-  window.LiqPayCheckoutCallback = function() {
-    LiqPayCheckout.init({
-        data: "@ViewBag.data",
-        signature: "@ViewBag.sign",
-      embedTo: "#liqpay_checkout",
-      mode: "embed" // embed || popup,
-       }).on("liqpay.callback", function(data){
-           
-			}).on("liqpay.ready", function(data){
-                $.post("/Basket/AddOrder", { status: data.status, order: Model });
-			}).on("liqpay.close", function(data){
-				// close
-		});
-    };
-</script>
+<h2>Дякуємо за замовлення!</h2>
+<div class="align-center">
+    @Html.ActionLink("Повернутися на головну", "Index", "Home", null, new { @class = "detail" })
+    @Html.ActionLink("Переглянути чек", "GetReceipt", "Basket", new { id = Model }, new { target = "_blank", @class = "detail" })
+</div>

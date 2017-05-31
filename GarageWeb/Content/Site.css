@@ -416,8 +416,7 @@ a.dish:hover{
     font-size:14px;
 }
 .for-price, .for-weight {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 20px;
 }
 .all-news .admin-menu {
     margin-top:10px;
@@ -853,20 +852,21 @@ input[type="tel"] {
 .cart-number {
     margin-top:30px;
 }
-    .cart-number input[type="text"] {
-        color: #5b6261;
-        font-family: Halter;
-        padding: 5px 10px;
-        width: 75px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #37705c;
-        border-radius: 2px;
-        background-image: -moz-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
-        background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
-        background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
-        /*opacity: 0.6;*/
-        box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(0, 66, 113, 0.3);
+.cart-number input[type="text"] {
+    color: #5b6261;
+    font-family: Halter;
+    padding: 5px;
+    font-size:16px;
+    width: 75px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #37705c;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 0%, rgb(215,242,236) 100%);
+    text-align:center;
+    box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.35),inset 0px 1px 4px 0px rgba(0, 66, 113, 0.3);
 }
 .datetime{
     width:200px;
@@ -1008,26 +1008,36 @@ dd{
 .dl-horizontal dd {
     margin-left: 230px;
 }
-
 .vert_bar ul {
     list-style-type: none;
-    position: fixed;
     margin: 0;
     padding: 0;
-    width: 15%;
-    min-width: 50px;
     font-family: "Impact";
-    background-color: transparent;
-    overflow: auto;
+    text-align:center;
 }
-
+.vert_bar ul li {
+    font-size: 22px;
+    display: inline-block;
+    margin: 5px 20px;
+}
 .vert_bar li a {
     display: block;
     color: #925d21;
-    padding: 8px 16px;
     text-decoration: none;
+    line-height: 1;
+    border-bottom: 2px solid transparent;
 }
-
 .vert_bar li a:hover {
-    background-color: rgb(238,238,238);
+    border-bottom: 2px solid #925d21;
+}
+.align-center{
+    text-align:center;
+    margin-bottom:40px;
+}
+.align-center a {
+    margin:0 20px;
+    display:inline-block;
+}
+.cursor{
+    cursor:pointer;
 }

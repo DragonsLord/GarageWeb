@@ -3,10 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using GarageWeb.Models.Interfaces;
 using GarageWeb.Models.ViewModel;
-using System.Net.Http;
 using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using GarageWeb.Infrastructure;
 
@@ -108,12 +105,14 @@ namespace GarageWeb.Controllers
                 });
             }
             await _orders.AddAsync(o);
-            dynamic a = lp.GetCheckOutData(order.ToPay, o.Id.ToString());
-            ViewBag.data = a.data;
-            ViewBag.sign = a.signature;
-            return View(order);
+            await lp.PayTest(order.Phone, order.ToPay, o.Id.ToString(), order.Card, order.CardExpMonth, order.CardExpYear, order.CardCVV, order.GetUserIP());
+            basket.Clear();
+            return View(o.Id);
         }
-
+        public ActionResult GetReceipt(int id)
+        {
+            return Receipt.GetPdfReceipt(_orders.Data.First(t => t.Id == id));
+        }
         [HttpPost]
         public async Task AddOrder(Basket basket, OrderViewModel order)
         {

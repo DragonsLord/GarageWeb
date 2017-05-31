@@ -25,7 +25,7 @@ namespace GarageWeb.Controllers
         [Route("Menu/{category}")]
         public async Task<ActionResult> Index(string category)
         {
-            ViewBag.Categories = _dishes.Data.Select(d => d.Category).Distinct();
+            ViewBag.Categories = _dishes.Data.Select(d => d.Category).Distinct().Where(c => c != null);
             if (string.IsNullOrEmpty(category))
                 return View(await _dishes.Data.ToListAsync());
             else return View(await _dishes.Data.Where(d => d.Category == category).ToListAsync());

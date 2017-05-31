@@ -24,8 +24,8 @@ namespace GarageWeb.Models
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            SqlCeEngine ce = new SqlCeEngine(Database.Connection.ConnectionString);
-            ce.Compact(Database.Connection.ConnectionString);
+            //SqlCeEngine ce = new SqlCeEngine(Database.Connection.ConnectionString);
+            //ce.Compact(Database.Connection.ConnectionString);
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Order>().Property<int>(o => o.Id).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             _ordersTimer = new Timer(TimeSpan.FromDays(Settings.OrdersDeleteDaysInterval).TotalMilliseconds);

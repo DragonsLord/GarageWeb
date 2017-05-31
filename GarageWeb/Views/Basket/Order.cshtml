@@ -113,7 +113,49 @@
                })
             </div>
         </div>
-       
+        <div class="cart">
+            <div class="cart-name">Номер картки</div>
+            <div class="cart-number">
+                @Html.TextBoxFor(m => m.Card1,new { maxlength = "4"})
+                @Html.TextBoxFor(m => m.Card2, new { maxlength = "4" })
+                @Html.TextBoxFor(m => m.Card3, new { maxlength = "4" })
+                @Html.TextBoxFor(m => m.Card4, new { maxlength = "4" })
+            </div>
+            <div class="datetime">
+                <div class="item">
+                    <div class="title">Місяць</div>
+                   @Html.DropDownListFor(m => m.CardExpMonth, new List<SelectListItem>()
+                   {
+                        new SelectListItem() { Text = "01", Value = "1"},
+                        new SelectListItem() { Text = "02", Value = "2"},
+                        new SelectListItem() { Text = "03", Value = "3"},
+                        new SelectListItem() { Text = "04", Value = "4"},
+                        new SelectListItem() { Text = "05", Value = "5"},
+                        new SelectListItem() { Text = "06", Value = "6"},
+                        new SelectListItem() { Text = "07", Value = "7"},
+                        new SelectListItem() { Text = "08", Value = "8"},
+                        new SelectListItem() { Text = "09", Value = "9"},
+                        new SelectListItem() { Text = "10", Value = "10"},
+                        new SelectListItem() { Text = "11", Value = "11"},
+                        new SelectListItem() { Text = "12", Value = "12"},
+                   });
+                </div>
+                <div class="item">
+                    <div class="title">Рік</div>
+                    @Html.DropDownListFor(m => m.CardExpYear, new List<SelectListItem>()
+                    {
+                        new SelectListItem() { Text = "18", Value = "18" },
+                        new SelectListItem() { Text = "19", Value = "19" },
+                        new SelectListItem() { Text = "20", Value = "20" },
+                    });
+                </div>
+            </div>
+            <div class="cvv">
+                <div class="title">СvС Code</div>
+                @Html.TextBoxFor(m => m.CardCVV, new { maxlength = "3" })
+            </div>
+        </div>
+
         @Html.HiddenFor(t=>t.ToPay)
         <div class="btn-group">
             @Html.ActionLink("Повернутися до списку", "Index", null, new { @class = "detail" })
