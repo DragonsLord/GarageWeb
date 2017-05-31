@@ -17,7 +17,7 @@ namespace GarageWeb.Infrastructure
         static readonly Font cellStyle = new Font(baseFont, 16, 0, BaseColor.BLACK);
         public static FileStreamResult GetPdfReceipt(Order order)
         {
-            string path = $"{System.AppDomain.CurrentDomain.BaseDirectory}/{order.Id}.pdf";
+            string path = $"{System.AppDomain.CurrentDomain.BaseDirectory}/Checks/{order.Id}.pdf";
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 Document doc = new Document(PageSize.A5);

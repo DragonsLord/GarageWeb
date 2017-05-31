@@ -335,6 +335,8 @@ a.dish:hover{
         color: #925d21;
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
+        width: auto;
+        opacity: 1;
     }
 .left-arrear:hover, .right-arrear:hover, .left-arrear:focus, .right-arrear:focus {
     color: #ca8231;

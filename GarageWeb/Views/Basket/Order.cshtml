@@ -10,7 +10,7 @@
     }
     else
     {
-        partOfWorth = 20;
+        partOfWorth = (int)(worth * Settings.PrepaynmentPercent / 100);
     }
 }
 
@@ -52,10 +52,10 @@
             {
                 <div class="delivery wrapper-pay">
                     <div class="wrapper-input">
-                        <input type="checkbox" name="delivery" value="30" /> Доставка
+                        <input type="checkbox" name="delivery" value="@Settings.DeliveryPrice" /> Доставка
                     </div>
                     <div class="text">
-                        <span class="val">30</span> грн
+                        <span class="val">@Settings.DeliveryPrice</span> грн
                     </div>
                 </div>
                 <div class="item delivery-address">

@@ -149,6 +149,41 @@ namespace GarageWeb.Infrastructure
             }
         }
 
+        public static short PrepaynmentPercent
+        {
+            get
+            {
+                Monitor.Enter(_mutexOnOrdering);
+                var val = short.Parse(WebConfigurationManager.AppSettings["PrepaynmentPercent"]);
+                Monitor.Exit(_mutexOnOrdering);
+                return val;
+            }
+            set
+            {
+                Monitor.Enter(_mutexOnOrdering);
+                WebConfig.AppSettings.Settings["PrepaynmentPercent"].Value = value.ToString();
+                OnOrdersDeleteDayIntervalChange?.Invoke(value);
+                Monitor.Exit(_mutexOnOrdering);
+            }
+        }
+
+        public static double DeliveryPrice
+        {
+            get
+            {
+                Monitor.Enter(_mutexOnOrdering);
+                var val = double.Parse(WebConfigurationManager.AppSettings["DeliveryPrice"]);
+                Monitor.Exit(_mutexOnOrdering);
+                return val;
+            }
+            set
+            {
+                Monitor.Enter(_mutexOnOrdering);
+                WebConfig.AppSettings.Settings["DeliveryPrice"].Value = value.ToString();
+                Monitor.Exit(_mutexOnOrdering);
+            }
+        }
+
         public static void SaveCanges()
         {
             WebConfig.Save();
